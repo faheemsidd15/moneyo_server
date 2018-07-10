@@ -1,12 +1,8 @@
 import * as bcrypt from "bcryptjs"
 import * as jwt from "jsonwebtoken"
-import { Context, createToken, getUserId } from "../../utils"
+import { Context } from "../../utils"
 
 export const auth = {
-	async refreshToken(parent, { token }, ctx: Context, info) {
-		const userId = getUserId(ctx, token)
-		return createToken(userId)
-	},
 	async signup(parent, args, ctx: Context, info) {
 		const password = await bcrypt.hash(args.password, 10)
 		const user = await ctx.db.mutation.createUser({
@@ -14,7 +10,7 @@ export const auth = {
 		})
 
 		return {
-			token: createToken(user.id),
+			token: jwt.sign({ userId: user.id }, process.env.APP_SECRET),
 			user
 		}
 	},
@@ -22,7 +18,6 @@ export const auth = {
 	async login(parent, { email, password }, ctx: Context, info) {
 		const user = await ctx.db.query.user({ where: { email } })
 		if (!user) {
-			// throw new Error(`No such user found for email: ${email}`)
 			return {
 				error: {
 					field: "email",
@@ -33,8 +28,6 @@ export const auth = {
 
 		const valid = await bcrypt.compare(password, user.password)
 		if (!valid) {
-			// throw new Error('Invalid password')
-
 			return {
 				error: {
 					field: "password",
@@ -45,7 +38,7 @@ export const auth = {
 
 		return {
 			payload: {
-				token: createToken(user.id),
+				token: jwt.sign({ userId: user.id }, process.env.APP_SECRET),
 				user
 			}
 		}
