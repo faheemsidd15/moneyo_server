@@ -9,18 +9,20 @@ export interface Context {
 export function getUserId(ctx: Context) {
 	const Authorization = ctx.request.get("Authorization")
 	const token = Authorization.replace("Bearer ", "")
-
+	console.log(token)
 	if (token) {
-		const { userId } = jwt.verify(token, process.env.APP_SECRET) as {
-			userId: string
-		}
+		const { userId } = jwt.verify(token, Buffer.from(process.env.APP_SECRET, "base64"))
+
+		console.log(userId)
+
 		return userId
 	}
 
 	throw new AuthError()
 }
 
-export const createToken = (userId: String) => jwt.sign({ userId }, process.env.APP_SECRET, { expiresIn: "1d" })
+export const createToken = (userId: String) =>
+	jwt.sign({ userId }, Buffer.from(process.env.APP_SECRET, "base64"), { expiresIn: "1d" })
 
 export class AuthError extends Error {
 	constructor() {
