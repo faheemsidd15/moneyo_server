@@ -14,22 +14,30 @@ type User {
 	password: String!
 	name: String!
 	posts: [Post!]!
+	expenses: [Expense!]!
+	incomes: [Income!]!
 }
 
 type Expense {
 	id: ID! @unique
+	category: Category
+	name: String!
+	amount: Float!
+	type: String!
+	dueDate: DateTime!
+	user: User!
+}
+
+type Income {
+	id: ID! @unique
+	category: Category
 	name: String!
 	amount: Float!
 	type: String!
 	payDate: DateTime!
 	user: User!
 }
-
-type Income {
+type Category {
 	id: ID! @unique
 	name: String!
-	amount: Float!
-	type: String!
-	dueDate: DateTime!
-	user: User!
 }

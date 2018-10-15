@@ -1,4 +1,5 @@
 # import Post from "./generated/prisma.graphql"
+# import Income from "./generated/prisma.graphql"
 
 type Query {
 	feed: [Post!]!
@@ -12,6 +13,7 @@ type Mutation {
 	signup(email: String!, password: String!, name: String!): AuthPayload!
 	login(email: String!, password: String!): LoginResponse!
 	createDraft(title: String!, text: String!): Post!
+	createIncome(name: String!, amount: Float!, type: String!, payDate: DateTime!): Income!
 	publish(id: ID!): Post!
 	deletePost(id: ID!): Post!
 }

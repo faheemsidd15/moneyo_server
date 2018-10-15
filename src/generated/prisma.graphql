@@ -1,5 +1,9 @@
 # source: http://localhost:8000/moneyo_server
-# timestamp: Sat Jun 02 2018 16:22:41 GMT-0400 (EDT)
+# timestamp: Mon Oct 15 2018 00:02:03 GMT-0400 (EDT)
+
+type AggregateCategory {
+  count: Int!
+}
 
 type AggregateExpense {
   count: Int!
@@ -22,85 +26,71 @@ type BatchPayload {
   count: Long!
 }
 
-scalar DateTime
-
-type Expense implements Node {
+type Category implements Node {
   id: ID!
   name: String!
-  amount: Float!
-  type: String!
-  payDate: DateTime!
-  user(where: UserWhereInput): User!
 }
 
 """A connection to a list of items."""
-type ExpenseConnection {
+type CategoryConnection {
   """Information to aid in pagination."""
   pageInfo: PageInfo!
 
   """A list of edges."""
-  edges: [ExpenseEdge]!
-  aggregate: AggregateExpense!
+  edges: [CategoryEdge]!
+  aggregate: AggregateCategory!
 }
 
-input ExpenseCreateInput {
+input CategoryCreateInput {
   name: String!
-  amount: Float!
-  type: String!
-  payDate: DateTime!
-  user: UserCreateOneInput!
+}
+
+input CategoryCreateOneInput {
+  create: CategoryCreateInput
+  connect: CategoryWhereUniqueInput
 }
 
 """An edge in a connection."""
-type ExpenseEdge {
+type CategoryEdge {
   """The item at the end of the edge."""
-  node: Expense!
+  node: Category!
 
   """A cursor for use in pagination."""
   cursor: String!
 }
 
-enum ExpenseOrderByInput {
+enum CategoryOrderByInput {
   id_ASC
   id_DESC
   name_ASC
   name_DESC
-  amount_ASC
-  amount_DESC
-  type_ASC
-  type_DESC
-  payDate_ASC
-  payDate_DESC
   updatedAt_ASC
   updatedAt_DESC
   createdAt_ASC
   createdAt_DESC
 }
 
-type ExpensePreviousValues {
+type CategoryPreviousValues {
   id: ID!
   name: String!
-  amount: Float!
-  type: String!
-  payDate: DateTime!
 }
 
-type ExpenseSubscriptionPayload {
+type CategorySubscriptionPayload {
   mutation: MutationType!
-  node: Expense
+  node: Category
   updatedFields: [String!]
-  previousValues: ExpensePreviousValues
+  previousValues: CategoryPreviousValues
 }
 
-input ExpenseSubscriptionWhereInput {
+input CategorySubscriptionWhereInput {
   """Logical AND on all given filters."""
-  AND: [ExpenseSubscriptionWhereInput!]
+  AND: [CategorySubscriptionWhereInput!]
 
   """Logical OR on all given filters."""
-  OR: [ExpenseSubscriptionWhereInput!]
+  OR: [CategorySubscriptionWhereInput!]
 
   """Logical NOT on all given filters combined by AND."""
-  NOT: [ExpenseSubscriptionWhereInput!]
+  NOT: [CategorySubscriptionWhereInput!]
 
   """
   The subscription event gets dispatched when it's listed in mutation_in
@@ -121,26 +111,40 @@ input ExpenseSubscriptionWhereInput {
   The subscription event gets only dispatched when some of the field names included in this list have been updated
   """
   updatedFields_contains_some: [String!]
-  node: ExpenseWhereInput
+  node: CategoryWhereInput
 }
 
-input ExpenseUpdateInput {
+input CategoryUpdateDataInput {
   name: String
-  amount: Float
-  type: String
-  payDate: DateTime
-  user: UserUpdateOneInput
 }
 
-input ExpenseWhereInput {
+input CategoryUpdateInput {
+  name: String
+}
+
+input CategoryUpdateOneInput {
+  create: CategoryCreateInput
+  connect: CategoryWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: CategoryUpdateDataInput
+  upsert: CategoryUpsertNestedInput
+}
+
+input CategoryUpsertNestedInput {
+  update: CategoryUpdateDataInput!
+  create: CategoryCreateInput!
+}
+
+input CategoryWhereInput {
   """Logical AND on all given filters."""
-  AND: [ExpenseWhereInput!]
+  AND: [CategoryWhereInput!]
 
   """Logical OR on all given filters."""
-  OR: [ExpenseWhereInput!]
+  OR: [CategoryWhereInput!]
 
   """Logical NOT on all given filters combined by AND."""
-  NOT: [ExpenseWhereInput!]
+  NOT: [CategoryWhereInput!]
   id: ID
 
   """All values that are not equal to given value."""
@@ -221,99 +225,17 @@ input ExpenseWhereInput {
 
   """All values not ending with the given string."""
   name_not_ends_with: String
-  amount: Float
-
-  """All values that are not equal to given value."""
-  amount_not: Float
-
-  """All values that are contained in given list."""
-  amount_in: [Float!]
-
-  """All values that are not contained in given list."""
-  amount_not_in: [Float!]
-
-  """All values less than the given value."""
-  amount_lt: Float
-
-  """All values less than or equal the given value."""
-  amount_lte: Float
-
-  """All values greater than the given value."""
-  amount_gt: Float
-
-  """All values greater than or equal the given value."""
-  amount_gte: Float
-  type: String
-
-  """All values that are not equal to given value."""
-  type_not: String
-
-  """All values that are contained in given list."""
-  type_in: [String!]
-
-  """All values that are not contained in given list."""
-  type_not_in: [String!]
-
-  """All values less than the given value."""
-  type_lt: String
-
-  """All values less than or equal the given value."""
-  type_lte: String
-
-  """All values greater than the given value."""
-  type_gt: String
-
-  """All values greater than or equal the given value."""
-  type_gte: String
-
-  """All values containing the given string."""
-  type_contains: String
-
-  """All values not containing the given string."""
-  type_not_contains: String
-
-  """All values starting with the given string."""
-  type_starts_with: String
-
-  """All values not starting with the given string."""
-  type_not_starts_with: String
-
-  """All values ending with the given string."""
-  type_ends_with: String
-
-  """All values not ending with the given string."""
-  type_not_ends_with: String
-  payDate: DateTime
-
-  """All values that are not equal to given value."""
-  payDate_not: DateTime
-
-  """All values that are contained in given list."""
-  payDate_in: [DateTime!]
-
-  """All values that are not contained in given list."""
-  payDate_not_in: [DateTime!]
-
-  """All values less than the given value."""
-  payDate_lt: DateTime
-
-  """All values less than or equal the given value."""
-  payDate_lte: DateTime
-
-  """All values greater than the given value."""
-  payDate_gt: DateTime
-
-  """All values greater than or equal the given value."""
-  payDate_gte: DateTime
-  user: UserWhereInput
 }
 
-input ExpenseWhereUniqueInput {
+input CategoryWhereUniqueInput {
   id: ID
 }
 
-type Income implements Node {
+scalar DateTime
+
+type Expense implements Node {
   id: ID!
+  category(where: CategoryWhereInput): Category
   name: String!
   amount: Float!
   type: String!
@@ -322,33 +244,47 @@ type Income implements Node {
 }
 
 """A connection to a list of items."""
-type IncomeConnection {
+type ExpenseConnection {
   """Information to aid in pagination."""
   pageInfo: PageInfo!
 
   """A list of edges."""
-  edges: [IncomeEdge]!
-  aggregate: AggregateIncome!
+  edges: [ExpenseEdge]!
+  aggregate: AggregateExpense!
 }
 
-input IncomeCreateInput {
+input ExpenseCreateInput {
   name: String!
   amount: Float!
   type: String!
   dueDate: DateTime!
-  user: UserCreateOneInput!
+  category: CategoryCreateOneInput
+  user: UserCreateOneWithoutExpensesInput!
+}
+
+input ExpenseCreateManyWithoutUserInput {
+  create: [ExpenseCreateWithoutUserInput!]
+  connect: [ExpenseWhereUniqueInput!]
+}
+
+input ExpenseCreateWithoutUserInput {
+  name: String!
+  amount: Float!
+  type: String!
+  dueDate: DateTime!
+  category: CategoryCreateOneInput
 }
 
 """An edge in a connection."""
-type IncomeEdge {
+type ExpenseEdge {
   """The item at the end of the edge."""
-  node: Income!
+  node: Expense!
 
   """A cursor for use in pagination."""
   cursor: String!
 }
 
-enum IncomeOrderByInput {
+enum ExpenseOrderByInput {
   id_ASC
   id_DESC
   name_ASC
@@ -365,7 +301,7 @@ enum IncomeOrderByInput {
   createdAt_DESC
 }
 
-type IncomePreviousValues {
+type ExpensePreviousValues {
   id: ID!
   name: String!
   amount: Float!
@@ -373,22 +309,22 @@ type IncomePreviousValues {
   dueDate: DateTime!
 }
 
-type IncomeSubscriptionPayload {
+type ExpenseSubscriptionPayload {
   mutation: MutationType!
-  node: Income
+  node: Expense
   updatedFields: [String!]
-  previousValues: IncomePreviousValues
+  previousValues: ExpensePreviousValues
 }
 
-input IncomeSubscriptionWhereInput {
+input ExpenseSubscriptionWhereInput {
   """Logical AND on all given filters."""
-  AND: [IncomeSubscriptionWhereInput!]
+  AND: [ExpenseSubscriptionWhereInput!]
 
   """Logical OR on all given filters."""
-  OR: [IncomeSubscriptionWhereInput!]
+  OR: [ExpenseSubscriptionWhereInput!]
 
   """Logical NOT on all given filters combined by AND."""
-  NOT: [IncomeSubscriptionWhereInput!]
+  NOT: [ExpenseSubscriptionWhereInput!]
 
   """
   The subscription event gets dispatched when it's listed in mutation_in
@@ -409,26 +345,55 @@ input IncomeSubscriptionWhereInput {
   The subscription event gets only dispatched when some of the field names included in this list have been updated
   """
   updatedFields_contains_some: [String!]
-  node: IncomeWhereInput
+  node: ExpenseWhereInput
 }
 
-input IncomeUpdateInput {
+input ExpenseUpdateInput {
   name: String
   amount: Float
   type: String
   dueDate: DateTime
-  user: UserUpdateOneInput
+  category: CategoryUpdateOneInput
+  user: UserUpdateOneWithoutExpensesInput
 }
 
-input IncomeWhereInput {
+input ExpenseUpdateManyWithoutUserInput {
+  create: [ExpenseCreateWithoutUserInput!]
+  connect: [ExpenseWhereUniqueInput!]
+  disconnect: [ExpenseWhereUniqueInput!]
+  delete: [ExpenseWhereUniqueInput!]
+  update: [ExpenseUpdateWithWhereUniqueWithoutUserInput!]
+  upsert: [ExpenseUpsertWithWhereUniqueWithoutUserInput!]
+}
+
+input ExpenseUpdateWithoutUserDataInput {
+  name: String
+  amount: Float
+  type: String
+  dueDate: DateTime
+  category: CategoryUpdateOneInput
+}
+
+input ExpenseUpdateWithWhereUniqueWithoutUserInput {
+  where: ExpenseWhereUniqueInput!
+  data: ExpenseUpdateWithoutUserDataInput!
+}
+
+input ExpenseUpsertWithWhereUniqueWithoutUserInput {
+  where: ExpenseWhereUniqueInput!
+  update: ExpenseUpdateWithoutUserDataInput!
+  create: ExpenseCreateWithoutUserInput!
+}
+
+input ExpenseWhereInput {
   """Logical AND on all given filters."""
-  AND: [IncomeWhereInput!]
+  AND: [ExpenseWhereInput!]
 
   """Logical OR on all given filters."""
-  OR: [IncomeWhereInput!]
+  OR: [ExpenseWhereInput!]
 
   """Logical NOT on all given filters combined by AND."""
-  NOT: [IncomeWhereInput!]
+  NOT: [ExpenseWhereInput!]
   id: ID
 
   """All values that are not equal to given value."""
@@ -593,6 +558,340 @@ input IncomeWhereInput {
 
   """All values greater than or equal the given value."""
   dueDate_gte: DateTime
+  category: CategoryWhereInput
+  user: UserWhereInput
+}
+
+input ExpenseWhereUniqueInput {
+  id: ID
+}
+
+type Income implements Node {
+  id: ID!
+  category(where: CategoryWhereInput): Category
+  name: String!
+  amount: Float!
+  type: String!
+  payDate: DateTime!
+  user(where: UserWhereInput): User!
+}
+
+"""A connection to a list of items."""
+type IncomeConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [IncomeEdge]!
+  aggregate: AggregateIncome!
+}
+
+input IncomeCreateInput {
+  name: String!
+  amount: Float!
+  type: String!
+  payDate: DateTime!
+  category: CategoryCreateOneInput
+  user: UserCreateOneWithoutIncomesInput!
+}
+
+input IncomeCreateManyWithoutUserInput {
+  create: [IncomeCreateWithoutUserInput!]
+  connect: [IncomeWhereUniqueInput!]
+}
+
+input IncomeCreateWithoutUserInput {
+  name: String!
+  amount: Float!
+  type: String!
+  payDate: DateTime!
+  category: CategoryCreateOneInput
+}
+
+"""An edge in a connection."""
+type IncomeEdge {
+  """The item at the end of the edge."""
+  node: Income!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum IncomeOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  amount_ASC
+  amount_DESC
+  type_ASC
+  type_DESC
+  payDate_ASC
+  payDate_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type IncomePreviousValues {
+  id: ID!
+  name: String!
+  amount: Float!
+  type: String!
+  payDate: DateTime!
+}
+
+type IncomeSubscriptionPayload {
+  mutation: MutationType!
+  node: Income
+  updatedFields: [String!]
+  previousValues: IncomePreviousValues
+}
+
+input IncomeSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [IncomeSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [IncomeSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [IncomeSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: IncomeWhereInput
+}
+
+input IncomeUpdateInput {
+  name: String
+  amount: Float
+  type: String
+  payDate: DateTime
+  category: CategoryUpdateOneInput
+  user: UserUpdateOneWithoutIncomesInput
+}
+
+input IncomeUpdateManyWithoutUserInput {
+  create: [IncomeCreateWithoutUserInput!]
+  connect: [IncomeWhereUniqueInput!]
+  disconnect: [IncomeWhereUniqueInput!]
+  delete: [IncomeWhereUniqueInput!]
+  update: [IncomeUpdateWithWhereUniqueWithoutUserInput!]
+  upsert: [IncomeUpsertWithWhereUniqueWithoutUserInput!]
+}
+
+input IncomeUpdateWithoutUserDataInput {
+  name: String
+  amount: Float
+  type: String
+  payDate: DateTime
+  category: CategoryUpdateOneInput
+}
+
+input IncomeUpdateWithWhereUniqueWithoutUserInput {
+  where: IncomeWhereUniqueInput!
+  data: IncomeUpdateWithoutUserDataInput!
+}
+
+input IncomeUpsertWithWhereUniqueWithoutUserInput {
+  where: IncomeWhereUniqueInput!
+  update: IncomeUpdateWithoutUserDataInput!
+  create: IncomeCreateWithoutUserInput!
+}
+
+input IncomeWhereInput {
+  """Logical AND on all given filters."""
+  AND: [IncomeWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [IncomeWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [IncomeWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+  amount: Float
+
+  """All values that are not equal to given value."""
+  amount_not: Float
+
+  """All values that are contained in given list."""
+  amount_in: [Float!]
+
+  """All values that are not contained in given list."""
+  amount_not_in: [Float!]
+
+  """All values less than the given value."""
+  amount_lt: Float
+
+  """All values less than or equal the given value."""
+  amount_lte: Float
+
+  """All values greater than the given value."""
+  amount_gt: Float
+
+  """All values greater than or equal the given value."""
+  amount_gte: Float
+  type: String
+
+  """All values that are not equal to given value."""
+  type_not: String
+
+  """All values that are contained in given list."""
+  type_in: [String!]
+
+  """All values that are not contained in given list."""
+  type_not_in: [String!]
+
+  """All values less than the given value."""
+  type_lt: String
+
+  """All values less than or equal the given value."""
+  type_lte: String
+
+  """All values greater than the given value."""
+  type_gt: String
+
+  """All values greater than or equal the given value."""
+  type_gte: String
+
+  """All values containing the given string."""
+  type_contains: String
+
+  """All values not containing the given string."""
+  type_not_contains: String
+
+  """All values starting with the given string."""
+  type_starts_with: String
+
+  """All values not starting with the given string."""
+  type_not_starts_with: String
+
+  """All values ending with the given string."""
+  type_ends_with: String
+
+  """All values not ending with the given string."""
+  type_not_ends_with: String
+  payDate: DateTime
+
+  """All values that are not equal to given value."""
+  payDate_not: DateTime
+
+  """All values that are contained in given list."""
+  payDate_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  payDate_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  payDate_lt: DateTime
+
+  """All values less than or equal the given value."""
+  payDate_lte: DateTime
+
+  """All values greater than the given value."""
+  payDate_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  payDate_gte: DateTime
+  category: CategoryWhereInput
   user: UserWhereInput
 }
 
@@ -611,26 +910,32 @@ type Mutation {
   createUser(data: UserCreateInput!): User!
   createExpense(data: ExpenseCreateInput!): Expense!
   createIncome(data: IncomeCreateInput!): Income!
+  createCategory(data: CategoryCreateInput!): Category!
   updatePost(data: PostUpdateInput!, where: PostWhereUniqueInput!): Post
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   updateExpense(data: ExpenseUpdateInput!, where: ExpenseWhereUniqueInput!): Expense
   updateIncome(data: IncomeUpdateInput!, where: IncomeWhereUniqueInput!): Income
+  updateCategory(data: CategoryUpdateInput!, where: CategoryWhereUniqueInput!): Category
   deletePost(where: PostWhereUniqueInput!): Post
   deleteUser(where: UserWhereUniqueInput!): User
   deleteExpense(where: ExpenseWhereUniqueInput!): Expense
   deleteIncome(where: IncomeWhereUniqueInput!): Income
+  deleteCategory(where: CategoryWhereUniqueInput!): Category
   upsertPost(where: PostWhereUniqueInput!, create: PostCreateInput!, update: PostUpdateInput!): Post!
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
   upsertExpense(where: ExpenseWhereUniqueInput!, create: ExpenseCreateInput!, update: ExpenseUpdateInput!): Expense!
   upsertIncome(where: IncomeWhereUniqueInput!, create: IncomeCreateInput!, update: IncomeUpdateInput!): Income!
+  upsertCategory(where: CategoryWhereUniqueInput!, create: CategoryCreateInput!, update: CategoryUpdateInput!): Category!
   updateManyPosts(data: PostUpdateInput!, where: PostWhereInput): BatchPayload!
   updateManyUsers(data: UserUpdateInput!, where: UserWhereInput): BatchPayload!
   updateManyExpenses(data: ExpenseUpdateInput!, where: ExpenseWhereInput): BatchPayload!
   updateManyIncomes(data: IncomeUpdateInput!, where: IncomeWhereInput): BatchPayload!
+  updateManyCategories(data: CategoryUpdateInput!, where: CategoryWhereInput): BatchPayload!
   deleteManyPosts(where: PostWhereInput): BatchPayload!
   deleteManyUsers(where: UserWhereInput): BatchPayload!
   deleteManyExpenses(where: ExpenseWhereInput): BatchPayload!
   deleteManyIncomes(where: IncomeWhereInput): BatchPayload!
+  deleteManyCategories(where: CategoryWhereInput): BatchPayload!
 }
 
 enum MutationType {
@@ -992,14 +1297,17 @@ type Query {
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
   expenses(where: ExpenseWhereInput, orderBy: ExpenseOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Expense]!
   incomes(where: IncomeWhereInput, orderBy: IncomeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Income]!
+  categories(where: CategoryWhereInput, orderBy: CategoryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Category]!
   post(where: PostWhereUniqueInput!): Post
   user(where: UserWhereUniqueInput!): User
   expense(where: ExpenseWhereUniqueInput!): Expense
   income(where: IncomeWhereUniqueInput!): Income
+  category(where: CategoryWhereUniqueInput!): Category
   postsConnection(where: PostWhereInput, orderBy: PostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PostConnection!
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
   expensesConnection(where: ExpenseWhereInput, orderBy: ExpenseOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ExpenseConnection!
   incomesConnection(where: IncomeWhereInput, orderBy: IncomeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): IncomeConnection!
+  categoriesConnection(where: CategoryWhereInput, orderBy: CategoryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CategoryConnection!
 
   """Fetches an object given its ID"""
   node(
@@ -1013,6 +1321,7 @@ type Subscription {
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
   expense(where: ExpenseSubscriptionWhereInput): ExpenseSubscriptionPayload
   income(where: IncomeSubscriptionWhereInput): IncomeSubscriptionPayload
+  category(where: CategorySubscriptionWhereInput): CategorySubscriptionPayload
 }
 
 type User implements Node {
@@ -1021,6 +1330,8 @@ type User implements Node {
   password: String!
   name: String!
   posts(where: PostWhereInput, orderBy: PostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Post!]
+  expenses(where: ExpenseWhereInput, orderBy: ExpenseOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Expense!]
+  incomes(where: IncomeWhereInput, orderBy: IncomeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Income!]
 }
 
 """A connection to a list of items."""
@@ -1038,10 +1349,17 @@ input UserCreateInput {
   password: String!
   name: String!
   posts: PostCreateManyWithoutAuthorInput
+  expenses: ExpenseCreateManyWithoutUserInput
+  incomes: IncomeCreateManyWithoutUserInput
 }
 
-input UserCreateOneInput {
-  create: UserCreateInput
+input UserCreateOneWithoutExpensesInput {
+  create: UserCreateWithoutExpensesInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateOneWithoutIncomesInput {
+  create: UserCreateWithoutIncomesInput
   connect: UserWhereUniqueInput
 }
 
@@ -1050,10 +1368,28 @@ input UserCreateOneWithoutPostsInput {
   connect: UserWhereUniqueInput
 }
 
+input UserCreateWithoutExpensesInput {
+  email: String!
+  password: String!
+  name: String!
+  posts: PostCreateManyWithoutAuthorInput
+  incomes: IncomeCreateManyWithoutUserInput
+}
+
+input UserCreateWithoutIncomesInput {
+  email: String!
+  password: String!
+  name: String!
+  posts: PostCreateManyWithoutAuthorInput
+  expenses: ExpenseCreateManyWithoutUserInput
+}
+
 input UserCreateWithoutPostsInput {
   email: String!
   password: String!
   name: String!
+  expenses: ExpenseCreateManyWithoutUserInput
+  incomes: IncomeCreateManyWithoutUserInput
 }
 
 """An edge in a connection."""
@@ -1126,26 +1462,29 @@ input UserSubscriptionWhereInput {
   node: UserWhereInput
 }
 
-input UserUpdateDataInput {
-  email: String
-  password: String
-  name: String
-  posts: PostUpdateManyWithoutAuthorInput
-}
-
 input UserUpdateInput {
   email: String
   password: String
   name: String
   posts: PostUpdateManyWithoutAuthorInput
+  expenses: ExpenseUpdateManyWithoutUserInput
+  incomes: IncomeUpdateManyWithoutUserInput
 }
 
-input UserUpdateOneInput {
-  create: UserCreateInput
+input UserUpdateOneWithoutExpensesInput {
+  create: UserCreateWithoutExpensesInput
   connect: UserWhereUniqueInput
   delete: Boolean
-  update: UserUpdateDataInput
-  upsert: UserUpsertNestedInput
+  update: UserUpdateWithoutExpensesDataInput
+  upsert: UserUpsertWithoutExpensesInput
+}
+
+input UserUpdateOneWithoutIncomesInput {
+  create: UserCreateWithoutIncomesInput
+  connect: UserWhereUniqueInput
+  delete: Boolean
+  update: UserUpdateWithoutIncomesDataInput
+  upsert: UserUpsertWithoutIncomesInput
 }
 
 input UserUpdateOneWithoutPostsInput {
@@ -1156,15 +1495,38 @@ input UserUpdateOneWithoutPostsInput {
   upsert: UserUpsertWithoutPostsInput
 }
 
+input UserUpdateWithoutExpensesDataInput {
+  email: String
+  password: String
+  name: String
+  posts: PostUpdateManyWithoutAuthorInput
+  incomes: IncomeUpdateManyWithoutUserInput
+}
+
+input UserUpdateWithoutIncomesDataInput {
+  email: String
+  password: String
+  name: String
+  posts: PostUpdateManyWithoutAuthorInput
+  expenses: ExpenseUpdateManyWithoutUserInput
+}
+
 input UserUpdateWithoutPostsDataInput {
   email: String
   password: String
   name: String
+  expenses: ExpenseUpdateManyWithoutUserInput
+  incomes: IncomeUpdateManyWithoutUserInput
 }
 
-input UserUpsertNestedInput {
-  update: UserUpdateDataInput!
-  create: UserCreateInput!
+input UserUpsertWithoutExpensesInput {
+  update: UserUpdateWithoutExpensesDataInput!
+  create: UserCreateWithoutExpensesInput!
+}
+
+input UserUpsertWithoutIncomesInput {
+  update: UserUpdateWithoutIncomesDataInput!
+  create: UserCreateWithoutIncomesInput!
 }
 
 input UserUpsertWithoutPostsInput {
@@ -1344,6 +1706,12 @@ input UserWhereInput {
   posts_every: PostWhereInput
   posts_some: PostWhereInput
   posts_none: PostWhereInput
+  expenses_every: ExpenseWhereInput
+  expenses_some: ExpenseWhereInput
+  expenses_none: ExpenseWhereInput
+  incomes_every: IncomeWhereInput
+  incomes_some: IncomeWhereInput
+  incomes_none: IncomeWhereInput
 }
 
 input UserWhereUniqueInput {

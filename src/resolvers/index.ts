@@ -1,13 +1,15 @@
 import { Query } from "./Query"
 import { auth } from "./Mutation/auth"
 import { post } from "./Mutation/post"
+import { income } from "./Mutation/incomes";
 import { AuthPayload } from "./AuthPayload"
 
 export default {
 	Query,
 	Mutation: {
 		...auth,
-		...post
+		...post,
+		...income
 	},
 	// User: {
 	//   posts: (user, input, ctx) => {
