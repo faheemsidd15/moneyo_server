@@ -21,6 +21,9 @@ export const Query = {
 	post(parent, { id }, ctx: Context, info) {
 		return ctx.db.query.post({ where: { id: id } }, info)
 	},
+	income(parent, { id }, ctx: Context, info) {
+		return ctx.db.query.income({ where: { id: id } }, info)
+	},
 
 	me(parent, args, ctx: Context, info) {
 		const id = getUserId(ctx)
