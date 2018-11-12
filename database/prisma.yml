@@ -1,6 +1,5 @@
 # The endpoint of your Prisma API (deployed to a Prisma Sandbox).
 endpoint: ${env:PRISMA_ENDPOINT}
-service: moneyo_server
 #secret: ${env:PRISMA_SECRET}
 
 # The file containing the definition of your data model.
@@ -19,7 +18,6 @@ hooks:
   post-deploy:
     - graphql get-schema --project database
     - graphql codegen
-
 # If specified, the `secret` must be used to generate a JWT which is attached
 # to the `Authorization` header of HTTP requests made against the Prisma API.
 # Info: https://www.prisma.io/docs/reference/prisma-api/concepts-utee3eiquo#authentication

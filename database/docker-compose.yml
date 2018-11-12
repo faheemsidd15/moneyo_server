@@ -19,6 +19,8 @@ services:
             password: prisma
             migrations: true
   mysql:
+    ports:
+      - "3001:3306"
     image: mysql:5.7
     restart: always
     environment:
@@ -26,4 +28,4 @@ services:
     volumes:
       - mysql:/var/lib/mysql
 volumes:
-  ? mysql
+  mysql:
