@@ -11,6 +11,7 @@ export const config = {
 export interface Context {
 	db: Prisma
 	request: any
+	connection: any
 }
 
 export function getUserId(ctx: Context) {

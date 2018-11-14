@@ -11,6 +11,7 @@ const server = new GraphQLServer({
 	resolvers,
 	context: req => ({
 		...req,
+		connection,
 		db: new Prisma({
 			endpoint: process.env.PRISMA_ENDPOINT, // the endpoint of the Prisma API (value set in `.env`)
 			debug: true // log all GraphQL queries & mutations sent to the Prisma API
