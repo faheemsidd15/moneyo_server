@@ -1,6 +1,13 @@
 import * as jwt from "jsonwebtoken"
 import { Prisma } from "./generated/prisma"
 
+export const config = {
+	host: process.env.DB_HOST,
+	user: process.env.DB_USER,
+	password: process.env.DB_PWD,
+	port: 3001
+}
+
 export interface Context {
 	db: Prisma
 	request: any
