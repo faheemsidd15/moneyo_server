@@ -48,4 +48,5 @@ type User {
 	name: String!
 	posts: [Post!]!
 	incomes: [Income!]!
+	totalIncome: Float
 }

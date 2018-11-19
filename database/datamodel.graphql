@@ -16,6 +16,7 @@ type User {
 	posts: [Post!]!
 	expenses: [Expense!]!
 	incomes: [Income!]!
+	totalIncome: Float
 }
 
 type Expense {

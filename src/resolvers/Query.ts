@@ -24,6 +24,9 @@ export const Query = {
 	income(parent, { id }, ctx: Context, info) {
 		return ctx.db.query.income({ where: { id: id } }, info)
 	},
+	// async totalIncome(parent, { id }, ctx: Context, info) {
+	// 	const response  = await ctx
+	// },
 
 	me(parent, args, ctx: Context, info) {
 		const id = getUserId(ctx)
