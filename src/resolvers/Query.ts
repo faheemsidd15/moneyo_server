@@ -28,6 +28,10 @@ export const Query = {
 	// 	const response  = await ctx
 	// },
 
+	// totalIncomeOfUser() {
+		
+	// },
+
 	me(parent, args, ctx: Context, info) {
 		const id = getUserId(ctx)
 		return ctx.db.query.user({ where: { id } }, info)

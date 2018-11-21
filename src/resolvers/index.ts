@@ -22,8 +22,8 @@ export default {
 	},
 	// User: {
 	//   posts: (user, input, ctx) => {
-	//     // return ctx.models.UserPosts.where({ userId: user.id })
-	//   }
+	//     return ctx.models.UserPosts.where({ userId: user.id })
+	//   }	
 	// },
 	AuthPayload
 }
