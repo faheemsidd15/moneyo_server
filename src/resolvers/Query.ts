@@ -1,4 +1,5 @@
-import { getUserId, Context } from "../utils"
+import { getUserId, Context, Conn } from "../utils"
+import { Result } from "range-parser"
 
 export const Query = {
 	feed(parent, args, ctx: Context, info) {
@@ -27,13 +28,47 @@ export const Query = {
 	// async totalIncome(parent, { id }, ctx: Context, info) {
 	// 	const response  = await ctx
 	// },
+	async totalIncome(parent, args, ctx: Context, info) {
+		const id = getUserId(ctx)
 
-	// totalIncomeOfUser() {
-		
-	// },
+		//console.log(ctx.db.query.incomes({ where: { id } }, info))
+
+		//return ctx.db.query.incomes({ where: { user: { id: id } } }, info)
+		const object = { amount: 11000, name: "Total Income" }
+		//return await object
+
+		const query = await Conn.query(`select 546 +  1 as amount`, function(error, results, fields) {
+			if (error) throw error
+
+			const response = results[0]
+			console.log(response)
+			return response
+		})
+		console.log(query)
+		return await object
+
+		// const totalIncome = Conn.query(
+		// 	"select sum(amount) as amount from `default@default`.`Income` join `default@default`.`_IncomeToUser` where Income.id = _IncomeToUser.A;",
+		// 	function(error, results, fields) {
+		// 		if (error) throw error
+		// 		//return results[0].summary
+		// 		console.log(results[0])
+		// 		return results[0].amount
+		// 	}
+		// )
+		// return totalIncome
+
+		// await console.log(response)
+		// return await response
+		//console.log(ctx.db.query.incomes({ where: { id } }, info))
+		//return ctx.db.query.incomesConnection({where: })
+	},
 
 	me(parent, args, ctx: Context, info) {
 		const id = getUserId(ctx)
+
+		//console.log(ctx.db.query.user({ where: { id } }, info))
+
 		return ctx.db.query.user({ where: { id } }, info)
 	}
 }

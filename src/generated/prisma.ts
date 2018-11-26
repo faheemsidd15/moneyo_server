@@ -1,388 +1,97 @@
-import { GraphQLResolveInfo, GraphQLSchema } from "graphql"
-import { IResolvers } from "graphql-tools/dist/Interfaces"
-import { Options } from "graphql-binding"
-import { makePrismaBindingClass, BasePrismaOptions } from "prisma-binding"
+import { GraphQLResolveInfo, GraphQLSchema } from 'graphql'
+import { IResolvers } from 'graphql-tools/dist/Interfaces'
+import { Options } from 'graphql-binding'
+import { makePrismaBindingClass, BasePrismaOptions } from 'prisma-binding'
 
 export interface Query {
-	posts: <T = Post[]>(
-		args: {
-			where?: PostWhereInput
-			orderBy?: PostOrderByInput
-			skip?: Int
-			after?: String
-			before?: String
-			first?: Int
-			last?: Int
-		},
-		info?: GraphQLResolveInfo | string,
-		options?: Options
-	) => Promise<T>
-	users: <T = User[]>(
-		args: {
-			where?: UserWhereInput
-			orderBy?: UserOrderByInput
-			skip?: Int
-			after?: String
-			before?: String
-			first?: Int
-			last?: Int
-		},
-		info?: GraphQLResolveInfo | string,
-		options?: Options
-	) => Promise<T>
-	expenses: <T = Expense[]>(
-		args: {
-			where?: ExpenseWhereInput
-			orderBy?: ExpenseOrderByInput
-			skip?: Int
-			after?: String
-			before?: String
-			first?: Int
-			last?: Int
-		},
-		info?: GraphQLResolveInfo | string,
-		options?: Options
-	) => Promise<T>
-	incomes: <T = Income[]>(
-		args: {
-			where?: IncomeWhereInput
-			orderBy?: IncomeOrderByInput
-			skip?: Int
-			after?: String
-			before?: String
-			first?: Int
-			last?: Int
-		},
-		info?: GraphQLResolveInfo | string,
-		options?: Options
-	) => Promise<T>
-	categories: <T = Category[]>(
-		args: {
-			where?: CategoryWhereInput
-			orderBy?: CategoryOrderByInput
-			skip?: Int
-			after?: String
-			before?: String
-			first?: Int
-			last?: Int
-		},
-		info?: GraphQLResolveInfo | string,
-		options?: Options
-	) => Promise<T>
-	post: <T = Post | null>(
-		args: { where: PostWhereUniqueInput },
-		info?: GraphQLResolveInfo | string,
-		options?: Options
-	) => Promise<T>
-	user: <T = User | null>(
-		args: { where: UserWhereUniqueInput },
-		info?: GraphQLResolveInfo | string,
-		options?: Options
-	) => Promise<T>
-	expense: <T = Expense | null>(
-		args: { where: ExpenseWhereUniqueInput },
-		info?: GraphQLResolveInfo | string,
-		options?: Options
-	) => Promise<T>
-	income: <T = Income | null>(
-		args: { where: IncomeWhereUniqueInput },
-		info?: GraphQLResolveInfo | string,
-		options?: Options
-	) => Promise<T>
-	category: <T = Category | null>(
-		args: { where: CategoryWhereUniqueInput },
-		info?: GraphQLResolveInfo | string,
-		options?: Options
-	) => Promise<T>
-	postsConnection: <T = PostConnection>(
-		args: {
-			where?: PostWhereInput
-			orderBy?: PostOrderByInput
-			skip?: Int
-			after?: String
-			before?: String
-			first?: Int
-			last?: Int
-		},
-		info?: GraphQLResolveInfo | string,
-		options?: Options
-	) => Promise<T>
-	usersConnection: <T = UserConnection>(
-		args: {
-			where?: UserWhereInput
-			orderBy?: UserOrderByInput
-			skip?: Int
-			after?: String
-			before?: String
-			first?: Int
-			last?: Int
-		},
-		info?: GraphQLResolveInfo | string,
-		options?: Options
-	) => Promise<T>
-	expensesConnection: <T = ExpenseConnection>(
-		args: {
-			where?: ExpenseWhereInput
-			orderBy?: ExpenseOrderByInput
-			skip?: Int
-			after?: String
-			before?: String
-			first?: Int
-			last?: Int
-		},
-		info?: GraphQLResolveInfo | string,
-		options?: Options
-	) => Promise<T>
-	incomesConnection: <T = IncomeConnection>(
-		args: {
-			where?: IncomeWhereInput
-			orderBy?: IncomeOrderByInput
-			skip?: Int
-			after?: String
-			before?: String
-			first?: Int
-			last?: Int
-		},
-		info?: GraphQLResolveInfo | string,
-		options?: Options
-	) => Promise<T>
-	categoriesConnection: <T = CategoryConnection>(
-		args: {
-			where?: CategoryWhereInput
-			orderBy?: CategoryOrderByInput
-			skip?: Int
-			after?: String
-			before?: String
-			first?: Int
-			last?: Int
-		},
-		info?: GraphQLResolveInfo | string,
-		options?: Options
-	) => Promise<T>
-	node: <T = Node | null>(args: { id: ID_Output }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T>
-}
+    posts: <T = Post[]>(args: { where?: PostWhereInput, orderBy?: PostOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    users: <T = User[]>(args: { where?: UserWhereInput, orderBy?: UserOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    expenses: <T = Expense[]>(args: { where?: ExpenseWhereInput, orderBy?: ExpenseOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    incomes: <T = Income[]>(args: { where?: IncomeWhereInput, orderBy?: IncomeOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    categories: <T = Category[]>(args: { where?: CategoryWhereInput, orderBy?: CategoryOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    post: <T = Post | null>(args: { where: PostWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    user: <T = User | null>(args: { where: UserWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    expense: <T = Expense | null>(args: { where: ExpenseWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    income: <T = Income | null>(args: { where: IncomeWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    category: <T = Category | null>(args: { where: CategoryWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    postsConnection: <T = PostConnection>(args: { where?: PostWhereInput, orderBy?: PostOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    usersConnection: <T = UserConnection>(args: { where?: UserWhereInput, orderBy?: UserOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    expensesConnection: <T = ExpenseConnection>(args: { where?: ExpenseWhereInput, orderBy?: ExpenseOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    incomesConnection: <T = IncomeConnection>(args: { where?: IncomeWhereInput, orderBy?: IncomeOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    categoriesConnection: <T = CategoryConnection>(args: { where?: CategoryWhereInput, orderBy?: CategoryOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    node: <T = Node | null>(args: { id: ID_Output }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> 
+  }
 
 export interface Mutation {
-	createPost: <T = Post>(
-		args: { data: PostCreateInput },
-		info?: GraphQLResolveInfo | string,
-		options?: Options
-	) => Promise<T>
-	createUser: <T = User>(
-		args: { data: UserCreateInput },
-		info?: GraphQLResolveInfo | string,
-		options?: Options
-	) => Promise<T>
-	createExpense: <T = Expense>(
-		args: { data: ExpenseCreateInput },
-		info?: GraphQLResolveInfo | string,
-		options?: Options
-	) => Promise<T>
-	createIncome: <T = Income>(
-		args: { data: IncomeCreateInput },
-		info?: GraphQLResolveInfo | string,
-		options?: Options
-	) => Promise<T>
-	createCategory: <T = Category>(
-		args: { data: CategoryCreateInput },
-		info?: GraphQLResolveInfo | string,
-		options?: Options
-	) => Promise<T>
-	updatePost: <T = Post | null>(
-		args: { data: PostUpdateInput; where: PostWhereUniqueInput },
-		info?: GraphQLResolveInfo | string,
-		options?: Options
-	) => Promise<T>
-	updateUser: <T = User | null>(
-		args: { data: UserUpdateInput; where: UserWhereUniqueInput },
-		info?: GraphQLResolveInfo | string,
-		options?: Options
-	) => Promise<T>
-	updateExpense: <T = Expense | null>(
-		args: { data: ExpenseUpdateInput; where: ExpenseWhereUniqueInput },
-		info?: GraphQLResolveInfo | string,
-		options?: Options
-	) => Promise<T>
-	updateIncome: <T = Income | null>(
-		args: { data: IncomeUpdateInput; where: IncomeWhereUniqueInput },
-		info?: GraphQLResolveInfo | string,
-		options?: Options
-	) => Promise<T>
-	updateCategory: <T = Category | null>(
-		args: { data: CategoryUpdateInput; where: CategoryWhereUniqueInput },
-		info?: GraphQLResolveInfo | string,
-		options?: Options
-	) => Promise<T>
-	deletePost: <T = Post | null>(
-		args: { where: PostWhereUniqueInput },
-		info?: GraphQLResolveInfo | string,
-		options?: Options
-	) => Promise<T>
-	deleteUser: <T = User | null>(
-		args: { where: UserWhereUniqueInput },
-		info?: GraphQLResolveInfo | string,
-		options?: Options
-	) => Promise<T>
-	deleteExpense: <T = Expense | null>(
-		args: { where: ExpenseWhereUniqueInput },
-		info?: GraphQLResolveInfo | string,
-		options?: Options
-	) => Promise<T>
-	deleteIncome: <T = Income | null>(
-		args: { where: IncomeWhereUniqueInput },
-		info?: GraphQLResolveInfo | string,
-		options?: Options
-	) => Promise<T>
-	deleteCategory: <T = Category | null>(
-		args: { where: CategoryWhereUniqueInput },
-		info?: GraphQLResolveInfo | string,
-		options?: Options
-	) => Promise<T>
-	upsertPost: <T = Post>(
-		args: { where: PostWhereUniqueInput; create: PostCreateInput; update: PostUpdateInput },
-		info?: GraphQLResolveInfo | string,
-		options?: Options
-	) => Promise<T>
-	upsertUser: <T = User>(
-		args: { where: UserWhereUniqueInput; create: UserCreateInput; update: UserUpdateInput },
-		info?: GraphQLResolveInfo | string,
-		options?: Options
-	) => Promise<T>
-	upsertExpense: <T = Expense>(
-		args: { where: ExpenseWhereUniqueInput; create: ExpenseCreateInput; update: ExpenseUpdateInput },
-		info?: GraphQLResolveInfo | string,
-		options?: Options
-	) => Promise<T>
-	upsertIncome: <T = Income>(
-		args: { where: IncomeWhereUniqueInput; create: IncomeCreateInput; update: IncomeUpdateInput },
-		info?: GraphQLResolveInfo | string,
-		options?: Options
-	) => Promise<T>
-	upsertCategory: <T = Category>(
-		args: { where: CategoryWhereUniqueInput; create: CategoryCreateInput; update: CategoryUpdateInput },
-		info?: GraphQLResolveInfo | string,
-		options?: Options
-	) => Promise<T>
-	updateManyPosts: <T = BatchPayload>(
-		args: { data: PostUpdateInput; where?: PostWhereInput },
-		info?: GraphQLResolveInfo | string,
-		options?: Options
-	) => Promise<T>
-	updateManyUsers: <T = BatchPayload>(
-		args: { data: UserUpdateInput; where?: UserWhereInput },
-		info?: GraphQLResolveInfo | string,
-		options?: Options
-	) => Promise<T>
-	updateManyExpenses: <T = BatchPayload>(
-		args: { data: ExpenseUpdateInput; where?: ExpenseWhereInput },
-		info?: GraphQLResolveInfo | string,
-		options?: Options
-	) => Promise<T>
-	updateManyIncomes: <T = BatchPayload>(
-		args: { data: IncomeUpdateInput; where?: IncomeWhereInput },
-		info?: GraphQLResolveInfo | string,
-		options?: Options
-	) => Promise<T>
-	updateManyCategories: <T = BatchPayload>(
-		args: { data: CategoryUpdateInput; where?: CategoryWhereInput },
-		info?: GraphQLResolveInfo | string,
-		options?: Options
-	) => Promise<T>
-	deleteManyPosts: <T = BatchPayload>(
-		args: { where?: PostWhereInput },
-		info?: GraphQLResolveInfo | string,
-		options?: Options
-	) => Promise<T>
-	deleteManyUsers: <T = BatchPayload>(
-		args: { where?: UserWhereInput },
-		info?: GraphQLResolveInfo | string,
-		options?: Options
-	) => Promise<T>
-	deleteManyExpenses: <T = BatchPayload>(
-		args: { where?: ExpenseWhereInput },
-		info?: GraphQLResolveInfo | string,
-		options?: Options
-	) => Promise<T>
-	deleteManyIncomes: <T = BatchPayload>(
-		args: { where?: IncomeWhereInput },
-		info?: GraphQLResolveInfo | string,
-		options?: Options
-	) => Promise<T>
-	deleteManyCategories: <T = BatchPayload>(
-		args: { where?: CategoryWhereInput },
-		info?: GraphQLResolveInfo | string,
-		options?: Options
-	) => Promise<T>
-}
+    createPost: <T = Post>(args: { data: PostCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    createUser: <T = User>(args: { data: UserCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    createExpense: <T = Expense>(args: { data: ExpenseCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    createIncome: <T = Income>(args: { data: IncomeCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    createCategory: <T = Category>(args: { data: CategoryCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    updatePost: <T = Post | null>(args: { data: PostUpdateInput, where: PostWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    updateUser: <T = User | null>(args: { data: UserUpdateInput, where: UserWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    updateExpense: <T = Expense | null>(args: { data: ExpenseUpdateInput, where: ExpenseWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    updateIncome: <T = Income | null>(args: { data: IncomeUpdateInput, where: IncomeWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    updateCategory: <T = Category | null>(args: { data: CategoryUpdateInput, where: CategoryWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    deletePost: <T = Post | null>(args: { where: PostWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    deleteUser: <T = User | null>(args: { where: UserWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    deleteExpense: <T = Expense | null>(args: { where: ExpenseWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    deleteIncome: <T = Income | null>(args: { where: IncomeWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    deleteCategory: <T = Category | null>(args: { where: CategoryWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    upsertPost: <T = Post>(args: { where: PostWhereUniqueInput, create: PostCreateInput, update: PostUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    upsertUser: <T = User>(args: { where: UserWhereUniqueInput, create: UserCreateInput, update: UserUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    upsertExpense: <T = Expense>(args: { where: ExpenseWhereUniqueInput, create: ExpenseCreateInput, update: ExpenseUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    upsertIncome: <T = Income>(args: { where: IncomeWhereUniqueInput, create: IncomeCreateInput, update: IncomeUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    upsertCategory: <T = Category>(args: { where: CategoryWhereUniqueInput, create: CategoryCreateInput, update: CategoryUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    updateManyPosts: <T = BatchPayload>(args: { data: PostUpdateInput, where?: PostWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    updateManyUsers: <T = BatchPayload>(args: { data: UserUpdateInput, where?: UserWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    updateManyExpenses: <T = BatchPayload>(args: { data: ExpenseUpdateInput, where?: ExpenseWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    updateManyIncomes: <T = BatchPayload>(args: { data: IncomeUpdateInput, where?: IncomeWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    updateManyCategories: <T = BatchPayload>(args: { data: CategoryUpdateInput, where?: CategoryWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    deleteManyPosts: <T = BatchPayload>(args: { where?: PostWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    deleteManyUsers: <T = BatchPayload>(args: { where?: UserWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    deleteManyExpenses: <T = BatchPayload>(args: { where?: ExpenseWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    deleteManyIncomes: <T = BatchPayload>(args: { where?: IncomeWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    deleteManyCategories: <T = BatchPayload>(args: { where?: CategoryWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> 
+  }
 
 export interface Subscription {
-	post: <T = PostSubscriptionPayload | null>(
-		args: { where?: PostSubscriptionWhereInput },
-		info?: GraphQLResolveInfo | string,
-		options?: Options
-	) => Promise<AsyncIterator<T>>
-	user: <T = UserSubscriptionPayload | null>(
-		args: { where?: UserSubscriptionWhereInput },
-		info?: GraphQLResolveInfo | string,
-		options?: Options
-	) => Promise<AsyncIterator<T>>
-	expense: <T = ExpenseSubscriptionPayload | null>(
-		args: { where?: ExpenseSubscriptionWhereInput },
-		info?: GraphQLResolveInfo | string,
-		options?: Options
-	) => Promise<AsyncIterator<T>>
-	income: <T = IncomeSubscriptionPayload | null>(
-		args: { where?: IncomeSubscriptionWhereInput },
-		info?: GraphQLResolveInfo | string,
-		options?: Options
-	) => Promise<AsyncIterator<T>>
-	category: <T = CategorySubscriptionPayload | null>(
-		args: { where?: CategorySubscriptionWhereInput },
-		info?: GraphQLResolveInfo | string,
-		options?: Options
-	) => Promise<AsyncIterator<T>>
-}
+    post: <T = PostSubscriptionPayload | null>(args: { where?: PostSubscriptionWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T>> ,
+    user: <T = UserSubscriptionPayload | null>(args: { where?: UserSubscriptionWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T>> ,
+    expense: <T = ExpenseSubscriptionPayload | null>(args: { where?: ExpenseSubscriptionWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T>> ,
+    income: <T = IncomeSubscriptionPayload | null>(args: { where?: IncomeSubscriptionWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T>> ,
+    category: <T = CategorySubscriptionPayload | null>(args: { where?: CategorySubscriptionWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T>> 
+  }
 
 export interface Exists {
-	Post: (where?: PostWhereInput) => Promise<boolean>
-	User: (where?: UserWhereInput) => Promise<boolean>
-	Expense: (where?: ExpenseWhereInput) => Promise<boolean>
-	Income: (where?: IncomeWhereInput) => Promise<boolean>
-	Category: (where?: CategoryWhereInput) => Promise<boolean>
+  Post: (where?: PostWhereInput) => Promise<boolean>
+  User: (where?: UserWhereInput) => Promise<boolean>
+  Expense: (where?: ExpenseWhereInput) => Promise<boolean>
+  Income: (where?: IncomeWhereInput) => Promise<boolean>
+  Category: (where?: CategoryWhereInput) => Promise<boolean>
 }
 
 export interface Prisma {
-	query: Query
-	mutation: Mutation
-	subscription: Subscription
-	exists: Exists
-	request: <T = any>(query: string, variables?: { [key: string]: any }) => Promise<T>
-	delegate(
-		operation: "query" | "mutation",
-		fieldName: string,
-		args: {
-			[key: string]: any
-		},
-		infoOrQuery?: GraphQLResolveInfo | string,
-		options?: Options
-	): Promise<any>
-	delegateSubscription(
-		fieldName: string,
-		args?: {
-			[key: string]: any
-		},
-		infoOrQuery?: GraphQLResolveInfo | string,
-		options?: Options
-	): Promise<AsyncIterator<any>>
-	getAbstractResolvers(filterSchema?: GraphQLSchema | string): IResolvers
+  query: Query
+  mutation: Mutation
+  subscription: Subscription
+  exists: Exists
+  request: <T = any>(query: string, variables?: {[key: string]: any}) => Promise<T>
+  delegate(operation: 'query' | 'mutation', fieldName: string, args: {
+    [key: string]: any;
+}, infoOrQuery?: GraphQLResolveInfo | string, options?: Options): Promise<any>;
+delegateSubscription(fieldName: string, args?: {
+    [key: string]: any;
+}, infoOrQuery?: GraphQLResolveInfo | string, options?: Options): Promise<AsyncIterator<any>>;
+getAbstractResolvers(filterSchema?: GraphQLSchema | string): IResolvers;
 }
 
 export interface BindingConstructor<T> {
-	new (options: BasePrismaOptions): T
+  new(options: BasePrismaOptions): T
 }
 /**
  * Type Defs
- */
+*/
 
 const typeDefs = `type AggregateCategory {
   count: Int!
@@ -1715,7 +1424,6 @@ type User implements Node {
   posts(where: PostWhereInput, orderBy: PostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Post!]
   expenses(where: ExpenseWhereInput, orderBy: ExpenseOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Expense!]
   incomes(where: IncomeWhereInput, orderBy: IncomeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Income!]
-  totalIncome: Float
 }
 
 """A connection to a list of items."""
@@ -1732,7 +1440,6 @@ input UserCreateInput {
   email: String!
   password: String!
   name: String!
-  totalIncome: Float
   posts: PostCreateManyWithoutAuthorInput
   expenses: ExpenseCreateManyWithoutUserInput
   incomes: IncomeCreateManyWithoutUserInput
@@ -1757,7 +1464,6 @@ input UserCreateWithoutExpensesInput {
   email: String!
   password: String!
   name: String!
-  totalIncome: Float
   posts: PostCreateManyWithoutAuthorInput
   incomes: IncomeCreateManyWithoutUserInput
 }
@@ -1766,7 +1472,6 @@ input UserCreateWithoutIncomesInput {
   email: String!
   password: String!
   name: String!
-  totalIncome: Float
   posts: PostCreateManyWithoutAuthorInput
   expenses: ExpenseCreateManyWithoutUserInput
 }
@@ -1775,7 +1480,6 @@ input UserCreateWithoutPostsInput {
   email: String!
   password: String!
   name: String!
-  totalIncome: Float
   expenses: ExpenseCreateManyWithoutUserInput
   incomes: IncomeCreateManyWithoutUserInput
 }
@@ -1798,8 +1502,6 @@ enum UserOrderByInput {
   password_DESC
   name_ASC
   name_DESC
-  totalIncome_ASC
-  totalIncome_DESC
   updatedAt_ASC
   updatedAt_DESC
   createdAt_ASC
@@ -1811,7 +1513,6 @@ type UserPreviousValues {
   email: String!
   password: String!
   name: String!
-  totalIncome: Float
 }
 
 type UserSubscriptionPayload {
@@ -1857,7 +1558,6 @@ input UserUpdateInput {
   email: String
   password: String
   name: String
-  totalIncome: Float
   posts: PostUpdateManyWithoutAuthorInput
   expenses: ExpenseUpdateManyWithoutUserInput
   incomes: IncomeUpdateManyWithoutUserInput
@@ -1891,7 +1591,6 @@ input UserUpdateWithoutExpensesDataInput {
   email: String
   password: String
   name: String
-  totalIncome: Float
   posts: PostUpdateManyWithoutAuthorInput
   incomes: IncomeUpdateManyWithoutUserInput
 }
@@ -1900,7 +1599,6 @@ input UserUpdateWithoutIncomesDataInput {
   email: String
   password: String
   name: String
-  totalIncome: Float
   posts: PostUpdateManyWithoutAuthorInput
   expenses: ExpenseUpdateManyWithoutUserInput
 }
@@ -1909,7 +1607,6 @@ input UserUpdateWithoutPostsDataInput {
   email: String
   password: String
   name: String
-  totalIncome: Float
   expenses: ExpenseUpdateManyWithoutUserInput
   incomes: IncomeUpdateManyWithoutUserInput
 }
@@ -2098,28 +1795,6 @@ input UserWhereInput {
 
   """All values not ending with the given string."""
   name_not_ends_with: String
-  totalIncome: Float
-
-  """All values that are not equal to given value."""
-  totalIncome_not: Float
-
-  """All values that are contained in given list."""
-  totalIncome_in: [Float!]
-
-  """All values that are not contained in given list."""
-  totalIncome_not_in: [Float!]
-
-  """All values less than the given value."""
-  totalIncome_lt: Float
-
-  """All values less than or equal the given value."""
-  totalIncome_lte: Float
-
-  """All values greater than the given value."""
-  totalIncome_gt: Float
-
-  """All values greater than or equal the given value."""
-  totalIncome_gte: Float
   posts_every: PostWhereInput
   posts_some: PostWhereInput
   posts_none: PostWhereInput
@@ -2137,800 +1812,779 @@ input UserWhereUniqueInput {
 }
 `
 
-export const Prisma = makePrismaBindingClass<BindingConstructor<Prisma>>({ typeDefs })
+export const Prisma = makePrismaBindingClass<BindingConstructor<Prisma>>({typeDefs})
 
 /**
  * Types
- */
+*/
 
-export type PostOrderByInput =
-	| "id_ASC"
-	| "id_DESC"
-	| "createdAt_ASC"
-	| "createdAt_DESC"
-	| "updatedAt_ASC"
-	| "updatedAt_DESC"
-	| "isPublished_ASC"
-	| "isPublished_DESC"
-	| "title_ASC"
-	| "title_DESC"
-	| "text_ASC"
-	| "text_DESC"
+export type PostOrderByInput =   'id_ASC' |
+  'id_DESC' |
+  'createdAt_ASC' |
+  'createdAt_DESC' |
+  'updatedAt_ASC' |
+  'updatedAt_DESC' |
+  'isPublished_ASC' |
+  'isPublished_DESC' |
+  'title_ASC' |
+  'title_DESC' |
+  'text_ASC' |
+  'text_DESC'
 
-export type ExpenseOrderByInput =
-	| "id_ASC"
-	| "id_DESC"
-	| "name_ASC"
-	| "name_DESC"
-	| "amount_ASC"
-	| "amount_DESC"
-	| "type_ASC"
-	| "type_DESC"
-	| "dueDate_ASC"
-	| "dueDate_DESC"
-	| "updatedAt_ASC"
-	| "updatedAt_DESC"
-	| "createdAt_ASC"
-	| "createdAt_DESC"
+export type ExpenseOrderByInput =   'id_ASC' |
+  'id_DESC' |
+  'name_ASC' |
+  'name_DESC' |
+  'amount_ASC' |
+  'amount_DESC' |
+  'type_ASC' |
+  'type_DESC' |
+  'dueDate_ASC' |
+  'dueDate_DESC' |
+  'updatedAt_ASC' |
+  'updatedAt_DESC' |
+  'createdAt_ASC' |
+  'createdAt_DESC'
 
-export type IncomeOrderByInput =
-	| "id_ASC"
-	| "id_DESC"
-	| "name_ASC"
-	| "name_DESC"
-	| "amount_ASC"
-	| "amount_DESC"
-	| "type_ASC"
-	| "type_DESC"
-	| "payDate_ASC"
-	| "payDate_DESC"
-	| "updatedAt_ASC"
-	| "updatedAt_DESC"
-	| "createdAt_ASC"
-	| "createdAt_DESC"
+export type IncomeOrderByInput =   'id_ASC' |
+  'id_DESC' |
+  'name_ASC' |
+  'name_DESC' |
+  'amount_ASC' |
+  'amount_DESC' |
+  'type_ASC' |
+  'type_DESC' |
+  'payDate_ASC' |
+  'payDate_DESC' |
+  'updatedAt_ASC' |
+  'updatedAt_DESC' |
+  'createdAt_ASC' |
+  'createdAt_DESC'
 
-export type UserOrderByInput =
-	| "id_ASC"
-	| "id_DESC"
-	| "email_ASC"
-	| "email_DESC"
-	| "password_ASC"
-	| "password_DESC"
-	| "name_ASC"
-	| "name_DESC"
-	| "totalIncome_ASC"
-	| "totalIncome_DESC"
-	| "updatedAt_ASC"
-	| "updatedAt_DESC"
-	| "createdAt_ASC"
-	| "createdAt_DESC"
+export type UserOrderByInput =   'id_ASC' |
+  'id_DESC' |
+  'email_ASC' |
+  'email_DESC' |
+  'password_ASC' |
+  'password_DESC' |
+  'name_ASC' |
+  'name_DESC' |
+  'updatedAt_ASC' |
+  'updatedAt_DESC' |
+  'createdAt_ASC' |
+  'createdAt_DESC'
 
-export type CategoryOrderByInput =
-	| "id_ASC"
-	| "id_DESC"
-	| "name_ASC"
-	| "name_DESC"
-	| "updatedAt_ASC"
-	| "updatedAt_DESC"
-	| "createdAt_ASC"
-	| "createdAt_DESC"
+export type CategoryOrderByInput =   'id_ASC' |
+  'id_DESC' |
+  'name_ASC' |
+  'name_DESC' |
+  'updatedAt_ASC' |
+  'updatedAt_DESC' |
+  'createdAt_ASC' |
+  'createdAt_DESC'
 
-export type MutationType = "CREATED" | "UPDATED" | "DELETED"
+export type MutationType =   'CREATED' |
+  'UPDATED' |
+  'DELETED'
 
 export interface PostCreateWithoutAuthorInput {
-	isPublished?: Boolean
-	title: String
-	text: String
+  isPublished?: Boolean
+  title: String
+  text: String
 }
 
 export interface PostWhereInput {
-	AND?: PostWhereInput[] | PostWhereInput
-	OR?: PostWhereInput[] | PostWhereInput
-	NOT?: PostWhereInput[] | PostWhereInput
-	id?: ID_Input
-	id_not?: ID_Input
-	id_in?: ID_Input[] | ID_Input
-	id_not_in?: ID_Input[] | ID_Input
-	id_lt?: ID_Input
-	id_lte?: ID_Input
-	id_gt?: ID_Input
-	id_gte?: ID_Input
-	id_contains?: ID_Input
-	id_not_contains?: ID_Input
-	id_starts_with?: ID_Input
-	id_not_starts_with?: ID_Input
-	id_ends_with?: ID_Input
-	id_not_ends_with?: ID_Input
-	createdAt?: DateTime
-	createdAt_not?: DateTime
-	createdAt_in?: DateTime[] | DateTime
-	createdAt_not_in?: DateTime[] | DateTime
-	createdAt_lt?: DateTime
-	createdAt_lte?: DateTime
-	createdAt_gt?: DateTime
-	createdAt_gte?: DateTime
-	updatedAt?: DateTime
-	updatedAt_not?: DateTime
-	updatedAt_in?: DateTime[] | DateTime
-	updatedAt_not_in?: DateTime[] | DateTime
-	updatedAt_lt?: DateTime
-	updatedAt_lte?: DateTime
-	updatedAt_gt?: DateTime
-	updatedAt_gte?: DateTime
-	isPublished?: Boolean
-	isPublished_not?: Boolean
-	title?: String
-	title_not?: String
-	title_in?: String[] | String
-	title_not_in?: String[] | String
-	title_lt?: String
-	title_lte?: String
-	title_gt?: String
-	title_gte?: String
-	title_contains?: String
-	title_not_contains?: String
-	title_starts_with?: String
-	title_not_starts_with?: String
-	title_ends_with?: String
-	title_not_ends_with?: String
-	text?: String
-	text_not?: String
-	text_in?: String[] | String
-	text_not_in?: String[] | String
-	text_lt?: String
-	text_lte?: String
-	text_gt?: String
-	text_gte?: String
-	text_contains?: String
-	text_not_contains?: String
-	text_starts_with?: String
-	text_not_starts_with?: String
-	text_ends_with?: String
-	text_not_ends_with?: String
-	author?: UserWhereInput
+  AND?: PostWhereInput[] | PostWhereInput
+  OR?: PostWhereInput[] | PostWhereInput
+  NOT?: PostWhereInput[] | PostWhereInput
+  id?: ID_Input
+  id_not?: ID_Input
+  id_in?: ID_Input[] | ID_Input
+  id_not_in?: ID_Input[] | ID_Input
+  id_lt?: ID_Input
+  id_lte?: ID_Input
+  id_gt?: ID_Input
+  id_gte?: ID_Input
+  id_contains?: ID_Input
+  id_not_contains?: ID_Input
+  id_starts_with?: ID_Input
+  id_not_starts_with?: ID_Input
+  id_ends_with?: ID_Input
+  id_not_ends_with?: ID_Input
+  createdAt?: DateTime
+  createdAt_not?: DateTime
+  createdAt_in?: DateTime[] | DateTime
+  createdAt_not_in?: DateTime[] | DateTime
+  createdAt_lt?: DateTime
+  createdAt_lte?: DateTime
+  createdAt_gt?: DateTime
+  createdAt_gte?: DateTime
+  updatedAt?: DateTime
+  updatedAt_not?: DateTime
+  updatedAt_in?: DateTime[] | DateTime
+  updatedAt_not_in?: DateTime[] | DateTime
+  updatedAt_lt?: DateTime
+  updatedAt_lte?: DateTime
+  updatedAt_gt?: DateTime
+  updatedAt_gte?: DateTime
+  isPublished?: Boolean
+  isPublished_not?: Boolean
+  title?: String
+  title_not?: String
+  title_in?: String[] | String
+  title_not_in?: String[] | String
+  title_lt?: String
+  title_lte?: String
+  title_gt?: String
+  title_gte?: String
+  title_contains?: String
+  title_not_contains?: String
+  title_starts_with?: String
+  title_not_starts_with?: String
+  title_ends_with?: String
+  title_not_ends_with?: String
+  text?: String
+  text_not?: String
+  text_in?: String[] | String
+  text_not_in?: String[] | String
+  text_lt?: String
+  text_lte?: String
+  text_gt?: String
+  text_gte?: String
+  text_contains?: String
+  text_not_contains?: String
+  text_starts_with?: String
+  text_not_starts_with?: String
+  text_ends_with?: String
+  text_not_ends_with?: String
+  author?: UserWhereInput
 }
 
 export interface IncomeCreateInput {
-	name: String
-	amount: Float
-	type: String
-	payDate: DateTime
-	category?: CategoryCreateOneInput
-	user: UserCreateOneWithoutIncomesInput
+  name: String
+  amount: Float
+  type: String
+  payDate: DateTime
+  category?: CategoryCreateOneInput
+  user: UserCreateOneWithoutIncomesInput
 }
 
 export interface CategoryWhereInput {
-	AND?: CategoryWhereInput[] | CategoryWhereInput
-	OR?: CategoryWhereInput[] | CategoryWhereInput
-	NOT?: CategoryWhereInput[] | CategoryWhereInput
-	id?: ID_Input
-	id_not?: ID_Input
-	id_in?: ID_Input[] | ID_Input
-	id_not_in?: ID_Input[] | ID_Input
-	id_lt?: ID_Input
-	id_lte?: ID_Input
-	id_gt?: ID_Input
-	id_gte?: ID_Input
-	id_contains?: ID_Input
-	id_not_contains?: ID_Input
-	id_starts_with?: ID_Input
-	id_not_starts_with?: ID_Input
-	id_ends_with?: ID_Input
-	id_not_ends_with?: ID_Input
-	name?: String
-	name_not?: String
-	name_in?: String[] | String
-	name_not_in?: String[] | String
-	name_lt?: String
-	name_lte?: String
-	name_gt?: String
-	name_gte?: String
-	name_contains?: String
-	name_not_contains?: String
-	name_starts_with?: String
-	name_not_starts_with?: String
-	name_ends_with?: String
-	name_not_ends_with?: String
-}
-
-export interface UserCreateOneWithoutIncomesInput {
-	create?: UserCreateWithoutIncomesInput
-	connect?: UserWhereUniqueInput
-}
-
-export interface ExpenseWhereInput {
-	AND?: ExpenseWhereInput[] | ExpenseWhereInput
-	OR?: ExpenseWhereInput[] | ExpenseWhereInput
-	NOT?: ExpenseWhereInput[] | ExpenseWhereInput
-	id?: ID_Input
-	id_not?: ID_Input
-	id_in?: ID_Input[] | ID_Input
-	id_not_in?: ID_Input[] | ID_Input
-	id_lt?: ID_Input
-	id_lte?: ID_Input
-	id_gt?: ID_Input
-	id_gte?: ID_Input
-	id_contains?: ID_Input
-	id_not_contains?: ID_Input
-	id_starts_with?: ID_Input
-	id_not_starts_with?: ID_Input
-	id_ends_with?: ID_Input
-	id_not_ends_with?: ID_Input
-	name?: String
-	name_not?: String
-	name_in?: String[] | String
-	name_not_in?: String[] | String
-	name_lt?: String
-	name_lte?: String
-	name_gt?: String
-	name_gte?: String
-	name_contains?: String
-	name_not_contains?: String
-	name_starts_with?: String
-	name_not_starts_with?: String
-	name_ends_with?: String
-	name_not_ends_with?: String
-	amount?: Float
-	amount_not?: Float
-	amount_in?: Float[] | Float
-	amount_not_in?: Float[] | Float
-	amount_lt?: Float
-	amount_lte?: Float
-	amount_gt?: Float
-	amount_gte?: Float
-	type?: String
-	type_not?: String
-	type_in?: String[] | String
-	type_not_in?: String[] | String
-	type_lt?: String
-	type_lte?: String
-	type_gt?: String
-	type_gte?: String
-	type_contains?: String
-	type_not_contains?: String
-	type_starts_with?: String
-	type_not_starts_with?: String
-	type_ends_with?: String
-	type_not_ends_with?: String
-	dueDate?: DateTime
-	dueDate_not?: DateTime
-	dueDate_in?: DateTime[] | DateTime
-	dueDate_not_in?: DateTime[] | DateTime
-	dueDate_lt?: DateTime
-	dueDate_lte?: DateTime
-	dueDate_gt?: DateTime
-	dueDate_gte?: DateTime
-	category?: CategoryWhereInput
-	user?: UserWhereInput
-}
-
-export interface IncomeUpdateWithoutUserDataInput {
-	name?: String
-	amount?: Float
-	type?: String
-	payDate?: DateTime
-	category?: CategoryUpdateOneInput
-}
-
-export interface CategoryUpsertNestedInput {
-	update: CategoryUpdateDataInput
-	create: CategoryCreateInput
-}
-
-export interface IncomeUpdateWithWhereUniqueWithoutUserInput {
-	where: IncomeWhereUniqueInput
-	data: IncomeUpdateWithoutUserDataInput
-}
-
-export interface UserCreateWithoutIncomesInput {
-	email: String
-	password: String
-	name: String
-	totalIncome?: Float
-	posts?: PostCreateManyWithoutAuthorInput
-	expenses?: ExpenseCreateManyWithoutUserInput
-}
-
-export interface PostCreateInput {
-	isPublished?: Boolean
-	title: String
-	text: String
-	author: UserCreateOneWithoutPostsInput
-}
-
-export interface IncomeSubscriptionWhereInput {
-	AND?: IncomeSubscriptionWhereInput[] | IncomeSubscriptionWhereInput
-	OR?: IncomeSubscriptionWhereInput[] | IncomeSubscriptionWhereInput
-	NOT?: IncomeSubscriptionWhereInput[] | IncomeSubscriptionWhereInput
-	mutation_in?: MutationType[] | MutationType
-	updatedFields_contains?: String
-	updatedFields_contains_every?: String[] | String
-	updatedFields_contains_some?: String[] | String
-	node?: IncomeWhereInput
-}
-
-export interface UserCreateOneWithoutPostsInput {
-	create?: UserCreateWithoutPostsInput
-	connect?: UserWhereUniqueInput
-}
-
-export interface UserSubscriptionWhereInput {
-	AND?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput
-	OR?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput
-	NOT?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput
-	mutation_in?: MutationType[] | MutationType
-	updatedFields_contains?: String
-	updatedFields_contains_every?: String[] | String
-	updatedFields_contains_some?: String[] | String
-	node?: UserWhereInput
-}
-
-export interface UserCreateWithoutPostsInput {
-	email: String
-	password: String
-	name: String
-	totalIncome?: Float
-	expenses?: ExpenseCreateManyWithoutUserInput
-	incomes?: IncomeCreateManyWithoutUserInput
-}
-
-export interface PostSubscriptionWhereInput {
-	AND?: PostSubscriptionWhereInput[] | PostSubscriptionWhereInput
-	OR?: PostSubscriptionWhereInput[] | PostSubscriptionWhereInput
-	NOT?: PostSubscriptionWhereInput[] | PostSubscriptionWhereInput
-	mutation_in?: MutationType[] | MutationType
-	updatedFields_contains?: String
-	updatedFields_contains_every?: String[] | String
-	updatedFields_contains_some?: String[] | String
-	node?: PostWhereInput
-}
-
-export interface ExpenseCreateManyWithoutUserInput {
-	create?: ExpenseCreateWithoutUserInput[] | ExpenseCreateWithoutUserInput
-	connect?: ExpenseWhereUniqueInput[] | ExpenseWhereUniqueInput
-}
-
-export interface UserUpsertWithoutIncomesInput {
-	update: UserUpdateWithoutIncomesDataInput
-	create: UserCreateWithoutIncomesInput
-}
-
-export interface ExpenseCreateWithoutUserInput {
-	name: String
-	amount: Float
-	type: String
-	dueDate: DateTime
-	category?: CategoryCreateOneInput
-}
-
-export interface UserWhereUniqueInput {
-	id?: ID_Input
-	email?: String
-}
-
-export interface CategoryCreateOneInput {
-	create?: CategoryCreateInput
-	connect?: CategoryWhereUniqueInput
-}
-
-export interface IncomeWhereUniqueInput {
-	id?: ID_Input
-}
-
-export interface CategoryCreateInput {
-	name: String
-}
-
-export interface UserUpdateWithoutIncomesDataInput {
-	email?: String
-	password?: String
-	name?: String
-	totalIncome?: Float
-	posts?: PostUpdateManyWithoutAuthorInput
-	expenses?: ExpenseUpdateManyWithoutUserInput
-}
-
-export interface IncomeCreateManyWithoutUserInput {
-	create?: IncomeCreateWithoutUserInput[] | IncomeCreateWithoutUserInput
-	connect?: IncomeWhereUniqueInput[] | IncomeWhereUniqueInput
-}
-
-export interface IncomeUpdateInput {
-	name?: String
-	amount?: Float
-	type?: String
-	payDate?: DateTime
-	category?: CategoryUpdateOneInput
-	user?: UserUpdateOneWithoutIncomesInput
-}
-
-export interface IncomeCreateWithoutUserInput {
-	name: String
-	amount: Float
-	type: String
-	payDate: DateTime
-	category?: CategoryCreateOneInput
-}
-
-export interface UserUpdateWithoutExpensesDataInput {
-	email?: String
-	password?: String
-	name?: String
-	totalIncome?: Float
-	posts?: PostUpdateManyWithoutAuthorInput
-	incomes?: IncomeUpdateManyWithoutUserInput
-}
-
-export interface UserCreateInput {
-	email: String
-	password: String
-	name: String
-	totalIncome?: Float
-	posts?: PostCreateManyWithoutAuthorInput
-	expenses?: ExpenseCreateManyWithoutUserInput
-	incomes?: IncomeCreateManyWithoutUserInput
-}
-
-export interface ExpenseUpdateInput {
-	name?: String
-	amount?: Float
-	type?: String
-	dueDate?: DateTime
-	category?: CategoryUpdateOneInput
-	user?: UserUpdateOneWithoutExpensesInput
-}
-
-export interface PostCreateManyWithoutAuthorInput {
-	create?: PostCreateWithoutAuthorInput[] | PostCreateWithoutAuthorInput
-	connect?: PostWhereUniqueInput[] | PostWhereUniqueInput
-}
-
-export interface PostUpdateWithoutAuthorDataInput {
-	isPublished?: Boolean
-	title?: String
-	text?: String
-}
-
-export interface IncomeUpdateManyWithoutUserInput {
-	create?: IncomeCreateWithoutUserInput[] | IncomeCreateWithoutUserInput
-	connect?: IncomeWhereUniqueInput[] | IncomeWhereUniqueInput
-	disconnect?: IncomeWhereUniqueInput[] | IncomeWhereUniqueInput
-	delete?: IncomeWhereUniqueInput[] | IncomeWhereUniqueInput
-	update?: IncomeUpdateWithWhereUniqueWithoutUserInput[] | IncomeUpdateWithWhereUniqueWithoutUserInput
-	upsert?: IncomeUpsertWithWhereUniqueWithoutUserInput[] | IncomeUpsertWithWhereUniqueWithoutUserInput
-}
-
-export interface PostUpdateManyWithoutAuthorInput {
-	create?: PostCreateWithoutAuthorInput[] | PostCreateWithoutAuthorInput
-	connect?: PostWhereUniqueInput[] | PostWhereUniqueInput
-	disconnect?: PostWhereUniqueInput[] | PostWhereUniqueInput
-	delete?: PostWhereUniqueInput[] | PostWhereUniqueInput
-	update?: PostUpdateWithWhereUniqueWithoutAuthorInput[] | PostUpdateWithWhereUniqueWithoutAuthorInput
-	upsert?: PostUpsertWithWhereUniqueWithoutAuthorInput[] | PostUpsertWithWhereUniqueWithoutAuthorInput
-}
-
-export interface ExpenseCreateInput {
-	name: String
-	amount: Float
-	type: String
-	dueDate: DateTime
-	category?: CategoryCreateOneInput
-	user: UserCreateOneWithoutExpensesInput
-}
-
-export interface UserUpsertWithoutPostsInput {
-	update: UserUpdateWithoutPostsDataInput
-	create: UserCreateWithoutPostsInput
-}
-
-export interface UserCreateOneWithoutExpensesInput {
-	create?: UserCreateWithoutExpensesInput
-	connect?: UserWhereUniqueInput
-}
-
-export interface CategorySubscriptionWhereInput {
-	AND?: CategorySubscriptionWhereInput[] | CategorySubscriptionWhereInput
-	OR?: CategorySubscriptionWhereInput[] | CategorySubscriptionWhereInput
-	NOT?: CategorySubscriptionWhereInput[] | CategorySubscriptionWhereInput
-	mutation_in?: MutationType[] | MutationType
-	updatedFields_contains?: String
-	updatedFields_contains_every?: String[] | String
-	updatedFields_contains_some?: String[] | String
-	node?: CategoryWhereInput
-}
-
-export interface UserCreateWithoutExpensesInput {
-	email: String
-	password: String
-	name: String
-	totalIncome?: Float
-	posts?: PostCreateManyWithoutAuthorInput
-	incomes?: IncomeCreateManyWithoutUserInput
-}
-
-export interface UserWhereInput {
-	AND?: UserWhereInput[] | UserWhereInput
-	OR?: UserWhereInput[] | UserWhereInput
-	NOT?: UserWhereInput[] | UserWhereInput
-	id?: ID_Input
-	id_not?: ID_Input
-	id_in?: ID_Input[] | ID_Input
-	id_not_in?: ID_Input[] | ID_Input
-	id_lt?: ID_Input
-	id_lte?: ID_Input
-	id_gt?: ID_Input
-	id_gte?: ID_Input
-	id_contains?: ID_Input
-	id_not_contains?: ID_Input
-	id_starts_with?: ID_Input
-	id_not_starts_with?: ID_Input
-	id_ends_with?: ID_Input
-	id_not_ends_with?: ID_Input
-	email?: String
-	email_not?: String
-	email_in?: String[] | String
-	email_not_in?: String[] | String
-	email_lt?: String
-	email_lte?: String
-	email_gt?: String
-	email_gte?: String
-	email_contains?: String
-	email_not_contains?: String
-	email_starts_with?: String
-	email_not_starts_with?: String
-	email_ends_with?: String
-	email_not_ends_with?: String
-	password?: String
-	password_not?: String
-	password_in?: String[] | String
-	password_not_in?: String[] | String
-	password_lt?: String
-	password_lte?: String
-	password_gt?: String
-	password_gte?: String
-	password_contains?: String
-	password_not_contains?: String
-	password_starts_with?: String
-	password_not_starts_with?: String
-	password_ends_with?: String
-	password_not_ends_with?: String
-	name?: String
-	name_not?: String
-	name_in?: String[] | String
-	name_not_in?: String[] | String
-	name_lt?: String
-	name_lte?: String
-	name_gt?: String
-	name_gte?: String
-	name_contains?: String
-	name_not_contains?: String
-	name_starts_with?: String
-	name_not_starts_with?: String
-	name_ends_with?: String
-	name_not_ends_with?: String
-	totalIncome?: Float
-	totalIncome_not?: Float
-	totalIncome_in?: Float[] | Float
-	totalIncome_not_in?: Float[] | Float
-	totalIncome_lt?: Float
-	totalIncome_lte?: Float
-	totalIncome_gt?: Float
-	totalIncome_gte?: Float
-	posts_every?: PostWhereInput
-	posts_some?: PostWhereInput
-	posts_none?: PostWhereInput
-	expenses_every?: ExpenseWhereInput
-	expenses_some?: ExpenseWhereInput
-	expenses_none?: ExpenseWhereInput
-	incomes_every?: IncomeWhereInput
-	incomes_some?: IncomeWhereInput
-	incomes_none?: IncomeWhereInput
-}
-
-export interface IncomeWhereInput {
-	AND?: IncomeWhereInput[] | IncomeWhereInput
-	OR?: IncomeWhereInput[] | IncomeWhereInput
-	NOT?: IncomeWhereInput[] | IncomeWhereInput
-	id?: ID_Input
-	id_not?: ID_Input
-	id_in?: ID_Input[] | ID_Input
-	id_not_in?: ID_Input[] | ID_Input
-	id_lt?: ID_Input
-	id_lte?: ID_Input
-	id_gt?: ID_Input
-	id_gte?: ID_Input
-	id_contains?: ID_Input
-	id_not_contains?: ID_Input
-	id_starts_with?: ID_Input
-	id_not_starts_with?: ID_Input
-	id_ends_with?: ID_Input
-	id_not_ends_with?: ID_Input
-	name?: String
-	name_not?: String
-	name_in?: String[] | String
-	name_not_in?: String[] | String
-	name_lt?: String
-	name_lte?: String
-	name_gt?: String
-	name_gte?: String
-	name_contains?: String
-	name_not_contains?: String
-	name_starts_with?: String
-	name_not_starts_with?: String
-	name_ends_with?: String
-	name_not_ends_with?: String
-	amount?: Float
-	amount_not?: Float
-	amount_in?: Float[] | Float
-	amount_not_in?: Float[] | Float
-	amount_lt?: Float
-	amount_lte?: Float
-	amount_gt?: Float
-	amount_gte?: Float
-	type?: String
-	type_not?: String
-	type_in?: String[] | String
-	type_not_in?: String[] | String
-	type_lt?: String
-	type_lte?: String
-	type_gt?: String
-	type_gte?: String
-	type_contains?: String
-	type_not_contains?: String
-	type_starts_with?: String
-	type_not_starts_with?: String
-	type_ends_with?: String
-	type_not_ends_with?: String
-	payDate?: DateTime
-	payDate_not?: DateTime
-	payDate_in?: DateTime[] | DateTime
-	payDate_not_in?: DateTime[] | DateTime
-	payDate_lt?: DateTime
-	payDate_lte?: DateTime
-	payDate_gt?: DateTime
-	payDate_gte?: DateTime
-	category?: CategoryWhereInput
-	user?: UserWhereInput
-}
-
-export interface PostWhereUniqueInput {
-	id?: ID_Input
-}
-
-export interface ExpenseUpsertWithWhereUniqueWithoutUserInput {
-	where: ExpenseWhereUniqueInput
-	update: ExpenseUpdateWithoutUserDataInput
-	create: ExpenseCreateWithoutUserInput
-}
-
-export interface CategoryWhereUniqueInput {
-	id?: ID_Input
-}
-
-export interface UserUpsertWithoutExpensesInput {
-	update: UserUpdateWithoutExpensesDataInput
-	create: UserCreateWithoutExpensesInput
-}
-
-export interface PostUpsertWithWhereUniqueWithoutAuthorInput {
-	where: PostWhereUniqueInput
-	update: PostUpdateWithoutAuthorDataInput
-	create: PostCreateWithoutAuthorInput
-}
-
-export interface PostUpdateInput {
-	isPublished?: Boolean
-	title?: String
-	text?: String
-	author?: UserUpdateOneWithoutPostsInput
-}
-
-export interface UserUpdateInput {
-	email?: String
-	password?: String
-	name?: String
-	totalIncome?: Float
-	posts?: PostUpdateManyWithoutAuthorInput
-	expenses?: ExpenseUpdateManyWithoutUserInput
-	incomes?: IncomeUpdateManyWithoutUserInput
-}
-
-export interface UserUpdateOneWithoutPostsInput {
-	create?: UserCreateWithoutPostsInput
-	connect?: UserWhereUniqueInput
-	delete?: Boolean
-	update?: UserUpdateWithoutPostsDataInput
-	upsert?: UserUpsertWithoutPostsInput
-}
-
-export interface ExpenseSubscriptionWhereInput {
-	AND?: ExpenseSubscriptionWhereInput[] | ExpenseSubscriptionWhereInput
-	OR?: ExpenseSubscriptionWhereInput[] | ExpenseSubscriptionWhereInput
-	NOT?: ExpenseSubscriptionWhereInput[] | ExpenseSubscriptionWhereInput
-	mutation_in?: MutationType[] | MutationType
-	updatedFields_contains?: String
-	updatedFields_contains_every?: String[] | String
-	updatedFields_contains_some?: String[] | String
-	node?: ExpenseWhereInput
-}
-
-export interface UserUpdateWithoutPostsDataInput {
-	email?: String
-	password?: String
-	name?: String
-	totalIncome?: Float
-	expenses?: ExpenseUpdateManyWithoutUserInput
-	incomes?: IncomeUpdateManyWithoutUserInput
-}
-
-export interface ExpenseWhereUniqueInput {
-	id?: ID_Input
-}
-
-export interface ExpenseUpdateManyWithoutUserInput {
-	create?: ExpenseCreateWithoutUserInput[] | ExpenseCreateWithoutUserInput
-	connect?: ExpenseWhereUniqueInput[] | ExpenseWhereUniqueInput
-	disconnect?: ExpenseWhereUniqueInput[] | ExpenseWhereUniqueInput
-	delete?: ExpenseWhereUniqueInput[] | ExpenseWhereUniqueInput
-	update?: ExpenseUpdateWithWhereUniqueWithoutUserInput[] | ExpenseUpdateWithWhereUniqueWithoutUserInput
-	upsert?: ExpenseUpsertWithWhereUniqueWithoutUserInput[] | ExpenseUpsertWithWhereUniqueWithoutUserInput
-}
-
-export interface UserUpdateOneWithoutExpensesInput {
-	create?: UserCreateWithoutExpensesInput
-	connect?: UserWhereUniqueInput
-	delete?: Boolean
-	update?: UserUpdateWithoutExpensesDataInput
-	upsert?: UserUpsertWithoutExpensesInput
-}
-
-export interface CategoryUpdateDataInput {
-	name?: String
-}
-
-export interface CategoryUpdateOneInput {
-	create?: CategoryCreateInput
-	connect?: CategoryWhereUniqueInput
-	disconnect?: Boolean
-	delete?: Boolean
-	update?: CategoryUpdateDataInput
-	upsert?: CategoryUpsertNestedInput
-}
-
-export interface ExpenseUpdateWithoutUserDataInput {
-	name?: String
-	amount?: Float
-	type?: String
-	dueDate?: DateTime
-	category?: CategoryUpdateOneInput
-}
-
-export interface ExpenseUpdateWithWhereUniqueWithoutUserInput {
-	where: ExpenseWhereUniqueInput
-	data: ExpenseUpdateWithoutUserDataInput
-}
-
-export interface PostUpdateWithWhereUniqueWithoutAuthorInput {
-	where: PostWhereUniqueInput
-	data: PostUpdateWithoutAuthorDataInput
-}
-
-export interface UserUpdateOneWithoutIncomesInput {
-	create?: UserCreateWithoutIncomesInput
-	connect?: UserWhereUniqueInput
-	delete?: Boolean
-	update?: UserUpdateWithoutIncomesDataInput
-	upsert?: UserUpsertWithoutIncomesInput
-}
-
-export interface CategoryUpdateInput {
-	name?: String
+  AND?: CategoryWhereInput[] | CategoryWhereInput
+  OR?: CategoryWhereInput[] | CategoryWhereInput
+  NOT?: CategoryWhereInput[] | CategoryWhereInput
+  id?: ID_Input
+  id_not?: ID_Input
+  id_in?: ID_Input[] | ID_Input
+  id_not_in?: ID_Input[] | ID_Input
+  id_lt?: ID_Input
+  id_lte?: ID_Input
+  id_gt?: ID_Input
+  id_gte?: ID_Input
+  id_contains?: ID_Input
+  id_not_contains?: ID_Input
+  id_starts_with?: ID_Input
+  id_not_starts_with?: ID_Input
+  id_ends_with?: ID_Input
+  id_not_ends_with?: ID_Input
+  name?: String
+  name_not?: String
+  name_in?: String[] | String
+  name_not_in?: String[] | String
+  name_lt?: String
+  name_lte?: String
+  name_gt?: String
+  name_gte?: String
+  name_contains?: String
+  name_not_contains?: String
+  name_starts_with?: String
+  name_not_starts_with?: String
+  name_ends_with?: String
+  name_not_ends_with?: String
 }
 
 export interface IncomeUpsertWithWhereUniqueWithoutUserInput {
-	where: IncomeWhereUniqueInput
-	update: IncomeUpdateWithoutUserDataInput
-	create: IncomeCreateWithoutUserInput
+  where: IncomeWhereUniqueInput
+  update: IncomeUpdateWithoutUserDataInput
+  create: IncomeCreateWithoutUserInput
+}
+
+export interface CategoryUpsertNestedInput {
+  update: CategoryUpdateDataInput
+  create: CategoryCreateInput
+}
+
+export interface IncomeUpdateWithoutUserDataInput {
+  name?: String
+  amount?: Float
+  type?: String
+  payDate?: DateTime
+  category?: CategoryUpdateOneInput
+}
+
+export interface UserCreateOneWithoutIncomesInput {
+  create?: UserCreateWithoutIncomesInput
+  connect?: UserWhereUniqueInput
+}
+
+export interface IncomeUpdateWithWhereUniqueWithoutUserInput {
+  where: IncomeWhereUniqueInput
+  data: IncomeUpdateWithoutUserDataInput
+}
+
+export interface ExpenseWhereInput {
+  AND?: ExpenseWhereInput[] | ExpenseWhereInput
+  OR?: ExpenseWhereInput[] | ExpenseWhereInput
+  NOT?: ExpenseWhereInput[] | ExpenseWhereInput
+  id?: ID_Input
+  id_not?: ID_Input
+  id_in?: ID_Input[] | ID_Input
+  id_not_in?: ID_Input[] | ID_Input
+  id_lt?: ID_Input
+  id_lte?: ID_Input
+  id_gt?: ID_Input
+  id_gte?: ID_Input
+  id_contains?: ID_Input
+  id_not_contains?: ID_Input
+  id_starts_with?: ID_Input
+  id_not_starts_with?: ID_Input
+  id_ends_with?: ID_Input
+  id_not_ends_with?: ID_Input
+  name?: String
+  name_not?: String
+  name_in?: String[] | String
+  name_not_in?: String[] | String
+  name_lt?: String
+  name_lte?: String
+  name_gt?: String
+  name_gte?: String
+  name_contains?: String
+  name_not_contains?: String
+  name_starts_with?: String
+  name_not_starts_with?: String
+  name_ends_with?: String
+  name_not_ends_with?: String
+  amount?: Float
+  amount_not?: Float
+  amount_in?: Float[] | Float
+  amount_not_in?: Float[] | Float
+  amount_lt?: Float
+  amount_lte?: Float
+  amount_gt?: Float
+  amount_gte?: Float
+  type?: String
+  type_not?: String
+  type_in?: String[] | String
+  type_not_in?: String[] | String
+  type_lt?: String
+  type_lte?: String
+  type_gt?: String
+  type_gte?: String
+  type_contains?: String
+  type_not_contains?: String
+  type_starts_with?: String
+  type_not_starts_with?: String
+  type_ends_with?: String
+  type_not_ends_with?: String
+  dueDate?: DateTime
+  dueDate_not?: DateTime
+  dueDate_in?: DateTime[] | DateTime
+  dueDate_not_in?: DateTime[] | DateTime
+  dueDate_lt?: DateTime
+  dueDate_lte?: DateTime
+  dueDate_gt?: DateTime
+  dueDate_gte?: DateTime
+  category?: CategoryWhereInput
+  user?: UserWhereInput
+}
+
+export interface PostCreateInput {
+  isPublished?: Boolean
+  title: String
+  text: String
+  author: UserCreateOneWithoutPostsInput
+}
+
+export interface UserSubscriptionWhereInput {
+  AND?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput
+  OR?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput
+  NOT?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput
+  mutation_in?: MutationType[] | MutationType
+  updatedFields_contains?: String
+  updatedFields_contains_every?: String[] | String
+  updatedFields_contains_some?: String[] | String
+  node?: UserWhereInput
+}
+
+export interface UserCreateOneWithoutPostsInput {
+  create?: UserCreateWithoutPostsInput
+  connect?: UserWhereUniqueInput
+}
+
+export interface PostSubscriptionWhereInput {
+  AND?: PostSubscriptionWhereInput[] | PostSubscriptionWhereInput
+  OR?: PostSubscriptionWhereInput[] | PostSubscriptionWhereInput
+  NOT?: PostSubscriptionWhereInput[] | PostSubscriptionWhereInput
+  mutation_in?: MutationType[] | MutationType
+  updatedFields_contains?: String
+  updatedFields_contains_every?: String[] | String
+  updatedFields_contains_some?: String[] | String
+  node?: PostWhereInput
+}
+
+export interface UserCreateWithoutPostsInput {
+  email: String
+  password: String
+  name: String
+  expenses?: ExpenseCreateManyWithoutUserInput
+  incomes?: IncomeCreateManyWithoutUserInput
+}
+
+export interface UserUpsertWithoutIncomesInput {
+  update: UserUpdateWithoutIncomesDataInput
+  create: UserCreateWithoutIncomesInput
+}
+
+export interface ExpenseCreateManyWithoutUserInput {
+  create?: ExpenseCreateWithoutUserInput[] | ExpenseCreateWithoutUserInput
+  connect?: ExpenseWhereUniqueInput[] | ExpenseWhereUniqueInput
+}
+
+export interface UserWhereUniqueInput {
+  id?: ID_Input
+  email?: String
+}
+
+export interface ExpenseCreateWithoutUserInput {
+  name: String
+  amount: Float
+  type: String
+  dueDate: DateTime
+  category?: CategoryCreateOneInput
+}
+
+export interface IncomeWhereUniqueInput {
+  id?: ID_Input
+}
+
+export interface CategoryCreateOneInput {
+  create?: CategoryCreateInput
+  connect?: CategoryWhereUniqueInput
+}
+
+export interface UserUpdateWithoutIncomesDataInput {
+  email?: String
+  password?: String
+  name?: String
+  posts?: PostUpdateManyWithoutAuthorInput
+  expenses?: ExpenseUpdateManyWithoutUserInput
+}
+
+export interface CategoryCreateInput {
+  name: String
+}
+
+export interface IncomeUpdateInput {
+  name?: String
+  amount?: Float
+  type?: String
+  payDate?: DateTime
+  category?: CategoryUpdateOneInput
+  user?: UserUpdateOneWithoutIncomesInput
+}
+
+export interface IncomeCreateManyWithoutUserInput {
+  create?: IncomeCreateWithoutUserInput[] | IncomeCreateWithoutUserInput
+  connect?: IncomeWhereUniqueInput[] | IncomeWhereUniqueInput
+}
+
+export interface UserUpdateWithoutExpensesDataInput {
+  email?: String
+  password?: String
+  name?: String
+  posts?: PostUpdateManyWithoutAuthorInput
+  incomes?: IncomeUpdateManyWithoutUserInput
+}
+
+export interface IncomeCreateWithoutUserInput {
+  name: String
+  amount: Float
+  type: String
+  payDate: DateTime
+  category?: CategoryCreateOneInput
+}
+
+export interface ExpenseUpdateInput {
+  name?: String
+  amount?: Float
+  type?: String
+  dueDate?: DateTime
+  category?: CategoryUpdateOneInput
+  user?: UserUpdateOneWithoutExpensesInput
+}
+
+export interface UserCreateInput {
+  email: String
+  password: String
+  name: String
+  posts?: PostCreateManyWithoutAuthorInput
+  expenses?: ExpenseCreateManyWithoutUserInput
+  incomes?: IncomeCreateManyWithoutUserInput
+}
+
+export interface PostUpdateWithoutAuthorDataInput {
+  isPublished?: Boolean
+  title?: String
+  text?: String
+}
+
+export interface PostCreateManyWithoutAuthorInput {
+  create?: PostCreateWithoutAuthorInput[] | PostCreateWithoutAuthorInput
+  connect?: PostWhereUniqueInput[] | PostWhereUniqueInput
+}
+
+export interface PostUpdateManyWithoutAuthorInput {
+  create?: PostCreateWithoutAuthorInput[] | PostCreateWithoutAuthorInput
+  connect?: PostWhereUniqueInput[] | PostWhereUniqueInput
+  disconnect?: PostWhereUniqueInput[] | PostWhereUniqueInput
+  delete?: PostWhereUniqueInput[] | PostWhereUniqueInput
+  update?: PostUpdateWithWhereUniqueWithoutAuthorInput[] | PostUpdateWithWhereUniqueWithoutAuthorInput
+  upsert?: PostUpsertWithWhereUniqueWithoutAuthorInput[] | PostUpsertWithWhereUniqueWithoutAuthorInput
+}
+
+export interface IncomeUpdateManyWithoutUserInput {
+  create?: IncomeCreateWithoutUserInput[] | IncomeCreateWithoutUserInput
+  connect?: IncomeWhereUniqueInput[] | IncomeWhereUniqueInput
+  disconnect?: IncomeWhereUniqueInput[] | IncomeWhereUniqueInput
+  delete?: IncomeWhereUniqueInput[] | IncomeWhereUniqueInput
+  update?: IncomeUpdateWithWhereUniqueWithoutUserInput[] | IncomeUpdateWithWhereUniqueWithoutUserInput
+  upsert?: IncomeUpsertWithWhereUniqueWithoutUserInput[] | IncomeUpsertWithWhereUniqueWithoutUserInput
+}
+
+export interface UserUpsertWithoutPostsInput {
+  update: UserUpdateWithoutPostsDataInput
+  create: UserCreateWithoutPostsInput
+}
+
+export interface ExpenseCreateInput {
+  name: String
+  amount: Float
+  type: String
+  dueDate: DateTime
+  category?: CategoryCreateOneInput
+  user: UserCreateOneWithoutExpensesInput
+}
+
+export interface IncomeSubscriptionWhereInput {
+  AND?: IncomeSubscriptionWhereInput[] | IncomeSubscriptionWhereInput
+  OR?: IncomeSubscriptionWhereInput[] | IncomeSubscriptionWhereInput
+  NOT?: IncomeSubscriptionWhereInput[] | IncomeSubscriptionWhereInput
+  mutation_in?: MutationType[] | MutationType
+  updatedFields_contains?: String
+  updatedFields_contains_every?: String[] | String
+  updatedFields_contains_some?: String[] | String
+  node?: IncomeWhereInput
+}
+
+export interface UserCreateOneWithoutExpensesInput {
+  create?: UserCreateWithoutExpensesInput
+  connect?: UserWhereUniqueInput
+}
+
+export interface UserWhereInput {
+  AND?: UserWhereInput[] | UserWhereInput
+  OR?: UserWhereInput[] | UserWhereInput
+  NOT?: UserWhereInput[] | UserWhereInput
+  id?: ID_Input
+  id_not?: ID_Input
+  id_in?: ID_Input[] | ID_Input
+  id_not_in?: ID_Input[] | ID_Input
+  id_lt?: ID_Input
+  id_lte?: ID_Input
+  id_gt?: ID_Input
+  id_gte?: ID_Input
+  id_contains?: ID_Input
+  id_not_contains?: ID_Input
+  id_starts_with?: ID_Input
+  id_not_starts_with?: ID_Input
+  id_ends_with?: ID_Input
+  id_not_ends_with?: ID_Input
+  email?: String
+  email_not?: String
+  email_in?: String[] | String
+  email_not_in?: String[] | String
+  email_lt?: String
+  email_lte?: String
+  email_gt?: String
+  email_gte?: String
+  email_contains?: String
+  email_not_contains?: String
+  email_starts_with?: String
+  email_not_starts_with?: String
+  email_ends_with?: String
+  email_not_ends_with?: String
+  password?: String
+  password_not?: String
+  password_in?: String[] | String
+  password_not_in?: String[] | String
+  password_lt?: String
+  password_lte?: String
+  password_gt?: String
+  password_gte?: String
+  password_contains?: String
+  password_not_contains?: String
+  password_starts_with?: String
+  password_not_starts_with?: String
+  password_ends_with?: String
+  password_not_ends_with?: String
+  name?: String
+  name_not?: String
+  name_in?: String[] | String
+  name_not_in?: String[] | String
+  name_lt?: String
+  name_lte?: String
+  name_gt?: String
+  name_gte?: String
+  name_contains?: String
+  name_not_contains?: String
+  name_starts_with?: String
+  name_not_starts_with?: String
+  name_ends_with?: String
+  name_not_ends_with?: String
+  posts_every?: PostWhereInput
+  posts_some?: PostWhereInput
+  posts_none?: PostWhereInput
+  expenses_every?: ExpenseWhereInput
+  expenses_some?: ExpenseWhereInput
+  expenses_none?: ExpenseWhereInput
+  incomes_every?: IncomeWhereInput
+  incomes_some?: IncomeWhereInput
+  incomes_none?: IncomeWhereInput
+}
+
+export interface UserCreateWithoutExpensesInput {
+  email: String
+  password: String
+  name: String
+  posts?: PostCreateManyWithoutAuthorInput
+  incomes?: IncomeCreateManyWithoutUserInput
+}
+
+export interface PostWhereUniqueInput {
+  id?: ID_Input
+}
+
+export interface IncomeWhereInput {
+  AND?: IncomeWhereInput[] | IncomeWhereInput
+  OR?: IncomeWhereInput[] | IncomeWhereInput
+  NOT?: IncomeWhereInput[] | IncomeWhereInput
+  id?: ID_Input
+  id_not?: ID_Input
+  id_in?: ID_Input[] | ID_Input
+  id_not_in?: ID_Input[] | ID_Input
+  id_lt?: ID_Input
+  id_lte?: ID_Input
+  id_gt?: ID_Input
+  id_gte?: ID_Input
+  id_contains?: ID_Input
+  id_not_contains?: ID_Input
+  id_starts_with?: ID_Input
+  id_not_starts_with?: ID_Input
+  id_ends_with?: ID_Input
+  id_not_ends_with?: ID_Input
+  name?: String
+  name_not?: String
+  name_in?: String[] | String
+  name_not_in?: String[] | String
+  name_lt?: String
+  name_lte?: String
+  name_gt?: String
+  name_gte?: String
+  name_contains?: String
+  name_not_contains?: String
+  name_starts_with?: String
+  name_not_starts_with?: String
+  name_ends_with?: String
+  name_not_ends_with?: String
+  amount?: Float
+  amount_not?: Float
+  amount_in?: Float[] | Float
+  amount_not_in?: Float[] | Float
+  amount_lt?: Float
+  amount_lte?: Float
+  amount_gt?: Float
+  amount_gte?: Float
+  type?: String
+  type_not?: String
+  type_in?: String[] | String
+  type_not_in?: String[] | String
+  type_lt?: String
+  type_lte?: String
+  type_gt?: String
+  type_gte?: String
+  type_contains?: String
+  type_not_contains?: String
+  type_starts_with?: String
+  type_not_starts_with?: String
+  type_ends_with?: String
+  type_not_ends_with?: String
+  payDate?: DateTime
+  payDate_not?: DateTime
+  payDate_in?: DateTime[] | DateTime
+  payDate_not_in?: DateTime[] | DateTime
+  payDate_lt?: DateTime
+  payDate_lte?: DateTime
+  payDate_gt?: DateTime
+  payDate_gte?: DateTime
+  category?: CategoryWhereInput
+  user?: UserWhereInput
+}
+
+export interface CategoryWhereUniqueInput {
+  id?: ID_Input
+}
+
+export interface ExpenseUpsertWithWhereUniqueWithoutUserInput {
+  where: ExpenseWhereUniqueInput
+  update: ExpenseUpdateWithoutUserDataInput
+  create: ExpenseCreateWithoutUserInput
+}
+
+export interface UserUpsertWithoutExpensesInput {
+  update: UserUpdateWithoutExpensesDataInput
+  create: UserCreateWithoutExpensesInput
+}
+
+export interface UserCreateWithoutIncomesInput {
+  email: String
+  password: String
+  name: String
+  posts?: PostCreateManyWithoutAuthorInput
+  expenses?: ExpenseCreateManyWithoutUserInput
+}
+
+export interface PostUpsertWithWhereUniqueWithoutAuthorInput {
+  where: PostWhereUniqueInput
+  update: PostUpdateWithoutAuthorDataInput
+  create: PostCreateWithoutAuthorInput
+}
+
+export interface PostUpdateInput {
+  isPublished?: Boolean
+  title?: String
+  text?: String
+  author?: UserUpdateOneWithoutPostsInput
+}
+
+export interface UserUpdateInput {
+  email?: String
+  password?: String
+  name?: String
+  posts?: PostUpdateManyWithoutAuthorInput
+  expenses?: ExpenseUpdateManyWithoutUserInput
+  incomes?: IncomeUpdateManyWithoutUserInput
+}
+
+export interface UserUpdateOneWithoutPostsInput {
+  create?: UserCreateWithoutPostsInput
+  connect?: UserWhereUniqueInput
+  delete?: Boolean
+  update?: UserUpdateWithoutPostsDataInput
+  upsert?: UserUpsertWithoutPostsInput
+}
+
+export interface ExpenseSubscriptionWhereInput {
+  AND?: ExpenseSubscriptionWhereInput[] | ExpenseSubscriptionWhereInput
+  OR?: ExpenseSubscriptionWhereInput[] | ExpenseSubscriptionWhereInput
+  NOT?: ExpenseSubscriptionWhereInput[] | ExpenseSubscriptionWhereInput
+  mutation_in?: MutationType[] | MutationType
+  updatedFields_contains?: String
+  updatedFields_contains_every?: String[] | String
+  updatedFields_contains_some?: String[] | String
+  node?: ExpenseWhereInput
+}
+
+export interface UserUpdateWithoutPostsDataInput {
+  email?: String
+  password?: String
+  name?: String
+  expenses?: ExpenseUpdateManyWithoutUserInput
+  incomes?: IncomeUpdateManyWithoutUserInput
+}
+
+export interface ExpenseWhereUniqueInput {
+  id?: ID_Input
+}
+
+export interface ExpenseUpdateManyWithoutUserInput {
+  create?: ExpenseCreateWithoutUserInput[] | ExpenseCreateWithoutUserInput
+  connect?: ExpenseWhereUniqueInput[] | ExpenseWhereUniqueInput
+  disconnect?: ExpenseWhereUniqueInput[] | ExpenseWhereUniqueInput
+  delete?: ExpenseWhereUniqueInput[] | ExpenseWhereUniqueInput
+  update?: ExpenseUpdateWithWhereUniqueWithoutUserInput[] | ExpenseUpdateWithWhereUniqueWithoutUserInput
+  upsert?: ExpenseUpsertWithWhereUniqueWithoutUserInput[] | ExpenseUpsertWithWhereUniqueWithoutUserInput
+}
+
+export interface UserUpdateOneWithoutExpensesInput {
+  create?: UserCreateWithoutExpensesInput
+  connect?: UserWhereUniqueInput
+  delete?: Boolean
+  update?: UserUpdateWithoutExpensesDataInput
+  upsert?: UserUpsertWithoutExpensesInput
+}
+
+export interface CategoryUpdateDataInput {
+  name?: String
+}
+
+export interface CategoryUpdateOneInput {
+  create?: CategoryCreateInput
+  connect?: CategoryWhereUniqueInput
+  disconnect?: Boolean
+  delete?: Boolean
+  update?: CategoryUpdateDataInput
+  upsert?: CategoryUpsertNestedInput
+}
+
+export interface ExpenseUpdateWithoutUserDataInput {
+  name?: String
+  amount?: Float
+  type?: String
+  dueDate?: DateTime
+  category?: CategoryUpdateOneInput
+}
+
+export interface ExpenseUpdateWithWhereUniqueWithoutUserInput {
+  where: ExpenseWhereUniqueInput
+  data: ExpenseUpdateWithoutUserDataInput
+}
+
+export interface PostUpdateWithWhereUniqueWithoutAuthorInput {
+  where: PostWhereUniqueInput
+  data: PostUpdateWithoutAuthorDataInput
+}
+
+export interface UserUpdateOneWithoutIncomesInput {
+  create?: UserCreateWithoutIncomesInput
+  connect?: UserWhereUniqueInput
+  delete?: Boolean
+  update?: UserUpdateWithoutIncomesDataInput
+  upsert?: UserUpsertWithoutIncomesInput
+}
+
+export interface CategoryUpdateInput {
+  name?: String
+}
+
+export interface CategorySubscriptionWhereInput {
+  AND?: CategorySubscriptionWhereInput[] | CategorySubscriptionWhereInput
+  OR?: CategorySubscriptionWhereInput[] | CategorySubscriptionWhereInput
+  NOT?: CategorySubscriptionWhereInput[] | CategorySubscriptionWhereInput
+  mutation_in?: MutationType[] | MutationType
+  updatedFields_contains?: String
+  updatedFields_contains_every?: String[] | String
+  updatedFields_contains_some?: String[] | String
+  node?: CategoryWhereInput
 }
 
 /*
@@ -2938,31 +2592,12 @@ export interface IncomeUpsertWithWhereUniqueWithoutUserInput {
 
  */
 export interface Node {
-	id: ID_Output
+  id: ID_Output
 }
 
 export interface CategoryPreviousValues {
-	id: ID_Output
-	name: String
-}
-
-/*
- * Information about pagination in a connection.
-
- */
-export interface PageInfo {
-	hasNextPage: Boolean
-	hasPreviousPage: Boolean
-	startCursor?: String
-	endCursor?: String
-}
-
-export interface ExpensePreviousValues {
-	id: ID_Output
-	name: String
-	amount: Float
-	type: String
-	dueDate: DateTime
+  id: ID_Output
+  name: String
 }
 
 /*
@@ -2970,26 +2605,26 @@ export interface ExpensePreviousValues {
 
  */
 export interface PostConnection {
-	pageInfo: PageInfo
-	edges: PostEdge[]
-	aggregate: AggregatePost
+  pageInfo: PageInfo
+  edges: PostEdge[]
+  aggregate: AggregatePost
 }
 
-export interface Post extends Node {
-	id: ID_Output
-	createdAt: DateTime
-	updatedAt: DateTime
-	isPublished: Boolean
-	title: String
-	text: String
-	author: User
+export interface User extends Node {
+  id: ID_Output
+  email: String
+  password: String
+  name: String
+  posts?: Post[]
+  expenses?: Expense[]
+  incomes?: Income[]
 }
 
 export interface CategorySubscriptionPayload {
-	mutation: MutationType
-	node?: Category
-	updatedFields?: String[]
-	previousValues?: CategoryPreviousValues
+  mutation: MutationType
+  node?: Category
+  updatedFields?: String[]
+  previousValues?: CategoryPreviousValues
 }
 
 /*
@@ -2997,27 +2632,26 @@ export interface CategorySubscriptionPayload {
 
  */
 export interface CategoryEdge {
-	node: Category
-	cursor: String
+  node: Category
+  cursor: String
 }
 
-export interface User extends Node {
-	id: ID_Output
-	email: String
-	password: String
-	name: String
-	posts?: Post[]
-	expenses?: Expense[]
-	incomes?: Income[]
-	totalIncome?: Float
+export interface Post extends Node {
+  id: ID_Output
+  createdAt: DateTime
+  updatedAt: DateTime
+  isPublished: Boolean
+  title: String
+  text: String
+  author: User
 }
 
 export interface AggregateIncome {
-	count: Int
+  count: Int
 }
 
 export interface BatchPayload {
-	count: Long
+  count: Long
 }
 
 /*
@@ -3025,17 +2659,17 @@ export interface BatchPayload {
 
  */
 export interface IncomeConnection {
-	pageInfo: PageInfo
-	edges: IncomeEdge[]
-	aggregate: AggregateIncome
+  pageInfo: PageInfo
+  edges: IncomeEdge[]
+  aggregate: AggregateIncome
 }
 
 export interface IncomePreviousValues {
-	id: ID_Output
-	name: String
-	amount: Float
-	type: String
-	payDate: DateTime
+  id: ID_Output
+  name: String
+  amount: Float
+  type: String
+  payDate: DateTime
 }
 
 /*
@@ -3043,29 +2677,29 @@ export interface IncomePreviousValues {
 
  */
 export interface ExpenseEdge {
-	node: Expense
-	cursor: String
+  node: Expense
+  cursor: String
 }
 
 export interface Income extends Node {
-	id: ID_Output
-	category?: Category
-	name: String
-	amount: Float
-	type: String
-	payDate: DateTime
-	user: User
+  id: ID_Output
+  category?: Category
+  name: String
+  amount: Float
+  type: String
+  payDate: DateTime
+  user: User
 }
 
 export interface AggregateUser {
-	count: Int
+  count: Int
 }
 
 export interface IncomeSubscriptionPayload {
-	mutation: MutationType
-	node?: Income
-	updatedFields?: String[]
-	previousValues?: IncomePreviousValues
+  mutation: MutationType
+  node?: Income
+  updatedFields?: String[]
+  previousValues?: IncomePreviousValues
 }
 
 /*
@@ -3073,16 +2707,16 @@ export interface IncomeSubscriptionPayload {
 
  */
 export interface UserConnection {
-	pageInfo: PageInfo
-	edges: UserEdge[]
-	aggregate: AggregateUser
+  pageInfo: PageInfo
+  edges: UserEdge[]
+  aggregate: AggregateUser
 }
 
 export interface PostSubscriptionPayload {
-	mutation: MutationType
-	node?: Post
-	updatedFields?: String[]
-	previousValues?: PostPreviousValues
+  mutation: MutationType
+  node?: Post
+  updatedFields?: String[]
+  previousValues?: PostPreviousValues
 }
 
 /*
@@ -3090,91 +2724,26 @@ export interface PostSubscriptionPayload {
 
  */
 export interface PostEdge {
-	node: Post
-	cursor: String
+  node: Post
+  cursor: String
 }
 
 export interface PostPreviousValues {
-	id: ID_Output
-	createdAt: DateTime
-	updatedAt: DateTime
-	isPublished: Boolean
-	title: String
-	text: String
+  id: ID_Output
+  createdAt: DateTime
+  updatedAt: DateTime
+  isPublished: Boolean
+  title: String
+  text: String
 }
 
-/*
- * A connection to a list of items.
-
- */
-export interface CategoryConnection {
-	pageInfo: PageInfo
-	edges: CategoryEdge[]
-	aggregate: AggregateCategory
+export interface AggregateCategory {
+  count: Int
 }
 
 export interface Category extends Node {
-	id: ID_Output
-	name: String
-}
-
-export interface AggregateExpense {
-	count: Int
-}
-
-/*
- * An edge in a connection.
-
- */
-export interface UserEdge {
-	node: User
-	cursor: String
-}
-
-export interface ExpenseSubscriptionPayload {
-	mutation: MutationType
-	node?: Expense
-	updatedFields?: String[]
-	previousValues?: ExpensePreviousValues
-}
-
-export interface Expense extends Node {
-	id: ID_Output
-	category?: Category
-	name: String
-	amount: Float
-	type: String
-	dueDate: DateTime
-	user: User
-}
-
-export interface UserPreviousValues {
-	id: ID_Output
-	email: String
-	password: String
-	name: String
-	totalIncome?: Float
-}
-
-export interface UserSubscriptionPayload {
-	mutation: MutationType
-	node?: User
-	updatedFields?: String[]
-	previousValues?: UserPreviousValues
-}
-
-export interface AggregatePost {
-	count: Int
-}
-
-/*
- * A connection to a list of items.
-
- */
-export interface ExpenseConnection {
-	pageInfo: PageInfo
-	edges: ExpenseEdge[]
-	aggregate: AggregateExpense
+  id: ID_Output
+  name: String
 }
 
 /*
@@ -3182,18 +2751,106 @@ export interface ExpenseConnection {
 
  */
 export interface IncomeEdge {
-	node: Income
-	cursor: String
+  node: Income
+  cursor: String
 }
 
-export interface AggregateCategory {
-	count: Int
+export interface UserSubscriptionPayload {
+  mutation: MutationType
+  node?: User
+  updatedFields?: String[]
+  previousValues?: UserPreviousValues
+}
+
+/*
+ * A connection to a list of items.
+
+ */
+export interface ExpenseConnection {
+  pageInfo: PageInfo
+  edges: ExpenseEdge[]
+  aggregate: AggregateExpense
+}
+
+export interface ExpensePreviousValues {
+  id: ID_Output
+  name: String
+  amount: Float
+  type: String
+  dueDate: DateTime
+}
+
+export interface ExpenseSubscriptionPayload {
+  mutation: MutationType
+  node?: Expense
+  updatedFields?: String[]
+  previousValues?: ExpensePreviousValues
+}
+
+export interface Expense extends Node {
+  id: ID_Output
+  category?: Category
+  name: String
+  amount: Float
+  type: String
+  dueDate: DateTime
+  user: User
+}
+
+export interface UserPreviousValues {
+  id: ID_Output
+  email: String
+  password: String
+  name: String
+}
+
+/*
+ * An edge in a connection.
+
+ */
+export interface UserEdge {
+  node: User
+  cursor: String
+}
+
+export interface AggregateExpense {
+  count: Int
+}
+
+/*
+ * A connection to a list of items.
+
+ */
+export interface CategoryConnection {
+  pageInfo: PageInfo
+  edges: CategoryEdge[]
+  aggregate: AggregateCategory
+}
+
+/*
+ * Information about pagination in a connection.
+
+ */
+export interface PageInfo {
+  hasNextPage: Boolean
+  hasPreviousPage: Boolean
+  startCursor?: String
+  endCursor?: String
+}
+
+export interface AggregatePost {
+  count: Int
 }
 
 /*
 The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
 */
 export type String = string
+
+/*
+The `Float` scalar type represents signed double-precision fractional values as specified by [IEEE 754](http://en.wikipedia.org/wiki/IEEE_floating_point). 
+*/
+export type Float = number
 
 /*
 The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1. 
@@ -3218,8 +2875,3 @@ Long can represent values between -(2^63) and 2^63 - 1.
 export type Long = string
 
 export type DateTime = Date | string
-
-/*
-The `Float` scalar type represents signed double-precision fractional values as specified by [IEEE 754](http://en.wikipedia.org/wiki/IEEE_floating_point). 
-*/
-export type Float = number

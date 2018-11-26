@@ -1,1245 +1,902 @@
 # source: http://localhost:4466
-# timestamp: Thu Nov 15 2018 13:02:33 GMT-0500 (EST)
+# timestamp: Sat Nov 24 2018 00:36:54 GMT-0500 (EST)
 
 type AggregateCategory {
-	count: Int!
+  count: Int!
 }
 
 type AggregateExpense {
-	count: Int!
+  count: Int!
 }
 
 type AggregateIncome {
-	count: Int!
+  count: Int!
 }
 
 type AggregatePost {
-	count: Int!
+  count: Int!
 }
 
 type AggregateUser {
-	count: Int!
+  count: Int!
 }
 
 type BatchPayload {
-	"""
-	The number of nodes that have been affected by the Batch operation.
-	"""
-	count: Long!
+  """The number of nodes that have been affected by the Batch operation."""
+  count: Long!
 }
 
 type Category implements Node {
-	id: ID!
-	name: String!
+  id: ID!
+  name: String!
 }
 
-"""
-A connection to a list of items.
-"""
+"""A connection to a list of items."""
 type CategoryConnection {
-	"""
-	Information to aid in pagination.
-	"""
-	pageInfo: PageInfo!
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
 
-	"""
-	A list of edges.
-	"""
-	edges: [CategoryEdge]!
-	aggregate: AggregateCategory!
+  """A list of edges."""
+  edges: [CategoryEdge]!
+  aggregate: AggregateCategory!
 }
 
 input CategoryCreateInput {
-	name: String!
+  name: String!
 }
 
 input CategoryCreateOneInput {
-	create: CategoryCreateInput
-	connect: CategoryWhereUniqueInput
+  create: CategoryCreateInput
+  connect: CategoryWhereUniqueInput
 }
 
-"""
-An edge in a connection.
-"""
+"""An edge in a connection."""
 type CategoryEdge {
-	"""
-	The item at the end of the edge.
-	"""
-	node: Category!
+  """The item at the end of the edge."""
+  node: Category!
 
-	"""
-	A cursor for use in pagination.
-	"""
-	cursor: String!
+  """A cursor for use in pagination."""
+  cursor: String!
 }
 
 enum CategoryOrderByInput {
-	id_ASC
-	id_DESC
-	name_ASC
-	name_DESC
-	updatedAt_ASC
-	updatedAt_DESC
-	createdAt_ASC
-	createdAt_DESC
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
 }
 
 type CategoryPreviousValues {
-	id: ID!
-	name: String!
+  id: ID!
+  name: String!
 }
 
 type CategorySubscriptionPayload {
-	mutation: MutationType!
-	node: Category
-	updatedFields: [String!]
-	previousValues: CategoryPreviousValues
+  mutation: MutationType!
+  node: Category
+  updatedFields: [String!]
+  previousValues: CategoryPreviousValues
 }
 
 input CategorySubscriptionWhereInput {
-	"""
-	Logical AND on all given filters.
-	"""
-	AND: [CategorySubscriptionWhereInput!]
+  """Logical AND on all given filters."""
+  AND: [CategorySubscriptionWhereInput!]
 
-	"""
-	Logical OR on all given filters.
-	"""
-	OR: [CategorySubscriptionWhereInput!]
+  """Logical OR on all given filters."""
+  OR: [CategorySubscriptionWhereInput!]
 
-	"""
-	Logical NOT on all given filters combined by AND.
-	"""
-	NOT: [CategorySubscriptionWhereInput!]
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [CategorySubscriptionWhereInput!]
 
-	"""
-	The subscription event gets dispatched when it's listed in mutation_in
-	"""
-	mutation_in: [MutationType!]
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
 
-	"""
-	The subscription event gets only dispatched when one of the updated fields names is included in this list
-	"""
-	updatedFields_contains: String
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
 
-	"""
-	The subscription event gets only dispatched when all of the field names included in this list have been updated
-	"""
-	updatedFields_contains_every: [String!]
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
 
-	"""
-	The subscription event gets only dispatched when some of the field names included in this list have been updated
-	"""
-	updatedFields_contains_some: [String!]
-	node: CategoryWhereInput
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: CategoryWhereInput
 }
 
 input CategoryUpdateDataInput {
-	name: String
+  name: String
 }
 
 input CategoryUpdateInput {
-	name: String
+  name: String
 }
 
 input CategoryUpdateOneInput {
-	create: CategoryCreateInput
-	connect: CategoryWhereUniqueInput
-	disconnect: Boolean
-	delete: Boolean
-	update: CategoryUpdateDataInput
-	upsert: CategoryUpsertNestedInput
+  create: CategoryCreateInput
+  connect: CategoryWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: CategoryUpdateDataInput
+  upsert: CategoryUpsertNestedInput
 }
 
 input CategoryUpsertNestedInput {
-	update: CategoryUpdateDataInput!
-	create: CategoryCreateInput!
+  update: CategoryUpdateDataInput!
+  create: CategoryCreateInput!
 }
 
 input CategoryWhereInput {
-	"""
-	Logical AND on all given filters.
-	"""
-	AND: [CategoryWhereInput!]
+  """Logical AND on all given filters."""
+  AND: [CategoryWhereInput!]
 
-	"""
-	Logical OR on all given filters.
-	"""
-	OR: [CategoryWhereInput!]
+  """Logical OR on all given filters."""
+  OR: [CategoryWhereInput!]
 
-	"""
-	Logical NOT on all given filters combined by AND.
-	"""
-	NOT: [CategoryWhereInput!]
-	id: ID
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [CategoryWhereInput!]
+  id: ID
 
-	"""
-	All values that are not equal to given value.
-	"""
-	id_not: ID
+  """All values that are not equal to given value."""
+  id_not: ID
 
-	"""
-	All values that are contained in given list.
-	"""
-	id_in: [ID!]
+  """All values that are contained in given list."""
+  id_in: [ID!]
 
-	"""
-	All values that are not contained in given list.
-	"""
-	id_not_in: [ID!]
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
 
-	"""
-	All values less than the given value.
-	"""
-	id_lt: ID
+  """All values less than the given value."""
+  id_lt: ID
 
-	"""
-	All values less than or equal the given value.
-	"""
-	id_lte: ID
+  """All values less than or equal the given value."""
+  id_lte: ID
 
-	"""
-	All values greater than the given value.
-	"""
-	id_gt: ID
+  """All values greater than the given value."""
+  id_gt: ID
 
-	"""
-	All values greater than or equal the given value.
-	"""
-	id_gte: ID
+  """All values greater than or equal the given value."""
+  id_gte: ID
 
-	"""
-	All values containing the given string.
-	"""
-	id_contains: ID
+  """All values containing the given string."""
+  id_contains: ID
 
-	"""
-	All values not containing the given string.
-	"""
-	id_not_contains: ID
+  """All values not containing the given string."""
+  id_not_contains: ID
 
-	"""
-	All values starting with the given string.
-	"""
-	id_starts_with: ID
+  """All values starting with the given string."""
+  id_starts_with: ID
 
-	"""
-	All values not starting with the given string.
-	"""
-	id_not_starts_with: ID
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
 
-	"""
-	All values ending with the given string.
-	"""
-	id_ends_with: ID
+  """All values ending with the given string."""
+  id_ends_with: ID
 
-	"""
-	All values not ending with the given string.
-	"""
-	id_not_ends_with: ID
-	name: String
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  name: String
 
-	"""
-	All values that are not equal to given value.
-	"""
-	name_not: String
+  """All values that are not equal to given value."""
+  name_not: String
 
-	"""
-	All values that are contained in given list.
-	"""
-	name_in: [String!]
+  """All values that are contained in given list."""
+  name_in: [String!]
 
-	"""
-	All values that are not contained in given list.
-	"""
-	name_not_in: [String!]
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
 
-	"""
-	All values less than the given value.
-	"""
-	name_lt: String
+  """All values less than the given value."""
+  name_lt: String
 
-	"""
-	All values less than or equal the given value.
-	"""
-	name_lte: String
+  """All values less than or equal the given value."""
+  name_lte: String
 
-	"""
-	All values greater than the given value.
-	"""
-	name_gt: String
+  """All values greater than the given value."""
+  name_gt: String
 
-	"""
-	All values greater than or equal the given value.
-	"""
-	name_gte: String
+  """All values greater than or equal the given value."""
+  name_gte: String
 
-	"""
-	All values containing the given string.
-	"""
-	name_contains: String
+  """All values containing the given string."""
+  name_contains: String
 
-	"""
-	All values not containing the given string.
-	"""
-	name_not_contains: String
+  """All values not containing the given string."""
+  name_not_contains: String
 
-	"""
-	All values starting with the given string.
-	"""
-	name_starts_with: String
+  """All values starting with the given string."""
+  name_starts_with: String
 
-	"""
-	All values not starting with the given string.
-	"""
-	name_not_starts_with: String
+  """All values not starting with the given string."""
+  name_not_starts_with: String
 
-	"""
-	All values ending with the given string.
-	"""
-	name_ends_with: String
+  """All values ending with the given string."""
+  name_ends_with: String
 
-	"""
-	All values not ending with the given string.
-	"""
-	name_not_ends_with: String
+  """All values not ending with the given string."""
+  name_not_ends_with: String
 }
 
 input CategoryWhereUniqueInput {
-	id: ID
+  id: ID
 }
 
 scalar DateTime
 
 type Expense implements Node {
-	id: ID!
-	category(where: CategoryWhereInput): Category
-	name: String!
-	amount: Float!
-	type: String!
-	dueDate: DateTime!
-	user(where: UserWhereInput): User!
+  id: ID!
+  category(where: CategoryWhereInput): Category
+  name: String!
+  amount: Float!
+  type: String!
+  dueDate: DateTime!
+  user(where: UserWhereInput): User!
 }
 
-"""
-A connection to a list of items.
-"""
+"""A connection to a list of items."""
 type ExpenseConnection {
-	"""
-	Information to aid in pagination.
-	"""
-	pageInfo: PageInfo!
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
 
-	"""
-	A list of edges.
-	"""
-	edges: [ExpenseEdge]!
-	aggregate: AggregateExpense!
+  """A list of edges."""
+  edges: [ExpenseEdge]!
+  aggregate: AggregateExpense!
 }
 
 input ExpenseCreateInput {
-	name: String!
-	amount: Float!
-	type: String!
-	dueDate: DateTime!
-	category: CategoryCreateOneInput
-	user: UserCreateOneWithoutExpensesInput!
+  name: String!
+  amount: Float!
+  type: String!
+  dueDate: DateTime!
+  category: CategoryCreateOneInput
+  user: UserCreateOneWithoutExpensesInput!
 }
 
 input ExpenseCreateManyWithoutUserInput {
-	create: [ExpenseCreateWithoutUserInput!]
-	connect: [ExpenseWhereUniqueInput!]
+  create: [ExpenseCreateWithoutUserInput!]
+  connect: [ExpenseWhereUniqueInput!]
 }
 
 input ExpenseCreateWithoutUserInput {
-	name: String!
-	amount: Float!
-	type: String!
-	dueDate: DateTime!
-	category: CategoryCreateOneInput
+  name: String!
+  amount: Float!
+  type: String!
+  dueDate: DateTime!
+  category: CategoryCreateOneInput
 }
 
-"""
-An edge in a connection.
-"""
+"""An edge in a connection."""
 type ExpenseEdge {
-	"""
-	The item at the end of the edge.
-	"""
-	node: Expense!
+  """The item at the end of the edge."""
+  node: Expense!
 
-	"""
-	A cursor for use in pagination.
-	"""
-	cursor: String!
+  """A cursor for use in pagination."""
+  cursor: String!
 }
 
 enum ExpenseOrderByInput {
-	id_ASC
-	id_DESC
-	name_ASC
-	name_DESC
-	amount_ASC
-	amount_DESC
-	type_ASC
-	type_DESC
-	dueDate_ASC
-	dueDate_DESC
-	updatedAt_ASC
-	updatedAt_DESC
-	createdAt_ASC
-	createdAt_DESC
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  amount_ASC
+  amount_DESC
+  type_ASC
+  type_DESC
+  dueDate_ASC
+  dueDate_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
 }
 
 type ExpensePreviousValues {
-	id: ID!
-	name: String!
-	amount: Float!
-	type: String!
-	dueDate: DateTime!
+  id: ID!
+  name: String!
+  amount: Float!
+  type: String!
+  dueDate: DateTime!
 }
 
 type ExpenseSubscriptionPayload {
-	mutation: MutationType!
-	node: Expense
-	updatedFields: [String!]
-	previousValues: ExpensePreviousValues
+  mutation: MutationType!
+  node: Expense
+  updatedFields: [String!]
+  previousValues: ExpensePreviousValues
 }
 
 input ExpenseSubscriptionWhereInput {
-	"""
-	Logical AND on all given filters.
-	"""
-	AND: [ExpenseSubscriptionWhereInput!]
+  """Logical AND on all given filters."""
+  AND: [ExpenseSubscriptionWhereInput!]
 
-	"""
-	Logical OR on all given filters.
-	"""
-	OR: [ExpenseSubscriptionWhereInput!]
+  """Logical OR on all given filters."""
+  OR: [ExpenseSubscriptionWhereInput!]
 
-	"""
-	Logical NOT on all given filters combined by AND.
-	"""
-	NOT: [ExpenseSubscriptionWhereInput!]
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [ExpenseSubscriptionWhereInput!]
 
-	"""
-	The subscription event gets dispatched when it's listed in mutation_in
-	"""
-	mutation_in: [MutationType!]
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
 
-	"""
-	The subscription event gets only dispatched when one of the updated fields names is included in this list
-	"""
-	updatedFields_contains: String
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
 
-	"""
-	The subscription event gets only dispatched when all of the field names included in this list have been updated
-	"""
-	updatedFields_contains_every: [String!]
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
 
-	"""
-	The subscription event gets only dispatched when some of the field names included in this list have been updated
-	"""
-	updatedFields_contains_some: [String!]
-	node: ExpenseWhereInput
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: ExpenseWhereInput
 }
 
 input ExpenseUpdateInput {
-	name: String
-	amount: Float
-	type: String
-	dueDate: DateTime
-	category: CategoryUpdateOneInput
-	user: UserUpdateOneWithoutExpensesInput
+  name: String
+  amount: Float
+  type: String
+  dueDate: DateTime
+  category: CategoryUpdateOneInput
+  user: UserUpdateOneWithoutExpensesInput
 }
 
 input ExpenseUpdateManyWithoutUserInput {
-	create: [ExpenseCreateWithoutUserInput!]
-	connect: [ExpenseWhereUniqueInput!]
-	disconnect: [ExpenseWhereUniqueInput!]
-	delete: [ExpenseWhereUniqueInput!]
-	update: [ExpenseUpdateWithWhereUniqueWithoutUserInput!]
-	upsert: [ExpenseUpsertWithWhereUniqueWithoutUserInput!]
+  create: [ExpenseCreateWithoutUserInput!]
+  connect: [ExpenseWhereUniqueInput!]
+  disconnect: [ExpenseWhereUniqueInput!]
+  delete: [ExpenseWhereUniqueInput!]
+  update: [ExpenseUpdateWithWhereUniqueWithoutUserInput!]
+  upsert: [ExpenseUpsertWithWhereUniqueWithoutUserInput!]
 }
 
 input ExpenseUpdateWithoutUserDataInput {
-	name: String
-	amount: Float
-	type: String
-	dueDate: DateTime
-	category: CategoryUpdateOneInput
+  name: String
+  amount: Float
+  type: String
+  dueDate: DateTime
+  category: CategoryUpdateOneInput
 }
 
 input ExpenseUpdateWithWhereUniqueWithoutUserInput {
-	where: ExpenseWhereUniqueInput!
-	data: ExpenseUpdateWithoutUserDataInput!
+  where: ExpenseWhereUniqueInput!
+  data: ExpenseUpdateWithoutUserDataInput!
 }
 
 input ExpenseUpsertWithWhereUniqueWithoutUserInput {
-	where: ExpenseWhereUniqueInput!
-	update: ExpenseUpdateWithoutUserDataInput!
-	create: ExpenseCreateWithoutUserInput!
+  where: ExpenseWhereUniqueInput!
+  update: ExpenseUpdateWithoutUserDataInput!
+  create: ExpenseCreateWithoutUserInput!
 }
 
 input ExpenseWhereInput {
-	"""
-	Logical AND on all given filters.
-	"""
-	AND: [ExpenseWhereInput!]
+  """Logical AND on all given filters."""
+  AND: [ExpenseWhereInput!]
 
-	"""
-	Logical OR on all given filters.
-	"""
-	OR: [ExpenseWhereInput!]
+  """Logical OR on all given filters."""
+  OR: [ExpenseWhereInput!]
 
-	"""
-	Logical NOT on all given filters combined by AND.
-	"""
-	NOT: [ExpenseWhereInput!]
-	id: ID
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [ExpenseWhereInput!]
+  id: ID
 
-	"""
-	All values that are not equal to given value.
-	"""
-	id_not: ID
+  """All values that are not equal to given value."""
+  id_not: ID
 
-	"""
-	All values that are contained in given list.
-	"""
-	id_in: [ID!]
+  """All values that are contained in given list."""
+  id_in: [ID!]
 
-	"""
-	All values that are not contained in given list.
-	"""
-	id_not_in: [ID!]
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
 
-	"""
-	All values less than the given value.
-	"""
-	id_lt: ID
+  """All values less than the given value."""
+  id_lt: ID
 
-	"""
-	All values less than or equal the given value.
-	"""
-	id_lte: ID
+  """All values less than or equal the given value."""
+  id_lte: ID
 
-	"""
-	All values greater than the given value.
-	"""
-	id_gt: ID
+  """All values greater than the given value."""
+  id_gt: ID
 
-	"""
-	All values greater than or equal the given value.
-	"""
-	id_gte: ID
+  """All values greater than or equal the given value."""
+  id_gte: ID
 
-	"""
-	All values containing the given string.
-	"""
-	id_contains: ID
+  """All values containing the given string."""
+  id_contains: ID
 
-	"""
-	All values not containing the given string.
-	"""
-	id_not_contains: ID
+  """All values not containing the given string."""
+  id_not_contains: ID
 
-	"""
-	All values starting with the given string.
-	"""
-	id_starts_with: ID
+  """All values starting with the given string."""
+  id_starts_with: ID
 
-	"""
-	All values not starting with the given string.
-	"""
-	id_not_starts_with: ID
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
 
-	"""
-	All values ending with the given string.
-	"""
-	id_ends_with: ID
+  """All values ending with the given string."""
+  id_ends_with: ID
 
-	"""
-	All values not ending with the given string.
-	"""
-	id_not_ends_with: ID
-	name: String
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  name: String
 
-	"""
-	All values that are not equal to given value.
-	"""
-	name_not: String
+  """All values that are not equal to given value."""
+  name_not: String
 
-	"""
-	All values that are contained in given list.
-	"""
-	name_in: [String!]
+  """All values that are contained in given list."""
+  name_in: [String!]
 
-	"""
-	All values that are not contained in given list.
-	"""
-	name_not_in: [String!]
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
 
-	"""
-	All values less than the given value.
-	"""
-	name_lt: String
+  """All values less than the given value."""
+  name_lt: String
 
-	"""
-	All values less than or equal the given value.
-	"""
-	name_lte: String
+  """All values less than or equal the given value."""
+  name_lte: String
 
-	"""
-	All values greater than the given value.
-	"""
-	name_gt: String
+  """All values greater than the given value."""
+  name_gt: String
 
-	"""
-	All values greater than or equal the given value.
-	"""
-	name_gte: String
+  """All values greater than or equal the given value."""
+  name_gte: String
 
-	"""
-	All values containing the given string.
-	"""
-	name_contains: String
+  """All values containing the given string."""
+  name_contains: String
 
-	"""
-	All values not containing the given string.
-	"""
-	name_not_contains: String
+  """All values not containing the given string."""
+  name_not_contains: String
 
-	"""
-	All values starting with the given string.
-	"""
-	name_starts_with: String
+  """All values starting with the given string."""
+  name_starts_with: String
 
-	"""
-	All values not starting with the given string.
-	"""
-	name_not_starts_with: String
+  """All values not starting with the given string."""
+  name_not_starts_with: String
 
-	"""
-	All values ending with the given string.
-	"""
-	name_ends_with: String
+  """All values ending with the given string."""
+  name_ends_with: String
 
-	"""
-	All values not ending with the given string.
-	"""
-	name_not_ends_with: String
-	amount: Float
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+  amount: Float
 
-	"""
-	All values that are not equal to given value.
-	"""
-	amount_not: Float
+  """All values that are not equal to given value."""
+  amount_not: Float
 
-	"""
-	All values that are contained in given list.
-	"""
-	amount_in: [Float!]
+  """All values that are contained in given list."""
+  amount_in: [Float!]
 
-	"""
-	All values that are not contained in given list.
-	"""
-	amount_not_in: [Float!]
+  """All values that are not contained in given list."""
+  amount_not_in: [Float!]
 
-	"""
-	All values less than the given value.
-	"""
-	amount_lt: Float
+  """All values less than the given value."""
+  amount_lt: Float
 
-	"""
-	All values less than or equal the given value.
-	"""
-	amount_lte: Float
+  """All values less than or equal the given value."""
+  amount_lte: Float
 
-	"""
-	All values greater than the given value.
-	"""
-	amount_gt: Float
+  """All values greater than the given value."""
+  amount_gt: Float
 
-	"""
-	All values greater than or equal the given value.
-	"""
-	amount_gte: Float
-	type: String
+  """All values greater than or equal the given value."""
+  amount_gte: Float
+  type: String
 
-	"""
-	All values that are not equal to given value.
-	"""
-	type_not: String
+  """All values that are not equal to given value."""
+  type_not: String
 
-	"""
-	All values that are contained in given list.
-	"""
-	type_in: [String!]
+  """All values that are contained in given list."""
+  type_in: [String!]
 
-	"""
-	All values that are not contained in given list.
-	"""
-	type_not_in: [String!]
+  """All values that are not contained in given list."""
+  type_not_in: [String!]
 
-	"""
-	All values less than the given value.
-	"""
-	type_lt: String
+  """All values less than the given value."""
+  type_lt: String
 
-	"""
-	All values less than or equal the given value.
-	"""
-	type_lte: String
+  """All values less than or equal the given value."""
+  type_lte: String
 
-	"""
-	All values greater than the given value.
-	"""
-	type_gt: String
+  """All values greater than the given value."""
+  type_gt: String
 
-	"""
-	All values greater than or equal the given value.
-	"""
-	type_gte: String
+  """All values greater than or equal the given value."""
+  type_gte: String
 
-	"""
-	All values containing the given string.
-	"""
-	type_contains: String
+  """All values containing the given string."""
+  type_contains: String
 
-	"""
-	All values not containing the given string.
-	"""
-	type_not_contains: String
+  """All values not containing the given string."""
+  type_not_contains: String
 
-	"""
-	All values starting with the given string.
-	"""
-	type_starts_with: String
+  """All values starting with the given string."""
+  type_starts_with: String
 
-	"""
-	All values not starting with the given string.
-	"""
-	type_not_starts_with: String
+  """All values not starting with the given string."""
+  type_not_starts_with: String
 
-	"""
-	All values ending with the given string.
-	"""
-	type_ends_with: String
+  """All values ending with the given string."""
+  type_ends_with: String
 
-	"""
-	All values not ending with the given string.
-	"""
-	type_not_ends_with: String
-	dueDate: DateTime
+  """All values not ending with the given string."""
+  type_not_ends_with: String
+  dueDate: DateTime
 
-	"""
-	All values that are not equal to given value.
-	"""
-	dueDate_not: DateTime
+  """All values that are not equal to given value."""
+  dueDate_not: DateTime
 
-	"""
-	All values that are contained in given list.
-	"""
-	dueDate_in: [DateTime!]
+  """All values that are contained in given list."""
+  dueDate_in: [DateTime!]
 
-	"""
-	All values that are not contained in given list.
-	"""
-	dueDate_not_in: [DateTime!]
+  """All values that are not contained in given list."""
+  dueDate_not_in: [DateTime!]
 
-	"""
-	All values less than the given value.
-	"""
-	dueDate_lt: DateTime
+  """All values less than the given value."""
+  dueDate_lt: DateTime
 
-	"""
-	All values less than or equal the given value.
-	"""
-	dueDate_lte: DateTime
+  """All values less than or equal the given value."""
+  dueDate_lte: DateTime
 
-	"""
-	All values greater than the given value.
-	"""
-	dueDate_gt: DateTime
+  """All values greater than the given value."""
+  dueDate_gt: DateTime
 
-	"""
-	All values greater than or equal the given value.
-	"""
-	dueDate_gte: DateTime
-	category: CategoryWhereInput
-	user: UserWhereInput
+  """All values greater than or equal the given value."""
+  dueDate_gte: DateTime
+  category: CategoryWhereInput
+  user: UserWhereInput
 }
 
 input ExpenseWhereUniqueInput {
-	id: ID
+  id: ID
 }
 
 type Income implements Node {
-	id: ID!
-	category(where: CategoryWhereInput): Category
-	name: String!
-	amount: Float!
-	type: String!
-	payDate: DateTime!
-	user(where: UserWhereInput): User!
+  id: ID!
+  category(where: CategoryWhereInput): Category
+  name: String!
+  amount: Float!
+  type: String!
+  payDate: DateTime!
+  user(where: UserWhereInput): User!
 }
 
-"""
-A connection to a list of items.
-"""
+"""A connection to a list of items."""
 type IncomeConnection {
-	"""
-	Information to aid in pagination.
-	"""
-	pageInfo: PageInfo!
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
 
-	"""
-	A list of edges.
-	"""
-	edges: [IncomeEdge]!
-	aggregate: AggregateIncome!
+  """A list of edges."""
+  edges: [IncomeEdge]!
+  aggregate: AggregateIncome!
 }
 
 input IncomeCreateInput {
-	name: String!
-	amount: Float!
-	type: String!
-	payDate: DateTime!
-	category: CategoryCreateOneInput
-	user: UserCreateOneWithoutIncomesInput!
+  name: String!
+  amount: Float!
+  type: String!
+  payDate: DateTime!
+  category: CategoryCreateOneInput
+  user: UserCreateOneWithoutIncomesInput!
 }
 
 input IncomeCreateManyWithoutUserInput {
-	create: [IncomeCreateWithoutUserInput!]
-	connect: [IncomeWhereUniqueInput!]
+  create: [IncomeCreateWithoutUserInput!]
+  connect: [IncomeWhereUniqueInput!]
 }
 
 input IncomeCreateWithoutUserInput {
-	name: String!
-	amount: Float!
-	type: String!
-	payDate: DateTime!
-	category: CategoryCreateOneInput
+  name: String!
+  amount: Float!
+  type: String!
+  payDate: DateTime!
+  category: CategoryCreateOneInput
 }
 
-"""
-An edge in a connection.
-"""
+"""An edge in a connection."""
 type IncomeEdge {
-	"""
-	The item at the end of the edge.
-	"""
-	node: Income!
+  """The item at the end of the edge."""
+  node: Income!
 
-	"""
-	A cursor for use in pagination.
-	"""
-	cursor: String!
+  """A cursor for use in pagination."""
+  cursor: String!
 }
 
 enum IncomeOrderByInput {
-	id_ASC
-	id_DESC
-	name_ASC
-	name_DESC
-	amount_ASC
-	amount_DESC
-	type_ASC
-	type_DESC
-	payDate_ASC
-	payDate_DESC
-	updatedAt_ASC
-	updatedAt_DESC
-	createdAt_ASC
-	createdAt_DESC
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  amount_ASC
+  amount_DESC
+  type_ASC
+  type_DESC
+  payDate_ASC
+  payDate_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
 }
 
 type IncomePreviousValues {
-	id: ID!
-	name: String!
-	amount: Float!
-	type: String!
-	payDate: DateTime!
+  id: ID!
+  name: String!
+  amount: Float!
+  type: String!
+  payDate: DateTime!
 }
 
 type IncomeSubscriptionPayload {
-	mutation: MutationType!
-	node: Income
-	updatedFields: [String!]
-	previousValues: IncomePreviousValues
+  mutation: MutationType!
+  node: Income
+  updatedFields: [String!]
+  previousValues: IncomePreviousValues
 }
 
 input IncomeSubscriptionWhereInput {
-	"""
-	Logical AND on all given filters.
-	"""
-	AND: [IncomeSubscriptionWhereInput!]
+  """Logical AND on all given filters."""
+  AND: [IncomeSubscriptionWhereInput!]
 
-	"""
-	Logical OR on all given filters.
-	"""
-	OR: [IncomeSubscriptionWhereInput!]
+  """Logical OR on all given filters."""
+  OR: [IncomeSubscriptionWhereInput!]
 
-	"""
-	Logical NOT on all given filters combined by AND.
-	"""
-	NOT: [IncomeSubscriptionWhereInput!]
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [IncomeSubscriptionWhereInput!]
 
-	"""
-	The subscription event gets dispatched when it's listed in mutation_in
-	"""
-	mutation_in: [MutationType!]
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
 
-	"""
-	The subscription event gets only dispatched when one of the updated fields names is included in this list
-	"""
-	updatedFields_contains: String
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
 
-	"""
-	The subscription event gets only dispatched when all of the field names included in this list have been updated
-	"""
-	updatedFields_contains_every: [String!]
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
 
-	"""
-	The subscription event gets only dispatched when some of the field names included in this list have been updated
-	"""
-	updatedFields_contains_some: [String!]
-	node: IncomeWhereInput
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: IncomeWhereInput
 }
 
 input IncomeUpdateInput {
-	name: String
-	amount: Float
-	type: String
-	payDate: DateTime
-	category: CategoryUpdateOneInput
-	user: UserUpdateOneWithoutIncomesInput
+  name: String
+  amount: Float
+  type: String
+  payDate: DateTime
+  category: CategoryUpdateOneInput
+  user: UserUpdateOneWithoutIncomesInput
 }
 
 input IncomeUpdateManyWithoutUserInput {
-	create: [IncomeCreateWithoutUserInput!]
-	connect: [IncomeWhereUniqueInput!]
-	disconnect: [IncomeWhereUniqueInput!]
-	delete: [IncomeWhereUniqueInput!]
-	update: [IncomeUpdateWithWhereUniqueWithoutUserInput!]
-	upsert: [IncomeUpsertWithWhereUniqueWithoutUserInput!]
+  create: [IncomeCreateWithoutUserInput!]
+  connect: [IncomeWhereUniqueInput!]
+  disconnect: [IncomeWhereUniqueInput!]
+  delete: [IncomeWhereUniqueInput!]
+  update: [IncomeUpdateWithWhereUniqueWithoutUserInput!]
+  upsert: [IncomeUpsertWithWhereUniqueWithoutUserInput!]
 }
 
 input IncomeUpdateWithoutUserDataInput {
-	name: String
-	amount: Float
-	type: String
-	payDate: DateTime
-	category: CategoryUpdateOneInput
+  name: String
+  amount: Float
+  type: String
+  payDate: DateTime
+  category: CategoryUpdateOneInput
 }
 
 input IncomeUpdateWithWhereUniqueWithoutUserInput {
-	where: IncomeWhereUniqueInput!
-	data: IncomeUpdateWithoutUserDataInput!
+  where: IncomeWhereUniqueInput!
+  data: IncomeUpdateWithoutUserDataInput!
 }
 
 input IncomeUpsertWithWhereUniqueWithoutUserInput {
-	where: IncomeWhereUniqueInput!
-	update: IncomeUpdateWithoutUserDataInput!
-	create: IncomeCreateWithoutUserInput!
+  where: IncomeWhereUniqueInput!
+  update: IncomeUpdateWithoutUserDataInput!
+  create: IncomeCreateWithoutUserInput!
 }
 
 input IncomeWhereInput {
-	"""
-	Logical AND on all given filters.
-	"""
-	AND: [IncomeWhereInput!]
+  """Logical AND on all given filters."""
+  AND: [IncomeWhereInput!]
 
-	"""
-	Logical OR on all given filters.
-	"""
-	OR: [IncomeWhereInput!]
+  """Logical OR on all given filters."""
+  OR: [IncomeWhereInput!]
 
-	"""
-	Logical NOT on all given filters combined by AND.
-	"""
-	NOT: [IncomeWhereInput!]
-	id: ID
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [IncomeWhereInput!]
+  id: ID
 
-	"""
-	All values that are not equal to given value.
-	"""
-	id_not: ID
+  """All values that are not equal to given value."""
+  id_not: ID
 
-	"""
-	All values that are contained in given list.
-	"""
-	id_in: [ID!]
+  """All values that are contained in given list."""
+  id_in: [ID!]
 
-	"""
-	All values that are not contained in given list.
-	"""
-	id_not_in: [ID!]
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
 
-	"""
-	All values less than the given value.
-	"""
-	id_lt: ID
+  """All values less than the given value."""
+  id_lt: ID
 
-	"""
-	All values less than or equal the given value.
-	"""
-	id_lte: ID
+  """All values less than or equal the given value."""
+  id_lte: ID
 
-	"""
-	All values greater than the given value.
-	"""
-	id_gt: ID
+  """All values greater than the given value."""
+  id_gt: ID
 
-	"""
-	All values greater than or equal the given value.
-	"""
-	id_gte: ID
+  """All values greater than or equal the given value."""
+  id_gte: ID
 
-	"""
-	All values containing the given string.
-	"""
-	id_contains: ID
+  """All values containing the given string."""
+  id_contains: ID
 
-	"""
-	All values not containing the given string.
-	"""
-	id_not_contains: ID
+  """All values not containing the given string."""
+  id_not_contains: ID
 
-	"""
-	All values starting with the given string.
-	"""
-	id_starts_with: ID
+  """All values starting with the given string."""
+  id_starts_with: ID
 
-	"""
-	All values not starting with the given string.
-	"""
-	id_not_starts_with: ID
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
 
-	"""
-	All values ending with the given string.
-	"""
-	id_ends_with: ID
+  """All values ending with the given string."""
+  id_ends_with: ID
 
-	"""
-	All values not ending with the given string.
-	"""
-	id_not_ends_with: ID
-	name: String
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  name: String
 
-	"""
-	All values that are not equal to given value.
-	"""
-	name_not: String
+  """All values that are not equal to given value."""
+  name_not: String
 
-	"""
-	All values that are contained in given list.
-	"""
-	name_in: [String!]
+  """All values that are contained in given list."""
+  name_in: [String!]
 
-	"""
-	All values that are not contained in given list.
-	"""
-	name_not_in: [String!]
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
 
-	"""
-	All values less than the given value.
-	"""
-	name_lt: String
+  """All values less than the given value."""
+  name_lt: String
 
-	"""
-	All values less than or equal the given value.
-	"""
-	name_lte: String
+  """All values less than or equal the given value."""
+  name_lte: String
 
-	"""
-	All values greater than the given value.
-	"""
-	name_gt: String
+  """All values greater than the given value."""
+  name_gt: String
 
-	"""
-	All values greater than or equal the given value.
-	"""
-	name_gte: String
+  """All values greater than or equal the given value."""
+  name_gte: String
 
-	"""
-	All values containing the given string.
-	"""
-	name_contains: String
+  """All values containing the given string."""
+  name_contains: String
 
-	"""
-	All values not containing the given string.
-	"""
-	name_not_contains: String
+  """All values not containing the given string."""
+  name_not_contains: String
 
-	"""
-	All values starting with the given string.
-	"""
-	name_starts_with: String
+  """All values starting with the given string."""
+  name_starts_with: String
 
-	"""
-	All values not starting with the given string.
-	"""
-	name_not_starts_with: String
+  """All values not starting with the given string."""
+  name_not_starts_with: String
 
-	"""
-	All values ending with the given string.
-	"""
-	name_ends_with: String
+  """All values ending with the given string."""
+  name_ends_with: String
 
-	"""
-	All values not ending with the given string.
-	"""
-	name_not_ends_with: String
-	amount: Float
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+  amount: Float
 
-	"""
-	All values that are not equal to given value.
-	"""
-	amount_not: Float
+  """All values that are not equal to given value."""
+  amount_not: Float
 
-	"""
-	All values that are contained in given list.
-	"""
-	amount_in: [Float!]
+  """All values that are contained in given list."""
+  amount_in: [Float!]
 
-	"""
-	All values that are not contained in given list.
-	"""
-	amount_not_in: [Float!]
+  """All values that are not contained in given list."""
+  amount_not_in: [Float!]
 
-	"""
-	All values less than the given value.
-	"""
-	amount_lt: Float
+  """All values less than the given value."""
+  amount_lt: Float
 
-	"""
-	All values less than or equal the given value.
-	"""
-	amount_lte: Float
+  """All values less than or equal the given value."""
+  amount_lte: Float
 
-	"""
-	All values greater than the given value.
-	"""
-	amount_gt: Float
+  """All values greater than the given value."""
+  amount_gt: Float
 
-	"""
-	All values greater than or equal the given value.
-	"""
-	amount_gte: Float
-	type: String
+  """All values greater than or equal the given value."""
+  amount_gte: Float
+  type: String
 
-	"""
-	All values that are not equal to given value.
-	"""
-	type_not: String
+  """All values that are not equal to given value."""
+  type_not: String
 
-	"""
-	All values that are contained in given list.
-	"""
-	type_in: [String!]
+  """All values that are contained in given list."""
+  type_in: [String!]
 
-	"""
-	All values that are not contained in given list.
-	"""
-	type_not_in: [String!]
+  """All values that are not contained in given list."""
+  type_not_in: [String!]
 
-	"""
-	All values less than the given value.
-	"""
-	type_lt: String
+  """All values less than the given value."""
+  type_lt: String
 
-	"""
-	All values less than or equal the given value.
-	"""
-	type_lte: String
+  """All values less than or equal the given value."""
+  type_lte: String
 
-	"""
-	All values greater than the given value.
-	"""
-	type_gt: String
+  """All values greater than the given value."""
+  type_gt: String
 
-	"""
-	All values greater than or equal the given value.
-	"""
-	type_gte: String
+  """All values greater than or equal the given value."""
+  type_gte: String
 
-	"""
-	All values containing the given string.
-	"""
-	type_contains: String
+  """All values containing the given string."""
+  type_contains: String
 
-	"""
-	All values not containing the given string.
-	"""
-	type_not_contains: String
+  """All values not containing the given string."""
+  type_not_contains: String
 
-	"""
-	All values starting with the given string.
-	"""
-	type_starts_with: String
+  """All values starting with the given string."""
+  type_starts_with: String
 
-	"""
-	All values not starting with the given string.
-	"""
-	type_not_starts_with: String
+  """All values not starting with the given string."""
+  type_not_starts_with: String
 
-	"""
-	All values ending with the given string.
-	"""
-	type_ends_with: String
+  """All values ending with the given string."""
+  type_ends_with: String
 
-	"""
-	All values not ending with the given string.
-	"""
-	type_not_ends_with: String
-	payDate: DateTime
+  """All values not ending with the given string."""
+  type_not_ends_with: String
+  payDate: DateTime
 
-	"""
-	All values that are not equal to given value.
-	"""
-	payDate_not: DateTime
+  """All values that are not equal to given value."""
+  payDate_not: DateTime
 
-	"""
-	All values that are contained in given list.
-	"""
-	payDate_in: [DateTime!]
+  """All values that are contained in given list."""
+  payDate_in: [DateTime!]
 
-	"""
-	All values that are not contained in given list.
-	"""
-	payDate_not_in: [DateTime!]
+  """All values that are not contained in given list."""
+  payDate_not_in: [DateTime!]
 
-	"""
-	All values less than the given value.
-	"""
-	payDate_lt: DateTime
+  """All values less than the given value."""
+  payDate_lt: DateTime
 
-	"""
-	All values less than or equal the given value.
-	"""
-	payDate_lte: DateTime
+  """All values less than or equal the given value."""
+  payDate_lte: DateTime
 
-	"""
-	All values greater than the given value.
-	"""
-	payDate_gt: DateTime
+  """All values greater than the given value."""
+  payDate_gt: DateTime
 
-	"""
-	All values greater than or equal the given value.
-	"""
-	payDate_gte: DateTime
-	category: CategoryWhereInput
-	user: UserWhereInput
-}
-
-input IncomeWhereUniqueInputUserInput {
-	id: ID!
+  """All values greater than or equal the given value."""
+  payDate_gte: DateTime
+  category: CategoryWhereInput
+  user: UserWhereInput
 }
 
 input IncomeWhereUniqueInput {
-	id: ID
-	user: IncomeWhereUniqueInputUserInput
+  id: ID
 }
 
 """
@@ -1249,1249 +906,815 @@ Long can represent values between -(2^63) and 2^63 - 1.
 scalar Long
 
 type Mutation {
-	createPost(data: PostCreateInput!): Post!
-	createUser(data: UserCreateInput!): User!
-	createExpense(data: ExpenseCreateInput!): Expense!
-	createIncome(data: IncomeCreateInput!): Income!
-	createCategory(data: CategoryCreateInput!): Category!
-	updatePost(data: PostUpdateInput!, where: PostWhereUniqueInput!): Post
-	updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
-	updateExpense(data: ExpenseUpdateInput!, where: ExpenseWhereUniqueInput!): Expense
-	updateIncome(data: IncomeUpdateInput!, where: IncomeWhereUniqueInput!): Income
-	updateCategory(data: CategoryUpdateInput!, where: CategoryWhereUniqueInput!): Category
-	deletePost(where: PostWhereUniqueInput!): Post
-	deleteUser(where: UserWhereUniqueInput!): User
-	deleteExpense(where: ExpenseWhereUniqueInput!): Expense
-	deleteIncome(where: IncomeWhereUniqueInput!): Income
-	deleteCategory(where: CategoryWhereUniqueInput!): Category
-	upsertPost(where: PostWhereUniqueInput!, create: PostCreateInput!, update: PostUpdateInput!): Post!
-	upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
-	upsertExpense(where: ExpenseWhereUniqueInput!, create: ExpenseCreateInput!, update: ExpenseUpdateInput!): Expense!
-	upsertIncome(where: IncomeWhereUniqueInput!, create: IncomeCreateInput!, update: IncomeUpdateInput!): Income!
-	upsertCategory(
-		where: CategoryWhereUniqueInput!
-		create: CategoryCreateInput!
-		update: CategoryUpdateInput!
-	): Category!
-	updateManyPosts(data: PostUpdateInput!, where: PostWhereInput): BatchPayload!
-	updateManyUsers(data: UserUpdateInput!, where: UserWhereInput): BatchPayload!
-	updateManyExpenses(data: ExpenseUpdateInput!, where: ExpenseWhereInput): BatchPayload!
-	updateManyIncomes(data: IncomeUpdateInput!, where: IncomeWhereInput): BatchPayload!
-	updateManyCategories(data: CategoryUpdateInput!, where: CategoryWhereInput): BatchPayload!
-	deleteManyPosts(where: PostWhereInput): BatchPayload!
-	deleteManyUsers(where: UserWhereInput): BatchPayload!
-	deleteManyExpenses(where: ExpenseWhereInput): BatchPayload!
-	deleteManyIncomes(where: IncomeWhereInput): BatchPayload!
-	deleteManyCategories(where: CategoryWhereInput): BatchPayload!
+  createPost(data: PostCreateInput!): Post!
+  createUser(data: UserCreateInput!): User!
+  createExpense(data: ExpenseCreateInput!): Expense!
+  createIncome(data: IncomeCreateInput!): Income!
+  createCategory(data: CategoryCreateInput!): Category!
+  updatePost(data: PostUpdateInput!, where: PostWhereUniqueInput!): Post
+  updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
+  updateExpense(data: ExpenseUpdateInput!, where: ExpenseWhereUniqueInput!): Expense
+  updateIncome(data: IncomeUpdateInput!, where: IncomeWhereUniqueInput!): Income
+  updateCategory(data: CategoryUpdateInput!, where: CategoryWhereUniqueInput!): Category
+  deletePost(where: PostWhereUniqueInput!): Post
+  deleteUser(where: UserWhereUniqueInput!): User
+  deleteExpense(where: ExpenseWhereUniqueInput!): Expense
+  deleteIncome(where: IncomeWhereUniqueInput!): Income
+  deleteCategory(where: CategoryWhereUniqueInput!): Category
+  upsertPost(where: PostWhereUniqueInput!, create: PostCreateInput!, update: PostUpdateInput!): Post!
+  upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
+  upsertExpense(where: ExpenseWhereUniqueInput!, create: ExpenseCreateInput!, update: ExpenseUpdateInput!): Expense!
+  upsertIncome(where: IncomeWhereUniqueInput!, create: IncomeCreateInput!, update: IncomeUpdateInput!): Income!
+  upsertCategory(where: CategoryWhereUniqueInput!, create: CategoryCreateInput!, update: CategoryUpdateInput!): Category!
+  updateManyPosts(data: PostUpdateInput!, where: PostWhereInput): BatchPayload!
+  updateManyUsers(data: UserUpdateInput!, where: UserWhereInput): BatchPayload!
+  updateManyExpenses(data: ExpenseUpdateInput!, where: ExpenseWhereInput): BatchPayload!
+  updateManyIncomes(data: IncomeUpdateInput!, where: IncomeWhereInput): BatchPayload!
+  updateManyCategories(data: CategoryUpdateInput!, where: CategoryWhereInput): BatchPayload!
+  deleteManyPosts(where: PostWhereInput): BatchPayload!
+  deleteManyUsers(where: UserWhereInput): BatchPayload!
+  deleteManyExpenses(where: ExpenseWhereInput): BatchPayload!
+  deleteManyIncomes(where: IncomeWhereInput): BatchPayload!
+  deleteManyCategories(where: CategoryWhereInput): BatchPayload!
 }
 
 enum MutationType {
-	CREATED
-	UPDATED
-	DELETED
+  CREATED
+  UPDATED
+  DELETED
 }
 
-"""
-An object with an ID
-"""
+"""An object with an ID"""
 interface Node {
-	"""
-	The id of the object.
-	"""
-	id: ID!
+  """The id of the object."""
+  id: ID!
 }
 
-"""
-Information about pagination in a connection.
-"""
+"""Information about pagination in a connection."""
 type PageInfo {
-	"""
-	When paginating forwards, are there more items?
-	"""
-	hasNextPage: Boolean!
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
 
-	"""
-	When paginating backwards, are there more items?
-	"""
-	hasPreviousPage: Boolean!
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
 
-	"""
-	When paginating backwards, the cursor to continue.
-	"""
-	startCursor: String
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
 
-	"""
-	When paginating forwards, the cursor to continue.
-	"""
-	endCursor: String
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
 }
 
 type Post implements Node {
-	id: ID!
-	createdAt: DateTime!
-	updatedAt: DateTime!
-	isPublished: Boolean!
-	title: String!
-	text: String!
-	author(where: UserWhereInput): User!
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  isPublished: Boolean!
+  title: String!
+  text: String!
+  author(where: UserWhereInput): User!
 }
 
-"""
-A connection to a list of items.
-"""
+"""A connection to a list of items."""
 type PostConnection {
-	"""
-	Information to aid in pagination.
-	"""
-	pageInfo: PageInfo!
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
 
-	"""
-	A list of edges.
-	"""
-	edges: [PostEdge]!
-	aggregate: AggregatePost!
+  """A list of edges."""
+  edges: [PostEdge]!
+  aggregate: AggregatePost!
 }
 
 input PostCreateInput {
-	isPublished: Boolean
-	title: String!
-	text: String!
-	author: UserCreateOneWithoutPostsInput!
+  isPublished: Boolean
+  title: String!
+  text: String!
+  author: UserCreateOneWithoutPostsInput!
 }
 
 input PostCreateManyWithoutAuthorInput {
-	create: [PostCreateWithoutAuthorInput!]
-	connect: [PostWhereUniqueInput!]
+  create: [PostCreateWithoutAuthorInput!]
+  connect: [PostWhereUniqueInput!]
 }
 
 input PostCreateWithoutAuthorInput {
-	isPublished: Boolean
-	title: String!
-	text: String!
+  isPublished: Boolean
+  title: String!
+  text: String!
 }
 
-"""
-An edge in a connection.
-"""
+"""An edge in a connection."""
 type PostEdge {
-	"""
-	The item at the end of the edge.
-	"""
-	node: Post!
+  """The item at the end of the edge."""
+  node: Post!
 
-	"""
-	A cursor for use in pagination.
-	"""
-	cursor: String!
+  """A cursor for use in pagination."""
+  cursor: String!
 }
 
 enum PostOrderByInput {
-	id_ASC
-	id_DESC
-	createdAt_ASC
-	createdAt_DESC
-	updatedAt_ASC
-	updatedAt_DESC
-	isPublished_ASC
-	isPublished_DESC
-	title_ASC
-	title_DESC
-	text_ASC
-	text_DESC
+  id_ASC
+  id_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  isPublished_ASC
+  isPublished_DESC
+  title_ASC
+  title_DESC
+  text_ASC
+  text_DESC
 }
 
 type PostPreviousValues {
-	id: ID!
-	createdAt: DateTime!
-	updatedAt: DateTime!
-	isPublished: Boolean!
-	title: String!
-	text: String!
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  isPublished: Boolean!
+  title: String!
+  text: String!
 }
 
 type PostSubscriptionPayload {
-	mutation: MutationType!
-	node: Post
-	updatedFields: [String!]
-	previousValues: PostPreviousValues
+  mutation: MutationType!
+  node: Post
+  updatedFields: [String!]
+  previousValues: PostPreviousValues
 }
 
 input PostSubscriptionWhereInput {
-	"""
-	Logical AND on all given filters.
-	"""
-	AND: [PostSubscriptionWhereInput!]
+  """Logical AND on all given filters."""
+  AND: [PostSubscriptionWhereInput!]
 
-	"""
-	Logical OR on all given filters.
-	"""
-	OR: [PostSubscriptionWhereInput!]
+  """Logical OR on all given filters."""
+  OR: [PostSubscriptionWhereInput!]
 
-	"""
-	Logical NOT on all given filters combined by AND.
-	"""
-	NOT: [PostSubscriptionWhereInput!]
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [PostSubscriptionWhereInput!]
 
-	"""
-	The subscription event gets dispatched when it's listed in mutation_in
-	"""
-	mutation_in: [MutationType!]
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
 
-	"""
-	The subscription event gets only dispatched when one of the updated fields names is included in this list
-	"""
-	updatedFields_contains: String
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
 
-	"""
-	The subscription event gets only dispatched when all of the field names included in this list have been updated
-	"""
-	updatedFields_contains_every: [String!]
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
 
-	"""
-	The subscription event gets only dispatched when some of the field names included in this list have been updated
-	"""
-	updatedFields_contains_some: [String!]
-	node: PostWhereInput
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: PostWhereInput
 }
 
 input PostUpdateInput {
-	isPublished: Boolean
-	title: String
-	text: String
-	author: UserUpdateOneWithoutPostsInput
+  isPublished: Boolean
+  title: String
+  text: String
+  author: UserUpdateOneWithoutPostsInput
 }
 
 input PostUpdateManyWithoutAuthorInput {
-	create: [PostCreateWithoutAuthorInput!]
-	connect: [PostWhereUniqueInput!]
-	disconnect: [PostWhereUniqueInput!]
-	delete: [PostWhereUniqueInput!]
-	update: [PostUpdateWithWhereUniqueWithoutAuthorInput!]
-	upsert: [PostUpsertWithWhereUniqueWithoutAuthorInput!]
+  create: [PostCreateWithoutAuthorInput!]
+  connect: [PostWhereUniqueInput!]
+  disconnect: [PostWhereUniqueInput!]
+  delete: [PostWhereUniqueInput!]
+  update: [PostUpdateWithWhereUniqueWithoutAuthorInput!]
+  upsert: [PostUpsertWithWhereUniqueWithoutAuthorInput!]
 }
 
 input PostUpdateWithoutAuthorDataInput {
-	isPublished: Boolean
-	title: String
-	text: String
+  isPublished: Boolean
+  title: String
+  text: String
 }
 
 input PostUpdateWithWhereUniqueWithoutAuthorInput {
-	where: PostWhereUniqueInput!
-	data: PostUpdateWithoutAuthorDataInput!
+  where: PostWhereUniqueInput!
+  data: PostUpdateWithoutAuthorDataInput!
 }
 
 input PostUpsertWithWhereUniqueWithoutAuthorInput {
-	where: PostWhereUniqueInput!
-	update: PostUpdateWithoutAuthorDataInput!
-	create: PostCreateWithoutAuthorInput!
+  where: PostWhereUniqueInput!
+  update: PostUpdateWithoutAuthorDataInput!
+  create: PostCreateWithoutAuthorInput!
 }
 
 input PostWhereInput {
-	"""
-	Logical AND on all given filters.
-	"""
-	AND: [PostWhereInput!]
+  """Logical AND on all given filters."""
+  AND: [PostWhereInput!]
 
-	"""
-	Logical OR on all given filters.
-	"""
-	OR: [PostWhereInput!]
+  """Logical OR on all given filters."""
+  OR: [PostWhereInput!]
 
-	"""
-	Logical NOT on all given filters combined by AND.
-	"""
-	NOT: [PostWhereInput!]
-	id: ID
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [PostWhereInput!]
+  id: ID
 
-	"""
-	All values that are not equal to given value.
-	"""
-	id_not: ID
+  """All values that are not equal to given value."""
+  id_not: ID
 
-	"""
-	All values that are contained in given list.
-	"""
-	id_in: [ID!]
+  """All values that are contained in given list."""
+  id_in: [ID!]
 
-	"""
-	All values that are not contained in given list.
-	"""
-	id_not_in: [ID!]
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
 
-	"""
-	All values less than the given value.
-	"""
-	id_lt: ID
+  """All values less than the given value."""
+  id_lt: ID
 
-	"""
-	All values less than or equal the given value.
-	"""
-	id_lte: ID
+  """All values less than or equal the given value."""
+  id_lte: ID
 
-	"""
-	All values greater than the given value.
-	"""
-	id_gt: ID
+  """All values greater than the given value."""
+  id_gt: ID
 
-	"""
-	All values greater than or equal the given value.
-	"""
-	id_gte: ID
+  """All values greater than or equal the given value."""
+  id_gte: ID
 
-	"""
-	All values containing the given string.
-	"""
-	id_contains: ID
+  """All values containing the given string."""
+  id_contains: ID
 
-	"""
-	All values not containing the given string.
-	"""
-	id_not_contains: ID
+  """All values not containing the given string."""
+  id_not_contains: ID
 
-	"""
-	All values starting with the given string.
-	"""
-	id_starts_with: ID
+  """All values starting with the given string."""
+  id_starts_with: ID
 
-	"""
-	All values not starting with the given string.
-	"""
-	id_not_starts_with: ID
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
 
-	"""
-	All values ending with the given string.
-	"""
-	id_ends_with: ID
+  """All values ending with the given string."""
+  id_ends_with: ID
 
-	"""
-	All values not ending with the given string.
-	"""
-	id_not_ends_with: ID
-	createdAt: DateTime
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  createdAt: DateTime
 
-	"""
-	All values that are not equal to given value.
-	"""
-	createdAt_not: DateTime
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
 
-	"""
-	All values that are contained in given list.
-	"""
-	createdAt_in: [DateTime!]
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
 
-	"""
-	All values that are not contained in given list.
-	"""
-	createdAt_not_in: [DateTime!]
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
 
-	"""
-	All values less than the given value.
-	"""
-	createdAt_lt: DateTime
+  """All values less than the given value."""
+  createdAt_lt: DateTime
 
-	"""
-	All values less than or equal the given value.
-	"""
-	createdAt_lte: DateTime
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
 
-	"""
-	All values greater than the given value.
-	"""
-	createdAt_gt: DateTime
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
 
-	"""
-	All values greater than or equal the given value.
-	"""
-	createdAt_gte: DateTime
-	updatedAt: DateTime
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
+  updatedAt: DateTime
 
-	"""
-	All values that are not equal to given value.
-	"""
-	updatedAt_not: DateTime
+  """All values that are not equal to given value."""
+  updatedAt_not: DateTime
 
-	"""
-	All values that are contained in given list.
-	"""
-	updatedAt_in: [DateTime!]
+  """All values that are contained in given list."""
+  updatedAt_in: [DateTime!]
 
-	"""
-	All values that are not contained in given list.
-	"""
-	updatedAt_not_in: [DateTime!]
+  """All values that are not contained in given list."""
+  updatedAt_not_in: [DateTime!]
 
-	"""
-	All values less than the given value.
-	"""
-	updatedAt_lt: DateTime
+  """All values less than the given value."""
+  updatedAt_lt: DateTime
 
-	"""
-	All values less than or equal the given value.
-	"""
-	updatedAt_lte: DateTime
+  """All values less than or equal the given value."""
+  updatedAt_lte: DateTime
 
-	"""
-	All values greater than the given value.
-	"""
-	updatedAt_gt: DateTime
+  """All values greater than the given value."""
+  updatedAt_gt: DateTime
 
-	"""
-	All values greater than or equal the given value.
-	"""
-	updatedAt_gte: DateTime
-	isPublished: Boolean
+  """All values greater than or equal the given value."""
+  updatedAt_gte: DateTime
+  isPublished: Boolean
 
-	"""
-	All values that are not equal to given value.
-	"""
-	isPublished_not: Boolean
-	title: String
+  """All values that are not equal to given value."""
+  isPublished_not: Boolean
+  title: String
 
-	"""
-	All values that are not equal to given value.
-	"""
-	title_not: String
+  """All values that are not equal to given value."""
+  title_not: String
 
-	"""
-	All values that are contained in given list.
-	"""
-	title_in: [String!]
+  """All values that are contained in given list."""
+  title_in: [String!]
 
-	"""
-	All values that are not contained in given list.
-	"""
-	title_not_in: [String!]
+  """All values that are not contained in given list."""
+  title_not_in: [String!]
 
-	"""
-	All values less than the given value.
-	"""
-	title_lt: String
+  """All values less than the given value."""
+  title_lt: String
 
-	"""
-	All values less than or equal the given value.
-	"""
-	title_lte: String
+  """All values less than or equal the given value."""
+  title_lte: String
 
-	"""
-	All values greater than the given value.
-	"""
-	title_gt: String
+  """All values greater than the given value."""
+  title_gt: String
 
-	"""
-	All values greater than or equal the given value.
-	"""
-	title_gte: String
+  """All values greater than or equal the given value."""
+  title_gte: String
 
-	"""
-	All values containing the given string.
-	"""
-	title_contains: String
+  """All values containing the given string."""
+  title_contains: String
 
-	"""
-	All values not containing the given string.
-	"""
-	title_not_contains: String
+  """All values not containing the given string."""
+  title_not_contains: String
 
-	"""
-	All values starting with the given string.
-	"""
-	title_starts_with: String
+  """All values starting with the given string."""
+  title_starts_with: String
 
-	"""
-	All values not starting with the given string.
-	"""
-	title_not_starts_with: String
+  """All values not starting with the given string."""
+  title_not_starts_with: String
 
-	"""
-	All values ending with the given string.
-	"""
-	title_ends_with: String
+  """All values ending with the given string."""
+  title_ends_with: String
 
-	"""
-	All values not ending with the given string.
-	"""
-	title_not_ends_with: String
-	text: String
+  """All values not ending with the given string."""
+  title_not_ends_with: String
+  text: String
 
-	"""
-	All values that are not equal to given value.
-	"""
-	text_not: String
+  """All values that are not equal to given value."""
+  text_not: String
 
-	"""
-	All values that are contained in given list.
-	"""
-	text_in: [String!]
+  """All values that are contained in given list."""
+  text_in: [String!]
 
-	"""
-	All values that are not contained in given list.
-	"""
-	text_not_in: [String!]
+  """All values that are not contained in given list."""
+  text_not_in: [String!]
 
-	"""
-	All values less than the given value.
-	"""
-	text_lt: String
+  """All values less than the given value."""
+  text_lt: String
 
-	"""
-	All values less than or equal the given value.
-	"""
-	text_lte: String
+  """All values less than or equal the given value."""
+  text_lte: String
 
-	"""
-	All values greater than the given value.
-	"""
-	text_gt: String
+  """All values greater than the given value."""
+  text_gt: String
 
-	"""
-	All values greater than or equal the given value.
-	"""
-	text_gte: String
+  """All values greater than or equal the given value."""
+  text_gte: String
 
-	"""
-	All values containing the given string.
-	"""
-	text_contains: String
+  """All values containing the given string."""
+  text_contains: String
 
-	"""
-	All values not containing the given string.
-	"""
-	text_not_contains: String
+  """All values not containing the given string."""
+  text_not_contains: String
 
-	"""
-	All values starting with the given string.
-	"""
-	text_starts_with: String
+  """All values starting with the given string."""
+  text_starts_with: String
 
-	"""
-	All values not starting with the given string.
-	"""
-	text_not_starts_with: String
+  """All values not starting with the given string."""
+  text_not_starts_with: String
 
-	"""
-	All values ending with the given string.
-	"""
-	text_ends_with: String
+  """All values ending with the given string."""
+  text_ends_with: String
 
-	"""
-	All values not ending with the given string.
-	"""
-	text_not_ends_with: String
-	author: UserWhereInput
+  """All values not ending with the given string."""
+  text_not_ends_with: String
+  author: UserWhereInput
 }
 
 input PostWhereUniqueInput {
-	id: ID
+  id: ID
 }
 
 type Query {
-	posts(
-		where: PostWhereInput
-		orderBy: PostOrderByInput
-		skip: Int
-		after: String
-		before: String
-		first: Int
-		last: Int
-	): [Post]!
-	users(
-		where: UserWhereInput
-		orderBy: UserOrderByInput
-		skip: Int
-		after: String
-		before: String
-		first: Int
-		last: Int
-	): [User]!
-	expenses(
-		where: ExpenseWhereInput
-		orderBy: ExpenseOrderByInput
-		skip: Int
-		after: String
-		before: String
-		first: Int
-		last: Int
-	): [Expense]!
-	incomes(
-		where: IncomeWhereInput
-		orderBy: IncomeOrderByInput
-		skip: Int
-		after: String
-		before: String
-		first: Int
-		last: Int
-	): [Income]!
-	categories(
-		where: CategoryWhereInput
-		orderBy: CategoryOrderByInput
-		skip: Int
-		after: String
-		before: String
-		first: Int
-		last: Int
-	): [Category]!
-	post(where: PostWhereUniqueInput!): Post
-	user(where: UserWhereUniqueInput!): User
-	expense(where: ExpenseWhereUniqueInput!): Expense
-	income(where: IncomeWhereUniqueInput!): Income
-	category(where: CategoryWhereUniqueInput!): Category
-	postsConnection(
-		where: PostWhereInput
-		orderBy: PostOrderByInput
-		skip: Int
-		after: String
-		before: String
-		first: Int
-		last: Int
-	): PostConnection!
-	usersConnection(
-		where: UserWhereInput
-		orderBy: UserOrderByInput
-		skip: Int
-		after: String
-		before: String
-		first: Int
-		last: Int
-	): UserConnection!
-	expensesConnection(
-		where: ExpenseWhereInput
-		orderBy: ExpenseOrderByInput
-		skip: Int
-		after: String
-		before: String
-		first: Int
-		last: Int
-	): ExpenseConnection!
-	incomesConnection(
-		where: IncomeWhereInput
-		orderBy: IncomeOrderByInput
-		skip: Int
-		after: String
-		before: String
-		first: Int
-		last: Int
-	): IncomeConnection!
-	categoriesConnection(
-		where: CategoryWhereInput
-		orderBy: CategoryOrderByInput
-		skip: Int
-		after: String
-		before: String
-		first: Int
-		last: Int
-	): CategoryConnection!
+  posts(where: PostWhereInput, orderBy: PostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Post]!
+  users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
+  expenses(where: ExpenseWhereInput, orderBy: ExpenseOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Expense]!
+  incomes(where: IncomeWhereInput, orderBy: IncomeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Income]!
+  categories(where: CategoryWhereInput, orderBy: CategoryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Category]!
+  post(where: PostWhereUniqueInput!): Post
+  user(where: UserWhereUniqueInput!): User
+  expense(where: ExpenseWhereUniqueInput!): Expense
+  income(where: IncomeWhereUniqueInput!): Income
+  category(where: CategoryWhereUniqueInput!): Category
+  postsConnection(where: PostWhereInput, orderBy: PostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PostConnection!
+  usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
+  expensesConnection(where: ExpenseWhereInput, orderBy: ExpenseOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ExpenseConnection!
+  incomesConnection(where: IncomeWhereInput, orderBy: IncomeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): IncomeConnection!
+  categoriesConnection(where: CategoryWhereInput, orderBy: CategoryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CategoryConnection!
 
-	"""
-	Fetches an object given its ID
-	"""
-	node(
-		"""
-		The ID of an object
-		"""
-		id: ID!
-	): Node
+  """Fetches an object given its ID"""
+  node(
+    """The ID of an object"""
+    id: ID!
+  ): Node
 }
 
 type Subscription {
-	post(where: PostSubscriptionWhereInput): PostSubscriptionPayload
-	user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
-	expense(where: ExpenseSubscriptionWhereInput): ExpenseSubscriptionPayload
-	income(where: IncomeSubscriptionWhereInput): IncomeSubscriptionPayload
-	category(where: CategorySubscriptionWhereInput): CategorySubscriptionPayload
+  post(where: PostSubscriptionWhereInput): PostSubscriptionPayload
+  user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
+  expense(where: ExpenseSubscriptionWhereInput): ExpenseSubscriptionPayload
+  income(where: IncomeSubscriptionWhereInput): IncomeSubscriptionPayload
+  category(where: CategorySubscriptionWhereInput): CategorySubscriptionPayload
 }
 
 type User implements Node {
-	id: ID!
-	email: String!
-	password: String!
-	name: String!
-	posts(
-		where: PostWhereInput
-		orderBy: PostOrderByInput
-		skip: Int
-		after: String
-		before: String
-		first: Int
-		last: Int
-	): [Post!]
-	expenses(
-		where: ExpenseWhereInput
-		orderBy: ExpenseOrderByInput
-		skip: Int
-		after: String
-		before: String
-		first: Int
-		last: Int
-	): [Expense!]
-	incomes(
-		where: IncomeWhereInput
-		orderBy: IncomeOrderByInput
-		skip: Int
-		after: String
-		before: String
-		first: Int
-		last: Int
-	): [Income!]
-	totalIncome: Float
+  id: ID!
+  email: String!
+  password: String!
+  name: String!
+  posts(where: PostWhereInput, orderBy: PostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Post!]
+  expenses(where: ExpenseWhereInput, orderBy: ExpenseOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Expense!]
+  incomes(where: IncomeWhereInput, orderBy: IncomeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Income!]
 }
 
-"""
-A connection to a list of items.
-"""
+"""A connection to a list of items."""
 type UserConnection {
-	"""
-	Information to aid in pagination.
-	"""
-	pageInfo: PageInfo!
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
 
-	"""
-	A list of edges.
-	"""
-	edges: [UserEdge]!
-	aggregate: AggregateUser!
+  """A list of edges."""
+  edges: [UserEdge]!
+  aggregate: AggregateUser!
 }
 
 input UserCreateInput {
-	email: String!
-	password: String!
-	name: String!
-	totalIncome: Float
-	posts: PostCreateManyWithoutAuthorInput
-	expenses: ExpenseCreateManyWithoutUserInput
-	incomes: IncomeCreateManyWithoutUserInput
+  email: String!
+  password: String!
+  name: String!
+  posts: PostCreateManyWithoutAuthorInput
+  expenses: ExpenseCreateManyWithoutUserInput
+  incomes: IncomeCreateManyWithoutUserInput
 }
 
 input UserCreateOneWithoutExpensesInput {
-	create: UserCreateWithoutExpensesInput
-	connect: UserWhereUniqueInput
+  create: UserCreateWithoutExpensesInput
+  connect: UserWhereUniqueInput
 }
 
 input UserCreateOneWithoutIncomesInput {
-	create: UserCreateWithoutIncomesInput
-	connect: UserWhereUniqueInput
+  create: UserCreateWithoutIncomesInput
+  connect: UserWhereUniqueInput
 }
 
 input UserCreateOneWithoutPostsInput {
-	create: UserCreateWithoutPostsInput
-	connect: UserWhereUniqueInput
+  create: UserCreateWithoutPostsInput
+  connect: UserWhereUniqueInput
 }
 
 input UserCreateWithoutExpensesInput {
-	email: String!
-	password: String!
-	name: String!
-	totalIncome: Float
-	posts: PostCreateManyWithoutAuthorInput
-	incomes: IncomeCreateManyWithoutUserInput
+  email: String!
+  password: String!
+  name: String!
+  posts: PostCreateManyWithoutAuthorInput
+  incomes: IncomeCreateManyWithoutUserInput
 }
 
 input UserCreateWithoutIncomesInput {
-	email: String!
-	password: String!
-	name: String!
-	totalIncome: Float
-	posts: PostCreateManyWithoutAuthorInput
-	expenses: ExpenseCreateManyWithoutUserInput
+  email: String!
+  password: String!
+  name: String!
+  posts: PostCreateManyWithoutAuthorInput
+  expenses: ExpenseCreateManyWithoutUserInput
 }
 
 input UserCreateWithoutPostsInput {
-	email: String!
-	password: String!
-	name: String!
-	totalIncome: Float
-	expenses: ExpenseCreateManyWithoutUserInput
-	incomes: IncomeCreateManyWithoutUserInput
+  email: String!
+  password: String!
+  name: String!
+  expenses: ExpenseCreateManyWithoutUserInput
+  incomes: IncomeCreateManyWithoutUserInput
 }
 
-"""
-An edge in a connection.
-"""
+"""An edge in a connection."""
 type UserEdge {
-	"""
-	The item at the end of the edge.
-	"""
-	node: User!
+  """The item at the end of the edge."""
+  node: User!
 
-	"""
-	A cursor for use in pagination.
-	"""
-	cursor: String!
+  """A cursor for use in pagination."""
+  cursor: String!
 }
 
 enum UserOrderByInput {
-	id_ASC
-	id_DESC
-	email_ASC
-	email_DESC
-	password_ASC
-	password_DESC
-	name_ASC
-	name_DESC
-	totalIncome_ASC
-	totalIncome_DESC
-	updatedAt_ASC
-	updatedAt_DESC
-	createdAt_ASC
-	createdAt_DESC
+  id_ASC
+  id_DESC
+  email_ASC
+  email_DESC
+  password_ASC
+  password_DESC
+  name_ASC
+  name_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
 }
 
 type UserPreviousValues {
-	id: ID!
-	email: String!
-	password: String!
-	name: String!
-	totalIncome: Float
+  id: ID!
+  email: String!
+  password: String!
+  name: String!
 }
 
 type UserSubscriptionPayload {
-	mutation: MutationType!
-	node: User
-	updatedFields: [String!]
-	previousValues: UserPreviousValues
+  mutation: MutationType!
+  node: User
+  updatedFields: [String!]
+  previousValues: UserPreviousValues
 }
 
 input UserSubscriptionWhereInput {
-	"""
-	Logical AND on all given filters.
-	"""
-	AND: [UserSubscriptionWhereInput!]
+  """Logical AND on all given filters."""
+  AND: [UserSubscriptionWhereInput!]
 
-	"""
-	Logical OR on all given filters.
-	"""
-	OR: [UserSubscriptionWhereInput!]
+  """Logical OR on all given filters."""
+  OR: [UserSubscriptionWhereInput!]
 
-	"""
-	Logical NOT on all given filters combined by AND.
-	"""
-	NOT: [UserSubscriptionWhereInput!]
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [UserSubscriptionWhereInput!]
 
-	"""
-	The subscription event gets dispatched when it's listed in mutation_in
-	"""
-	mutation_in: [MutationType!]
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
 
-	"""
-	The subscription event gets only dispatched when one of the updated fields names is included in this list
-	"""
-	updatedFields_contains: String
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
 
-	"""
-	The subscription event gets only dispatched when all of the field names included in this list have been updated
-	"""
-	updatedFields_contains_every: [String!]
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
 
-	"""
-	The subscription event gets only dispatched when some of the field names included in this list have been updated
-	"""
-	updatedFields_contains_some: [String!]
-	node: UserWhereInput
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: UserWhereInput
 }
 
 input UserUpdateInput {
-	email: String
-	password: String
-	name: String
-	totalIncome: Float
-	posts: PostUpdateManyWithoutAuthorInput
-	expenses: ExpenseUpdateManyWithoutUserInput
-	incomes: IncomeUpdateManyWithoutUserInput
+  email: String
+  password: String
+  name: String
+  posts: PostUpdateManyWithoutAuthorInput
+  expenses: ExpenseUpdateManyWithoutUserInput
+  incomes: IncomeUpdateManyWithoutUserInput
 }
 
 input UserUpdateOneWithoutExpensesInput {
-	create: UserCreateWithoutExpensesInput
-	connect: UserWhereUniqueInput
-	delete: Boolean
-	update: UserUpdateWithoutExpensesDataInput
-	upsert: UserUpsertWithoutExpensesInput
+  create: UserCreateWithoutExpensesInput
+  connect: UserWhereUniqueInput
+  delete: Boolean
+  update: UserUpdateWithoutExpensesDataInput
+  upsert: UserUpsertWithoutExpensesInput
 }
 
 input UserUpdateOneWithoutIncomesInput {
-	create: UserCreateWithoutIncomesInput
-	connect: UserWhereUniqueInput
-	delete: Boolean
-	update: UserUpdateWithoutIncomesDataInput
-	upsert: UserUpsertWithoutIncomesInput
+  create: UserCreateWithoutIncomesInput
+  connect: UserWhereUniqueInput
+  delete: Boolean
+  update: UserUpdateWithoutIncomesDataInput
+  upsert: UserUpsertWithoutIncomesInput
 }
 
 input UserUpdateOneWithoutPostsInput {
-	create: UserCreateWithoutPostsInput
-	connect: UserWhereUniqueInput
-	delete: Boolean
-	update: UserUpdateWithoutPostsDataInput
-	upsert: UserUpsertWithoutPostsInput
+  create: UserCreateWithoutPostsInput
+  connect: UserWhereUniqueInput
+  delete: Boolean
+  update: UserUpdateWithoutPostsDataInput
+  upsert: UserUpsertWithoutPostsInput
 }
 
 input UserUpdateWithoutExpensesDataInput {
-	email: String
-	password: String
-	name: String
-	totalIncome: Float
-	posts: PostUpdateManyWithoutAuthorInput
-	incomes: IncomeUpdateManyWithoutUserInput
+  email: String
+  password: String
+  name: String
+  posts: PostUpdateManyWithoutAuthorInput
+  incomes: IncomeUpdateManyWithoutUserInput
 }
 
 input UserUpdateWithoutIncomesDataInput {
-	email: String
-	password: String
-	name: String
-	totalIncome: Float
-	posts: PostUpdateManyWithoutAuthorInput
-	expenses: ExpenseUpdateManyWithoutUserInput
+  email: String
+  password: String
+  name: String
+  posts: PostUpdateManyWithoutAuthorInput
+  expenses: ExpenseUpdateManyWithoutUserInput
 }
 
 input UserUpdateWithoutPostsDataInput {
-	email: String
-	password: String
-	name: String
-	totalIncome: Float
-	expenses: ExpenseUpdateManyWithoutUserInput
-	incomes: IncomeUpdateManyWithoutUserInput
+  email: String
+  password: String
+  name: String
+  expenses: ExpenseUpdateManyWithoutUserInput
+  incomes: IncomeUpdateManyWithoutUserInput
 }
 
 input UserUpsertWithoutExpensesInput {
-	update: UserUpdateWithoutExpensesDataInput!
-	create: UserCreateWithoutExpensesInput!
+  update: UserUpdateWithoutExpensesDataInput!
+  create: UserCreateWithoutExpensesInput!
 }
 
 input UserUpsertWithoutIncomesInput {
-	update: UserUpdateWithoutIncomesDataInput!
-	create: UserCreateWithoutIncomesInput!
+  update: UserUpdateWithoutIncomesDataInput!
+  create: UserCreateWithoutIncomesInput!
 }
 
 input UserUpsertWithoutPostsInput {
-	update: UserUpdateWithoutPostsDataInput!
-	create: UserCreateWithoutPostsInput!
+  update: UserUpdateWithoutPostsDataInput!
+  create: UserCreateWithoutPostsInput!
 }
 
 input UserWhereInput {
-	"""
-	Logical AND on all given filters.
-	"""
-	AND: [UserWhereInput!]
+  """Logical AND on all given filters."""
+  AND: [UserWhereInput!]
 
-	"""
-	Logical OR on all given filters.
-	"""
-	OR: [UserWhereInput!]
+  """Logical OR on all given filters."""
+  OR: [UserWhereInput!]
 
-	"""
-	Logical NOT on all given filters combined by AND.
-	"""
-	NOT: [UserWhereInput!]
-	id: ID
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [UserWhereInput!]
+  id: ID
 
-	"""
-	All values that are not equal to given value.
-	"""
-	id_not: ID
+  """All values that are not equal to given value."""
+  id_not: ID
 
-	"""
-	All values that are contained in given list.
-	"""
-	id_in: [ID!]
+  """All values that are contained in given list."""
+  id_in: [ID!]
 
-	"""
-	All values that are not contained in given list.
-	"""
-	id_not_in: [ID!]
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
 
-	"""
-	All values less than the given value.
-	"""
-	id_lt: ID
+  """All values less than the given value."""
+  id_lt: ID
 
-	"""
-	All values less than or equal the given value.
-	"""
-	id_lte: ID
+  """All values less than or equal the given value."""
+  id_lte: ID
 
-	"""
-	All values greater than the given value.
-	"""
-	id_gt: ID
+  """All values greater than the given value."""
+  id_gt: ID
 
-	"""
-	All values greater than or equal the given value.
-	"""
-	id_gte: ID
+  """All values greater than or equal the given value."""
+  id_gte: ID
 
-	"""
-	All values containing the given string.
-	"""
-	id_contains: ID
+  """All values containing the given string."""
+  id_contains: ID
 
-	"""
-	All values not containing the given string.
-	"""
-	id_not_contains: ID
+  """All values not containing the given string."""
+  id_not_contains: ID
 
-	"""
-	All values starting with the given string.
-	"""
-	id_starts_with: ID
+  """All values starting with the given string."""
+  id_starts_with: ID
 
-	"""
-	All values not starting with the given string.
-	"""
-	id_not_starts_with: ID
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
 
-	"""
-	All values ending with the given string.
-	"""
-	id_ends_with: ID
+  """All values ending with the given string."""
+  id_ends_with: ID
 
-	"""
-	All values not ending with the given string.
-	"""
-	id_not_ends_with: ID
-	email: String
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  email: String
 
-	"""
-	All values that are not equal to given value.
-	"""
-	email_not: String
+  """All values that are not equal to given value."""
+  email_not: String
 
-	"""
-	All values that are contained in given list.
-	"""
-	email_in: [String!]
+  """All values that are contained in given list."""
+  email_in: [String!]
 
-	"""
-	All values that are not contained in given list.
-	"""
-	email_not_in: [String!]
+  """All values that are not contained in given list."""
+  email_not_in: [String!]
 
-	"""
-	All values less than the given value.
-	"""
-	email_lt: String
+  """All values less than the given value."""
+  email_lt: String
 
-	"""
-	All values less than or equal the given value.
-	"""
-	email_lte: String
+  """All values less than or equal the given value."""
+  email_lte: String
 
-	"""
-	All values greater than the given value.
-	"""
-	email_gt: String
+  """All values greater than the given value."""
+  email_gt: String
 
-	"""
-	All values greater than or equal the given value.
-	"""
-	email_gte: String
+  """All values greater than or equal the given value."""
+  email_gte: String
 
-	"""
-	All values containing the given string.
-	"""
-	email_contains: String
+  """All values containing the given string."""
+  email_contains: String
 
-	"""
-	All values not containing the given string.
-	"""
-	email_not_contains: String
+  """All values not containing the given string."""
+  email_not_contains: String
 
-	"""
-	All values starting with the given string.
-	"""
-	email_starts_with: String
+  """All values starting with the given string."""
+  email_starts_with: String
 
-	"""
-	All values not starting with the given string.
-	"""
-	email_not_starts_with: String
+  """All values not starting with the given string."""
+  email_not_starts_with: String
 
-	"""
-	All values ending with the given string.
-	"""
-	email_ends_with: String
+  """All values ending with the given string."""
+  email_ends_with: String
 
-	"""
-	All values not ending with the given string.
-	"""
-	email_not_ends_with: String
-	password: String
+  """All values not ending with the given string."""
+  email_not_ends_with: String
+  password: String
 
-	"""
-	All values that are not equal to given value.
-	"""
-	password_not: String
+  """All values that are not equal to given value."""
+  password_not: String
 
-	"""
-	All values that are contained in given list.
-	"""
-	password_in: [String!]
+  """All values that are contained in given list."""
+  password_in: [String!]
 
-	"""
-	All values that are not contained in given list.
-	"""
-	password_not_in: [String!]
+  """All values that are not contained in given list."""
+  password_not_in: [String!]
 
-	"""
-	All values less than the given value.
-	"""
-	password_lt: String
+  """All values less than the given value."""
+  password_lt: String
 
-	"""
-	All values less than or equal the given value.
-	"""
-	password_lte: String
+  """All values less than or equal the given value."""
+  password_lte: String
 
-	"""
-	All values greater than the given value.
-	"""
-	password_gt: String
+  """All values greater than the given value."""
+  password_gt: String
 
-	"""
-	All values greater than or equal the given value.
-	"""
-	password_gte: String
+  """All values greater than or equal the given value."""
+  password_gte: String
 
-	"""
-	All values containing the given string.
-	"""
-	password_contains: String
+  """All values containing the given string."""
+  password_contains: String
 
-	"""
-	All values not containing the given string.
-	"""
-	password_not_contains: String
+  """All values not containing the given string."""
+  password_not_contains: String
 
-	"""
-	All values starting with the given string.
-	"""
-	password_starts_with: String
+  """All values starting with the given string."""
+  password_starts_with: String
 
-	"""
-	All values not starting with the given string.
-	"""
-	password_not_starts_with: String
+  """All values not starting with the given string."""
+  password_not_starts_with: String
 
-	"""
-	All values ending with the given string.
-	"""
-	password_ends_with: String
+  """All values ending with the given string."""
+  password_ends_with: String
 
-	"""
-	All values not ending with the given string.
-	"""
-	password_not_ends_with: String
-	name: String
+  """All values not ending with the given string."""
+  password_not_ends_with: String
+  name: String
 
-	"""
-	All values that are not equal to given value.
-	"""
-	name_not: String
+  """All values that are not equal to given value."""
+  name_not: String
 
-	"""
-	All values that are contained in given list.
-	"""
-	name_in: [String!]
+  """All values that are contained in given list."""
+  name_in: [String!]
 
-	"""
-	All values that are not contained in given list.
-	"""
-	name_not_in: [String!]
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
 
-	"""
-	All values less than the given value.
-	"""
-	name_lt: String
+  """All values less than the given value."""
+  name_lt: String
 
-	"""
-	All values less than or equal the given value.
-	"""
-	name_lte: String
+  """All values less than or equal the given value."""
+  name_lte: String
 
-	"""
-	All values greater than the given value.
-	"""
-	name_gt: String
+  """All values greater than the given value."""
+  name_gt: String
 
-	"""
-	All values greater than or equal the given value.
-	"""
-	name_gte: String
+  """All values greater than or equal the given value."""
+  name_gte: String
 
-	"""
-	All values containing the given string.
-	"""
-	name_contains: String
+  """All values containing the given string."""
+  name_contains: String
 
-	"""
-	All values not containing the given string.
-	"""
-	name_not_contains: String
+  """All values not containing the given string."""
+  name_not_contains: String
 
-	"""
-	All values starting with the given string.
-	"""
-	name_starts_with: String
+  """All values starting with the given string."""
+  name_starts_with: String
 
-	"""
-	All values not starting with the given string.
-	"""
-	name_not_starts_with: String
+  """All values not starting with the given string."""
+  name_not_starts_with: String
 
-	"""
-	All values ending with the given string.
-	"""
-	name_ends_with: String
+  """All values ending with the given string."""
+  name_ends_with: String
 
-	"""
-	All values not ending with the given string.
-	"""
-	name_not_ends_with: String
-	totalIncome: Float
-
-	"""
-	All values that are not equal to given value.
-	"""
-	totalIncome_not: Float
-
-	"""
-	All values that are contained in given list.
-	"""
-	totalIncome_in: [Float!]
-
-	"""
-	All values that are not contained in given list.
-	"""
-	totalIncome_not_in: [Float!]
-
-	"""
-	All values less than the given value.
-	"""
-	totalIncome_lt: Float
-
-	"""
-	All values less than or equal the given value.
-	"""
-	totalIncome_lte: Float
-
-	"""
-	All values greater than the given value.
-	"""
-	totalIncome_gt: Float
-
-	"""
-	All values greater than or equal the given value.
-	"""
-	totalIncome_gte: Float
-	posts_every: PostWhereInput
-	posts_some: PostWhereInput
-	posts_none: PostWhereInput
-	expenses_every: ExpenseWhereInput
-	expenses_some: ExpenseWhereInput
-	expenses_none: ExpenseWhereInput
-	incomes_every: IncomeWhereInput
-	incomes_some: IncomeWhereInput
-	incomes_none: IncomeWhereInput
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+  posts_every: PostWhereInput
+  posts_some: PostWhereInput
+  posts_none: PostWhereInput
+  expenses_every: ExpenseWhereInput
+  expenses_some: ExpenseWhereInput
+  expenses_none: ExpenseWhereInput
+  incomes_every: IncomeWhereInput
+  incomes_some: IncomeWhereInput
+  incomes_none: IncomeWhereInput
 }
 
 input UserWhereUniqueInput {
-	id: ID
-	email: String
+  id: ID
+  email: String
 }
