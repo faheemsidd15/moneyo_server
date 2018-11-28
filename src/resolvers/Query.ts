@@ -34,18 +34,19 @@ export const Query = {
 		//console.log(ctx.db.query.incomes({ where: { id } }, info))
 
 		//return ctx.db.query.incomes({ where: { user: { id: id } } }, info)
-		const object = { amount: 11000, name: "Total Income" }
+		const object = { amount: 0, name: "Total Income" }
 		//return await object
+		const amount = await new Promise((resolve, reject) => {
+			Conn.query(`select 546 +  1 as amount`, function(error, results, fields) {
+				if (error) throw error
 
-		const query = await Conn.query(`select 546 +  1 as amount`, function(error, results, fields) {
-			if (error) throw error
-
-			const response = results[0]
-			console.log(response)
-			return response
+				const response = results[0].amount
+				object.amount = response
+				resolve(response)
+			})
 		})
-		console.log(query)
-		return await object
+
+		return { ...object, amount }
 
 		// const totalIncome = Conn.query(
 		// 	"select sum(amount) as amount from `default@default`.`Income` join `default@default`.`_IncomeToUser` where Income.id = _IncomeToUser.A;",
