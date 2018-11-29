@@ -25,44 +25,21 @@ export const Query = {
 	income(parent, { id }, ctx: Context, info) {
 		return ctx.db.query.income({ where: { id: id } }, info)
 	},
-	// async totalIncome(parent, { id }, ctx: Context, info) {
-	// 	const response  = await ctx
-	// },
+
 	async totalIncome(parent, args, ctx: Context, info) {
 		const id = getUserId(ctx)
 
-		//console.log(ctx.db.query.incomes({ where: { id } }, info))
-
-		//return ctx.db.query.incomes({ where: { user: { id: id } } }, info)
-		const object = { amount: 0, name: "Total Income" }
-		//return await object
 		const amount = await new Promise((resolve, reject) => {
-			Conn.query(`select 546 +  1 as amount`, function(error, results, fields) {
+			Conn.query(`SELECT 768 + 1 as amount`, (error, results, fields) => {
 				if (error) throw error
 
+				console.log(`hello 'there'`)
 				const response = results[0].amount
-				object.amount = response
 				resolve(response)
 			})
 		})
 
-		return { ...object, amount }
-
-		// const totalIncome = Conn.query(
-		// 	"select sum(amount) as amount from `default@default`.`Income` join `default@default`.`_IncomeToUser` where Income.id = _IncomeToUser.A;",
-		// 	function(error, results, fields) {
-		// 		if (error) throw error
-		// 		//return results[0].summary
-		// 		console.log(results[0])
-		// 		return results[0].amount
-		// 	}
-		// )
-		// return totalIncome
-
-		// await console.log(response)
-		// return await response
-		//console.log(ctx.db.query.incomes({ where: { id } }, info))
-		//return ctx.db.query.incomesConnection({where: })
+		return amount
 	},
 
 	me(parent, args, ctx: Context, info) {
