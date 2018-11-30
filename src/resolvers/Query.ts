@@ -30,13 +30,19 @@ export const Query = {
 		const id = getUserId(ctx)
 
 		const amount = await new Promise((resolve, reject) => {
-			Conn.query(`SELECT 768 + 1 as amount`, (error, results, fields) => {
-				if (error) throw error
+			Conn.query(
+				"select sum(amount) as amount from `default@default`.`Income` join `default@default`.`_IncomeToUser` where Income.id = _IncomeToUser.A and _IncomeToUser.B =" +
+					`'${id}'` +
+					";",
+				(error, results, fields) => {
+					if (error) throw error
 
-				console.log(`hello 'there'`)
-				const response = results[0].amount
-				resolve(response)
-			})
+					const response = results[0].amount
+
+					resolve(response)
+					console.log("Query Resolved")
+				}
+			)
 		})
 
 		return amount
