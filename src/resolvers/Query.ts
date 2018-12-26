@@ -1,5 +1,6 @@
 import { getUserId, Context, Conn } from "../utils"
 import { Result } from "range-parser"
+import { forwardTo } from "prisma-binding"
 
 export const Query = {
 	feed(parent, args, ctx: Context, info) {
@@ -25,7 +26,10 @@ export const Query = {
 	income(parent, { id }, ctx: Context, info) {
 		return ctx.db.query.income({ where: { id: id } }, info)
 	},
-
+	// income: (parent, args, ctx: Context, info) => {
+	// 	getUserId(ctx);
+	// 	return forwardTo("db")(parent, args, ctx, info);
+	// },
 	async totalIncome(parent, args, ctx: Context, info) {
 		const id = getUserId(ctx)
 
