@@ -15,15 +15,21 @@ type Mutation {
 	signup(email: String!, password: String!, name: String!): AuthPayload!
 	login(email: String!, password: String!): LoginResponse!
 	createDraft(title: String!, text: String!): Post!
-	createIncome(input: IncomeInput!): Income!
-	updateIncome(input: IncomeInput!): Income!
+	createIncome(input: CreateIncomeInput!): Income!
+	updateIncome(input: UpdateIncomeInput!): Income!
 	publish(id: ID!): Post!
 	deletePost(id: ID!): Post!
 	deleteIncome(id: ID!): Income!
 }
 
-input IncomeInput {
-	id: ID
+input CreateIncomeInput {
+	name: String!
+	amount: Float!
+	type: String!
+	payDate: DateTime!
+}
+input UpdateIncomeInput {
+	id: ID!
 	name: String!
 	amount: Float!
 	type: String!

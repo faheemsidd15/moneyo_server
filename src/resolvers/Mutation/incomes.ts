@@ -2,10 +2,10 @@ import { getUserId, Context } from "../../utils"
 
 export const income = {
 	async updateIncome(parent, { input: { id, ...data } }, ctx: Context, info) {
-		// check income id to match userID otherwise dont post
+		console.log("This is the id of the income passed: ", id)
 		const userId = getUserId(ctx)
-		const income = await ctx.db.query.income({ where: { id } })
-		console.log(income)
+		const income = await ctx.db.query.income({ where: { id } }, `{ user { id } }`)
+		console.log("THis is a query ", income)
 
 		if (userId !== income.user.id) {
 			throw new Error("Not Authorized")
