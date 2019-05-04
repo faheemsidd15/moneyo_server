@@ -6,7 +6,8 @@ const config = {
 	host: process.env.DB_HOST,
 	user: process.env.DB_USER,
 	password: process.env.DB_PWD,
-	port: 3001
+	port: 3001,
+	database: process.env.DB_DATABASE
 }
 
 export const Conn = createConnection(config)
@@ -33,7 +34,7 @@ export function getUserId(ctx: Context) {
 }
 
 export const createToken = (userId: String) =>
-	jwt.sign({ userId }, Buffer.from(process.env.APP_SECRET, "base64"), { expiresIn: "1d" })
+	jwt.sign({ userId }, Buffer.from(process.env.APP_SECRET, "base64"), { expiresIn: "3d" })
 
 export class AuthError extends Error {
 	constructor() {

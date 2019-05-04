@@ -30,19 +30,17 @@ export const Query = {
 	// 	getUserId(ctx);
 	// 	return forwardTo("db")(parent, args, ctx, info);
 	// },
-	async totalIncome(parent, args, ctx: Context, info) {
+	async totalMonthlyIncome(parent, args, ctx: Context, info) {
 		const id = getUserId(ctx)
 
 		const amount = await new Promise((resolve, reject) => {
 			Conn.query(
-				"select sum(amount) as amount from `default@default`.`Income` join `default@default`.`_IncomeToUser` where Income.id = _IncomeToUser.A and _IncomeToUser.B =" +
+				"select sum(amount) as amount from `Income` join `_IncomeToUser` where Income.id = _IncomeToUser.A and Income.type = 'monthly' and _IncomeToUser.B =" +
 					`'${id}'` +
 					";",
 				(error, results, fields) => {
 					if (error) throw error
-
 					const response = results[0].amount
-
 					resolve(response)
 					console.log("Query Resolved")
 				}

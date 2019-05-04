@@ -7,7 +7,7 @@ type Query {
 	post(id: ID!): Post
 	income(id: ID!): Income
 	me: User
-	totalIncome: Float
+	totalMonthlyIncome: Float
 }
 
 type Mutation {
@@ -57,5 +57,5 @@ type User {
 	name: String!
 	posts: [Post!]!
 	incomes: [Income!]!
-	totalIncome: Float
+	totalMonthlyIncome: Float
 }
