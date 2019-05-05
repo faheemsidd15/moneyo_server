@@ -1,7 +1,14 @@
 import { getUserId, Context, Conn } from "../utils"
 import { Result } from "range-parser"
 import { forwardTo } from "prisma-binding"
-import sqlFunction, { TOTAL_MONTHLY_INCOME, TOTAL_WEEKLY_INCOME } from "../sql"
+import sqlFunction, {
+	TOTAL_MONTHLY_INCOME,
+	TOTAL_WEEKLY_INCOME,
+	TOTAL_BIWEEKLY_INCOME,
+	TOTAL_DAILY_INCOME
+} from "../sql"
+
+const factors = { monthly: 1, weekly: 4, daily: 30, biweekly: 2 }
 
 export const Query = {
 	feed(parent, args, ctx: Context, info) {
@@ -54,11 +61,55 @@ export const Query = {
 				if (error) throw error
 				const response = results[0].amount
 				resolve(response)
-				console.log("Monthly Query Resolved")
+				console.log("Weekly Query Resolved")
 			})
 		})
 
 		return amount
+	},
+
+	async totalDailyIncome(parent, args, ctx: Context, info) {
+		const id = getUserId(ctx)
+
+		const amount = await new Promise((resolve, reject) => {
+			Conn.query(sqlFunction(TOTAL_DAILY_INCOME, id), (error, results, fields) => {
+				if (error) throw error
+				const response = results[0].amount
+				resolve(response)
+				console.log("Daily Query Resolved")
+			})
+		})
+
+		return amount
+	},
+
+	async totalBiweeklyIncome(parent, args, ctx: Context, info) {
+		const id = getUserId(ctx)
+
+		const amount = await new Promise((resolve, reject) => {
+			Conn.query(sqlFunction(TOTAL_BIWEEKLY_INCOME, id), (error, results, fields) => {
+				if (error) throw error
+				const response = results[0].amount
+				resolve(response)
+				console.log("Biweekly Query Resolved")
+			})
+		})
+
+		return amount
+	},
+
+	totalIncome(parent, args, ctx: Context, info) {
+		return Promise.all([
+			Query.totalMonthlyIncome(parent, args, ctx, info),
+			Query.totalWeeklyIncome(parent, args, ctx, info),
+			Query.totalDailyIncome(parent, args, ctx, info),
+			Query.totalBiweeklyIncome(parent, args, ctx, info)
+		]).then((results: any[]) => {
+			const noNull = results.map(res => (res === null ? 0 : res))
+			const mapFactors = [factors.monthly, factors.weekly, factors.daily, factors.biweekly]
+
+			return noNull.reduce((r, a, i) => r + a * mapFactors[i], 0)
+		})
 	},
 
 	me(parent, args, ctx: Context, info) {
