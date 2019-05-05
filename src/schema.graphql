@@ -8,6 +8,7 @@ type Query {
 	income(id: ID!): Income
 	me: User
 	totalMonthlyIncome: Float
+	totalWeeklyIncome: Float
 }
 
 type Mutation {
@@ -58,4 +59,5 @@ type User {
 	posts: [Post!]!
 	incomes: [Income!]!
 	totalMonthlyIncome: Float
+	totalWeeklyIncome: Float
 }

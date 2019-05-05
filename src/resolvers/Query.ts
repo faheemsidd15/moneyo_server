@@ -1,6 +1,7 @@
 import { getUserId, Context, Conn } from "../utils"
 import { Result } from "range-parser"
 import { forwardTo } from "prisma-binding"
+import sqlFunction, { TOTAL_MONTHLY_INCOME, TOTAL_WEEKLY_INCOME } from "../sql"
 
 export const Query = {
 	feed(parent, args, ctx: Context, info) {
@@ -34,17 +35,27 @@ export const Query = {
 		const id = getUserId(ctx)
 
 		const amount = await new Promise((resolve, reject) => {
-			Conn.query(
-				"select sum(amount) as amount from `Income` join `_IncomeToUser` where Income.id = _IncomeToUser.A and Income.type = 'monthly' and _IncomeToUser.B =" +
-					`'${id}'` +
-					";",
-				(error, results, fields) => {
-					if (error) throw error
-					const response = results[0].amount
-					resolve(response)
-					console.log("Query Resolved")
-				}
-			)
+			Conn.query(sqlFunction(TOTAL_MONTHLY_INCOME, id), (error, results, fields) => {
+				if (error) throw error
+				const response = results[0].amount
+				resolve(response)
+				console.log("Monthly Query Resolved")
+			})
+		})
+
+		return amount
+	},
+
+	async totalWeeklyIncome(parent, args, ctx: Context, info) {
+		const id = getUserId(ctx)
+
+		const amount = await new Promise((resolve, reject) => {
+			Conn.query(sqlFunction(TOTAL_WEEKLY_INCOME, id), (error, results, fields) => {
+				if (error) throw error
+				const response = results[0].amount
+				resolve(response)
+				console.log("Monthly Query Resolved")
+			})
 		})
 
 		return amount
