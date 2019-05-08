@@ -107,7 +107,6 @@ export const Query = {
 		]).then((results: any[]) => {
 			const noNull = results.map(res => (res === null ? 0 : res))
 			const mapFactors = [factors.monthly, factors.weekly, factors.daily, factors.biweekly]
-
 			return noNull.reduce((r, a, i) => r + a * mapFactors[i], 0)
 		})
 	},
