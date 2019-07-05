@@ -20,7 +20,9 @@ export interface Context {
 
 export function getUserId(ctx: Context) {
 	const Authorization = ctx.request.get("Authorization")
+	console.log("AUTH", Authorization)
 	const token = Authorization.replace("Bearer ", "")
+
 	console.log(token)
 	if (token) {
 		const { userId } = jwt.verify(token, Buffer.from(process.env.APP_SECRET, "base64"))
